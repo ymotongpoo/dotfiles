@@ -1,0 +1,32 @@
+"---------------------------------------------------------------------------
+" フォント設定:
+"
+if has('win32')
+  " Windows用
+  set guifont=MS_Gothic:h10:cSHIFTJIS
+  " 行間隔の設定
+  set linespace=1
+  " 一部のUCS文字の幅を自動計測して決める
+  if has('kaoriya')
+    set ambiwidth=auto
+  endif
+elseif has('mac')
+  set guifont=Osaka−等幅:h16
+elseif has('xfontset')
+  " UNIX用 (xfontsetを使用)
+  set guifontset=a16,r16,k16
+endif
+
+"---------------------------------------------------------------------------
+" ウインドウに関する設定:
+"
+" ウインドウの幅
+set columns=100
+" ウインドウの高さ
+set lines=58
+" コマンドラインの高さ(GUI使用時)
+set cmdheight=2
+" 画面を黒地に白にする (次行の先頭の " を削除すれば有効になる)
+"colorscheme evening " (GUI使用時
+colorscheme asmdev
+
