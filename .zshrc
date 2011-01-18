@@ -110,6 +110,8 @@ export OMAKE_HOME=/opt/ocaml/omake
 
 export PATH=.:$OCAML_HOME/bin:$OMAKE_HOME/bin:$MACPORTS_PREFIX/bin:$VIRTUALENV_BIN/bin:~/bin:/usr/local/bin:$PATH
 
+export WORKON_HOME=$HOME/.virtualenvs
+. /opt/local/Library/Frameworks/Python.framework/Versions/2.6/bin/virtualenvwrapper.sh
 
 ########################################
 ##################### Programming Env
