@@ -1,0 +1,503 @@
+Info file: trr.info,    -*-Text-*-
+produced by `texinfo-format-buffer'
+from file `trr.texi'
+using `texinfmt.el' version 2.32 of 19 November 1993.
+
+
+
+
+
+File: trr.info, Node: Top, Next: History, Prev: (dir), Up: (dir)
+
+Top Menu
+********
+
+これは GNU Emacs 上でタイピング能力を向上させるためのパッケージです。
+TRR19 の著作権に関しては GNU の GENERAL PUBLIC LICENSEの version 2 もし
+くはそれ以降に準じるものとします。
+
+* Menu:
+
+* History::                     TRR の歴史
+* Installation::                
+* How to play::                 さあ始めよう
+* Further more::                詳しい説明を読んでみよう
+* How to customize::            TRR を料理しちゃおう!
+* Index::                       
+
+
+
+File: trr.info, Node: History, Next: Installation, Prev: Top, Up: Top
+
+TRR の歴史
+**********
+
+
+The birth of trr
+================
+
+  trrが人類の歴史に初めて姿を表したのは1986年のことである。それは沖電気
+工業で当時遊んでいた守山貢氏が、自らのタイプ速度を上げるための練習用ツー
+ルとして、Dec2060用にPascalで作成したものであった。守山氏はその翌年Ｃ版
+のtrrを作成し、それが次第に普及していくことになる。ちなみにtrrという名称
+（愛称トゥルル）は守山氏が取り敢えず"trainer"から"aine"を省略して名付け
+たのであるが、本当の名前を考える前にそれが各地に普及してしまったそうであ
+る。
+
+
+Original E-Lisp edition
+=======================
+
+  trrの歴史に新たな展開が訪れるのはtrrがＩＣＯＴ（新世代コンピュータ技
+術開発機構）に移植されてからである。ＩＣＯＴのリーダーの一人でありしか
+もピアノの名手でもある富士通の近山隆氏が初めてtrrをやってみたところ一
+発で500点以上をマークし（600点を越えていたという証言者もいる）、そのよ
+うな高得点を想定していなかったtrrのプログラムのバグを引き出したという
+逸話はあまりにも有名である。その後trrはＩＣＯＴの中でＮＳＩＳ（日本電
+気技術情報システム開発：現在はNEC情報システムズ）の稲村雄氏により
+Emacs-Lispに翻訳され、稲村公開版 trr として定着していった
+（<INAMURA.92May21180510@psiux536.icot.or.jp>）。その後ＩＣＯＴの萩原
+氏（現ソニー）などの手によりハイスコアを競い合う形式が確立し、Emacs版trr
+への人気は絶大なものとなり、第５世代コンピュータプロジェクトの成果の一つ
+に数えられる程となった。
+
+
+Great Evolution
+===============
+
+  trrにさらに大きな転機が訪れたのは、沖電気工業で当時やはり遊んでいた加
+藤研児氏がＩＣＯＴに出入りするようになってからである。ここで、この人物に
+ついて簡単に紹介しよう。彼は学生時代にはタイプが全く打てず、論文を締切り
+に間に合わせるために担当教授である今井浩助教授(現東大)に自分の論文をタイ
+プさせた程の経歴の持ち主である。その時のコンプレックスからか、彼は沖電気
+に入社すると同じ職場の守山氏の作成したＣ版trrに熱中し、明けても暮れても
+trrばかりやる毎日であったと言う。
+  彼はＩＣＯＴで進化したtrrに触れ、改めて感銘し即座に改宗すると共に、
+同僚の女性(りみりん)の発言をモデルにして評価メッセージの表示機能を追
+加しはじめた。より馬鹿馬鹿しいメッセージを出すために各種実行情報の集
+計機能を追加すると共に、テキスト選択や立ち上げの高速化等の各種の修正
+及び機能追加を行い、1992年にNemacs版と呼ばれるものを発表した。ちなみ
+に彼はtrrをあまりにやり過ぎて指を痛め、現在はすっかりタイプスピードが
+落ちていると言う。くれぐれもやり過ぎには注意されたい。なお彼は現在、
+数理技研(株)に身を隠している(kato@suri.co.jp)との情報である。
+
+
+New Generation
+==============
+
+  これは長らく親しまれてきたが、残念ながらNemacs上でしか動作しなかったた
+め、Emacs 19 が世に広まるにつれ徐々に忘れられ始めてしまった。そこで東大
+情報科学科の山本泰宇(著者)がNemacs版のコードを全面的に見直すと共に、英語
+メッセージ表示などの機能を追加したTRR19を1996年に発表した。
+
+
+
+File: trr.info, Node: Installation, Next: How to play, Prev: History, Up: Top
+
+Installation
+************
+
+以下の手順で行ないます。もし問題があれば ymmt@is.s.u-tokyo.ac.jp
+まで連絡お願い致します。
+
+
+* Menu:
+
+* unpack the package::          TRR を展開する
+* edit Makefile::               Makefile を編集する
+* make all::                    
+* make install::                
+* additional texts::            好きな text を TRR で使う
+* autoload::                    
+
+
+
+File: trr.info, Node: unpack the package, Next: edit Makefile, Prev: Installation, Up: Installation
+
+TRR を展開する
+==============
+
+例えば以下のようにして下さい。
+     % zcat trr19.tar.gz | tar xvpf -
+     % cd trr19
+
+GNU tar を使っているなら
+     % tar xvzfp trr19.tar.gz
+     % cd trr19
+
+
+
+File: trr.info, Node: edit Makefile, Next: make all, Prev: unpack the package, Up: Installation
+
+Makefile を編集する
+===================
+
+`Makefile' の上の方にある以下の項目を編集して下さい。
+
+`trrdir'
+     TRR の elc file, text の入る directory, high score を保存する
+     directory, `CONTENTS' file が入る場所です。absolute path name でお
+     願いします。
+
+`bindir'
+     TRR の外部 command である、trr_update, trr_format が入るdirectory 
+     です。absolute path name でお願いします。
+
+`infodir'
+     info の入る directory です。
+
+`EMACS'
+     使用している Emacs version 19 の command 名です。
+
+`installer'
+     install する人か、TRR の maintainance をする人の e-mail address や
+     本名を入れて下さい。
+
+`japanese'
+     TRR の message 表示モードの default を日本語にしたい方は T,英語にし
+     たいかたは NIL にして下さい。
+
+`OPTIONS'
+     C compiler に渡す option です。大抵はそのままで大丈夫だと思いますが
+     何らかの include file がないといわれた場合、-D を削ってみて下さい。
+     それでも駄目な時は ymmt@is.s.u-tokyo.ac.jp まで連絡して下さい。
+
+`SED, GREP'
+     path 名が違う時は変えて下さい。*必ず絶対パスで記述して下さい!*
+     setuid している command の security のためです。
+
+
+
+
+File: trr.info, Node: make all, Next: make install, Prev: edit Makefile, Up: Installation
+
+make all
+========
+
+Makefile を編集し終ったら `make all' と type してください。
+失敗した時は Makefile の OPTIONS を変えて試してみて下さい。
+それでもうまくいかない時は system 名、emacs の version,
+エラーの内容を沿えて ymmt@is.s.u-tokyo.ac.jp まで連絡して下さい。
+
+
+
+File: trr.info, Node: make install, Next: additional texts, Prev: make all, Up: Installation
+
+make install
+============
+
+以上が全てうまくいったら TRR を install します。`make install' と type 
+して下さい。trrdir, infodir, bindir が存在しない場合は作成されます。もし 
+info file がないようならば `make info' として下さい。
+
+うまくいった後に `(infodir)'/dir に trr の項目を付け加えるのを忘れないよ
+うにして下さい。
+
+
+
+File: trr.info, Node: additional texts, Next: autoload, Prev: make install, Up: Installation
+
+好きな text を TRR で使う
+=========================
+
+TRR19 は日本国憲法と合衆国憲法がいっしょに配布されています。これら以外に
+も自由に好きな text を使って TRR を行なうことが出来ます。
+
+以下のような条件を満たしていることを確認して下さい。
+
+   * US-ASCII であること。変な control code が入っていたりするのは
+     駄目です。
+
+   * 適当な長さ以上であること。短過ぎるのは使えません。
+
+   * DOS や MAC の text file なら改行コードを変換すること。UNIX では 
+     texi file 中の改行は `0x0a' です。
+
+
+以下では `(trrdir)' は Makefile で指定した trrdir のこととします。
+
+  1. 付け加えたい text を `(trrdir)'/text にコピーする。
+
+  2. 付け加えた text の情報を `(trrdir)'/CONTENTS file に書き加える。
+     CONTENTS file の書き方は CONTENTS file 内に詳しく書いてあります。
+
+
+text file はいつでも好きな時に上のようにして付け加えられます。
+
+
+
+File: trr.info, Node: autoload, Prev: additional texts, Up: Installation
+
+autoload
+========
+
+最後に TRR を autoload 出来るようにします。以下のいずれかを選んで下さい。
+なお以下では `(trrdir)' は Makefile で指定した trrdir のこととします。
+
+   * `site-start.el' file に
+          (autoload 'trr "`(trrdir)'/trr" nil t)
+
+     を書き加える。
+     こうしておけばその site のユーザーは何もせずに `M-x trr' で
+     trr を実行できます。
+
+   * 各人の `.emacs' に
+          (autoload 'trr "`(trrdir)'/trr" nil t)
+
+     を書き加える。この場合使いたいユーザーに使い方を教えてあげて下さい。
+
+You are done! 以上で `M-x trr' と type すれば TRR が出来るはずです。
+
+
+
+File: trr.info, Node: How to play, Next: Further more, Prev: Installation, Up: Top
+
+さあ始めよう
+************
+
+TRR は以下のような流れで実行できます。
+
+  1. Emacs (MULE) から `M-x(もしくは ESC-x) trr' RET
+
+  2. text の一覧が出てくるので打ちたい text の番号を入力する。
+
+  3. ちょっと待つと画面が3段にわかれて text が表示されます。
+
+  4. カーソルの上にある文字をどんどん打っていって下さい。間違えるとそこ
+     でカーソルが止まります。BackSpace などで直す必要はありません。
+
+  5. 最後まで打つと得点やかかった時間が表示されます。
+
+  6. menu が出ますので続けたければ 2, もう終りにするのなら 1 を押して下
+     さい。
+
+
+
+
+File: trr.info, Node: Further more, Next: How to customize, Prev: How to play, Up: Top
+
+もっと TRR を知ろう!
+********************
+
+TRR にはいろいろな機能が備わっています。
+
+* Menu:
+
+* play level::                  
+* toggling switches::           
+* special keys::                特殊なキー操作
+
+
+
+File: trr.info, Node: play level, Next: toggling switches, Prev: Further more, Up: Further more
+
+プレイレベル
+============
+
+TRR は player の level に応じた4つの mode を持っています。これは menu の 
+`設定の変更' で変えることが出来ます。
+
+`初心者用 TRR'
+     表示される text の量は中級者用と同じですが、session を繰り返しても
+     同じ text が表示されます。得点は初心者用の file に記録されます。
+
+`中級者用 TRR'
+     default ではこの mode になっています。これで300点が出せるようになれ
+     ばあなたもなかなかの TRRer でしょう。
+
+`上級者用 TRR'
+     ここは初心者が生半可な気持ちで入ってはいけません。
+     text は full screen で出てきて、しかも減点率が
+     初心者もしくは中級者用の5倍!!
+     へたをすれば一生悪夢に悩まされてしまいます。
+
+
+
+
+File: trr.info, Node: toggling switches, Next: special keys, Prev: play level, Up: Further more
+
+トグルスイッチ
+==============
+
+menu の `設定の変更' の中で いくつかのスイッチを切替えることが出来ます。
+
+   * return key の扱いの変更を行なえます。行末の return を本当にreturn 
+     を押さなければいけないようにするか、もしくはspace で代用できるよう
+     にするかを選べます。
+
+   * message の表示言語の切替が出来ます。日本語か英語しか現在書いていま
+     せん。
+
+   * 間違えた時に音を鳴らすか鳴らさないかを選べます。
+
+   * text 中にある hyphenate された単語を元に戻すかどうかを切替えられま
+     す。
+
+それぞれ該当する番号を選ぶことで切り替わります。
+
+
+
+File: trr.info, Node: special keys, Prev: toggling switches, Up: Further more
+
+特殊なキー操作
+==============
+
+TRR の typing 画面では次のような特殊なキー操作が許されています。
+
+C-l
+     TRR を -nw で起動したりすると biff 等で画面が乱れることがあります。
+     そういった時に C-l を押せば画面を redraw します。
+
+C-c      session を始めると TRR は typing のキー入力以外禁止します。
+     途中で止めたくなった時は C-c を押すと即座に終了します。
+
+
+
+
+
+File: trr.info, Node: How to customize, Next: Index, Prev: Further more, Up: Top
+
+使いやすくしよう
+****************
+
+TRR は `.emacs' に書くことで User にさらに細かい設定の
+手段を提供しています。
+
+* Menu:
+
+* default switch::              
+* default directory::           
+* color::                       色を変更したい
+* hooks::                       フック関数
+
+
+
+File: trr.info, Node: default switch, Next: default directory, Prev: How to customize, Up: How to customize
+
+toggle switch の default 値
+===========================
+
+menu の `設定の変更' で毎回設定を変更するのが煩わしい場合以下のようにす
+れば default 値を変更できます。
+
+`return'
+     `(setq TRR:return-is-space t)' とすれば default で
+     return キーを space キーで代用できます。
+     `(setq TRR:return-is-space nil)' なら出来ません。
+
+`language'
+     `(setq TRR:japanese nil)' とすると message が default で英語の表示
+     になります。t なら日本語です。
+
+`ding'
+     `(setq TRR:ding-when-miss nil)' とすれば miss したときに
+     音がなりません。t だとなるようになります。
+
+`hyphenate'
+     `(setq TRR:un-hyphenate nil)' とするとハイフネーションを
+     戻さなくなります。t だとハイフネーションを消します。
+
+
+
+File: trr.info, Node: default directory, Next: color, Prev: default switch, Up: How to customize
+
+TRR の default directory の変更
+===============================
+
+TRR は通常 install 時に正しい directory を与えられています。しかしなんら
+かの理由でそれを変更したい場合環境変数を与えれば変えられます。
+
+elc, text, record 等が入っている directory を与えるには環境変数 TRRDIR 
+を定義します。trr_update, trr_format が入っている directory は TRRBINDIR 
+です。
+
+
+
+File: trr.info, Node: color, Next: hooks, Prev: default directory, Up: How to customize
+
+色を変更したい
+==============
+
+default の色指定は明るい背景用になっています。
+これも `.emacs' に以下のような指定を加えれば変更できます。
+
+
+`textの色'
+     `(setq TRR:text-color-name COLOR)' の color に
+     色を表す文字列を入れると打つべき text の色がその色になります。COLOR 
+     に nil を指定すれば色がつきません。以下も同様の指定方法です。
+
+`正しく打った文字の色'
+     `(setq TRR:correct-color-name COLOR)' で指定できます。
+
+`間違えた文字の色'
+     `(setq TRR:miss-color-name COLOR)' で指定できます。
+
+`グラフの星の色'
+     `(setq TRR:graph-color-name COLOR)' で指定できます。
+
+`自分の名前の背景の色'
+     `(setq TRR:self-color-name COLOR)' で指定できます。
+
+
+
+
+File: trr.info, Node: hooks, Prev: color, Up: How to customize
+
+フック関数
+==========
+
+TRR は以下のような hook を用意しています。
+
+TRR:LOAD-HOOK
+     TRR を load する時だけ評価されます。
+
+TRR:START-HOOK
+     M-x trr を実行する際に評価されます。
+
+TRR:END-HOOK
+     TRR を終了する際に評価されます。
+
+
+
+
+
+File: trr.info, Node: Index, Prev: How to customize, Up: Top
+
+Index
+*****
+
+
+* Menu:
+
+* add text:                     additional texts.       4.
+* autoload:                     autoload.               4.
+* beep:                         toggling switches.      17.
+* birth:                        History.                8.
+* color:                        color.                  4.
+* CONTENTS:                     additional texts.       4.
+* ding:                         toggling switches.      17.
+* directory:                    default directory.      4.
+* English:                      toggling switches.      13.
+* History:                      History.                4.
+* hook:                         hooks.                  4.
+* How to play:                  How to play.            4.
+* hyphenate:                    toggling switches.      20.
+* install:                      Installation.           4.
+* installation:                 Installation.           4.
+* Japanese:                     toggling switches.      13.
+* key:                          special keys.           4.
+* language:                     toggling switches.      13.
+* level:                        play level.             4.
+* Makefile:                     edit Makefile.          4.
+* play:                         How to play.            4.
+* quit:                         special keys.           13.
+* refresh screen:               special keys.           9.
+* return:                       toggling switches.      8.
+* start:                        How to play.            4.
+* switch:                       toggling switches.      4.
+* text:                         additional texts.       4.
+* toggle:                       toggling switches.      4.
+* TRR19:                        History.                62.
+* unpack:                       unpack the package.     4.
+     
