@@ -1,0 +1,131 @@
+# zshrc >= 4.3.10
+# 2011.01.19 4.3.11
+#
+# If you want MacPorts' zsh as login shell, you should run:
+# % sudo sh -c "echo '/opt/local/bin/zsh' >> /etc/shells"
+# % chsh -s /opt/local/bin/zsh
+#
+########################################
+##################### General settings
+########################################
+
+# LANG
+export LANG=ja_JP.UTF-8
+
+# Emacs like key bind
+bindkey -e
+
+# completion
+autoload -U compinit
+compinit
+
+setopt auto_menu
+setopt list_packed
+setopt list_types
+setopt magic_equal_subst
+
+# correct typo
+setopt correct
+
+# auto change directory (i.e. cd foo -> foo)
+setopt auto_cd
+
+# auto directory pushd that you can get dirs list by cd -[tab]
+setopt auto_pushd
+
+# no beep sound when complete list displayed
+setopt nolistbeep
+
+# history setting
+HISTFILE=~/.zsh_history
+HISTSIZE=10000
+SAVEHIST=10000
+setopt hist_ignore_dups # ignore duplication command history list
+setopt share_history # share command history data
+
+
+########################################
+##################### PROMPT settings
+########################################
+
+setopt prompt_subst
+autoload -Uz add-zsh-hook
+autoload colors
+colors
+
+# PROMPT
+case ${UID} in
+0)
+    PROMPT="${fg[white]}[${fg[red]}%* %n${fg[white]}@%m ${fg[green]}%~${fg[white]}]
+ %# "
+    ;;
+*)
+    PROMPT="${fg[white]}[${fg[green]}%* ${fg[cyan]}%n${fg[white]}@%m ${fg[green]}%~${fg[white]}]
+ %# "
+    ;;
+esac
+
+# VCS version and branch info in RPROMPT
+autoload -Uz vcs_info
+zstyle ':vcs_info:*' enable git svn hg bzr
+zstyle ':vcs_info:*' formats '(%s:%b)'
+zstyle ':vcs_info:*' actionformats '(%s:%b|%a)'
+zstyle ':vcs_info:(svn|bzr):*' branchformat '%b:r%r'
+zstyle ':vcs_info:bzr:*' use-simple true
+
+autoload -Uz is-at-least
+if is-at-least 4.3.10; then
+  zstyle ':vcs_info:git:*' check-for-changes true
+  zstyle ':vcs_info:git:*' stagedstr "+"    
+  zstyle ':vcs_info:git:*' unstagedstr "-"  
+  zstyle ':vcs_info:git:*' formats '(%s:%b) %c%u'
+  zstyle ':vcs_info:git:*' actionformats '(%s:%b|%a) %c%u'
+fi
+
+function _update_vcs_info_msg() {
+    psvar=()
+    LANG=en_US.UTF-8 vcs_info
+    [[ -n "$vcs_info_msg_0_" ]] && psvar[1]="$vcs_info_msg_0_"
+}
+add-zsh-hook precmd _update_vcs_info_msg
+RPROMPT="%1(v|%F{green}%1v%f|)"
+
+########################################
+##################### Programming Env
+########################################
+
+export MACPORTS_PREFIX=/opt/local
+
+### for Python
+export VIRTUALENV_BIN=$MACPORTS_PREFIX/Library/Frameworks/Python.framework/Versions/2.6
+export PYTHONPATH=$MACPORTS_PREFIX/lib/python2.6/:$PYTHONPATH.
+export MANPATH=$MACPORTS_PREFIX/share/man:/usr/local/man:$MANPATH
+
+### for OCaml
+export OCAML_VER=3.11.2
+export OCAML_HOME=/opt/ocaml/$OCAML_VER
+
+### for OMake
+export OMAKE_HOME=/opt/ocaml/omake
+
+export PATH=.:$OCAML_HOME/bin:$OMAKE_HOME/bin:$MACPORTS_PREFIX/bin:$VIRTUALENV_BIN/bin:~/bin:/usr/local/bin:$PATH
+
+
+########################################
+##################### Programming Env
+########################################
+
+# complete process ID
+zstyle ':completion:*:processes' command 'ps x -o pid,s,args'
+
+# put colors on completion candidates
+zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS} menu select=1
+
+alias emacs="/Applications/Emacs.app/Contents/MacOS/Emacs"
+alias gvim="/Applications/MacVim.app/Contents/MacOS/MacVim"
+
+alias docs="cd ~/docs"
+alias src="cd ~/src"
+
+
+
