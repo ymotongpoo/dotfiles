@@ -67,7 +67,7 @@ esac
 
 # VCS version and branch info in RPROMPT
 autoload -Uz vcs_info
-zstyle ':vcs_info:*' enable git svn hg bzr
+zstyle ':vcs_info:*' enable git hg bzr
 zstyle ':vcs_info:*' formats '(%s:%b)'
 zstyle ':vcs_info:*' actionformats '(%s:%b|%a)'
 zstyle ':vcs_info:(svn|bzr):*' branchformat '%b:r%r'
@@ -81,6 +81,11 @@ if is-at-least 4.3.10; then
   zstyle ':vcs_info:git:*' formats '(%s:%b) %c%u'
   zstyle ':vcs_info:git:*' actionformats '(%s:%b|%a) %c%u'
 fi
+
+local _pre=''
+preexec() {
+    _pre="$1"
+}
 
 function _update_vcs_info_msg() {
     psvar=()
