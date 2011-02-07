@@ -25,7 +25,7 @@ setopt list_types
 setopt magic_equal_subst
 
 # correct typo
-setopt correct
+#setopt correct
 
 # auto change directory (i.e. cd foo -> foo)
 setopt auto_cd

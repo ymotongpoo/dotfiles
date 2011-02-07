@@ -49,11 +49,6 @@
 ;;リージョンを[delete][BS]で削除
 (delete-selection-mode 1)
 
-;;color-theme
-(require 'color-theme)
-(color-theme-initialize)
-(color-theme-dark-laptop)
-
 ;;フリンジの色の変更
 (set-face-background 'fringe "gray20")
 
@@ -130,31 +125,20 @@
 ;(setq font-lock-support-mode 'lazy-lock-mode)
 
 ;;; フォントをInconsolataに設定
-;;; Mac OS X -- http://www.levien.com/type/myfonts/inconsolata.html
-;;; Ubuntu -- http://yamashita.dyndns.org/blog/inconsolata-as-a-programming-font/
-(when (eq window-system 'ns)
-  (create-fontset-from-mac-roman-font
-   "-apple-inconsolata-medium-r-normal--14-0-72-72-m-0-iso10646-1"
-   nil "myfont")
+;;; http://www.levien.com/type/myfonts/inconsolata.html
+(create-fontset-from-mac-roman-font
+ "-apple-inconsolata-medium-r-normal--14-0-72-72-m-0-iso10646-1"
+ nil "myfont")
 
-  (set-fontset-font "fontset-myfont"
-					'japanese-jisx0208
-					'("ヒラギノ丸ゴ pro w4*" . "jisx0208.*"))
+(set-fontset-font "fontset-myfont"
+                  'japanese-jisx0208
+                  '("ヒラギノ丸ゴ pro w4*" . "jisx0208.*"))
 
-  (set-fontset-font "fontset-myfont"
-					'katakana-jisx0201
-					'("ヒラギノ丸ゴ pro w4*" . "jisx0201.*"))
+(set-fontset-font "fontset-myfont"
+                  'katakana-jisx0201
+                  '("ヒラギノ丸ゴ pro w4*" . "jisx0201.*"))
 
-  (add-to-list 'default-frame-alist '(font . "fontset-myfont")))
-
-(when (eq window-system 'x)
-  (set-default-font "Inconsolata-11")
-  (set-face-font 'variable-pitch "Inconsolata-11")
-  (set-fontset-font (frame-parameter nil 'font)
-					'japanese-jisx0208
-					'("Takaoゴシック" . "unicode-bmp")
-					))
-
+(add-to-list 'default-frame-alist '(font . "fontset-myfont"))
   
 ;;; 初期フレームの設定
 (setq default-frame-alist
@@ -371,8 +355,7 @@
   ;; If you edit it by hand, you could mess it up, so be careful.
   ;; Your init file should contain only one such instance.
   ;; If there is more than one, they won't work right.
- '(inhibit-startup-screen t)
- '(vc-follow-symlinks t))
+ '(inhibit-startup-screen t))
 (custom-set-faces
   ;; custom-set-faces was added by Custom.
   ;; If you edit it by hand, you could mess it up, so be careful.
