@@ -128,8 +128,6 @@ zstyle ':completion:*:processes' command 'ps x -o pid,s,args'
 # put colors on completion candidates
 zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS} menu select=1
 
-alias emacs="/Applications/Emacs.app/Contents/MacOS/Emacs"
-alias gvim="/Applications/MacVim.app/Contents/MacOS/MacVim"
 
 alias docs="cd ~/docs"
 alias src="cd ~/src"
