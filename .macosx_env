@@ -10,3 +10,5 @@ OMAKE_HOME=/opt/ocaml/omake
 
 EXTRA_PATH=$MACPORTS_PREFIX/bin
 
+alias emacs="/Applications/Emacs.app/Contents/MacOS/Emacs"
+alias gvim="/Applications/MacVim.app/Contents/MacOS/MacVim"
