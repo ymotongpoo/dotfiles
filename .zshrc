@@ -113,7 +113,7 @@ export OCAML_HOME
 export OMAKE_HOME
 
 export EXTRA_PATH
-export PATH=.:$OCAML_HOME/bin:$OMAKE_HOME/bin:$EXTRA_PATH/bin:$VIRTUALENV_BIN/bin:~/bin:/usr/local/bin:$PATH
+export PATH=.:$OCAML_HOME/bin:$OMAKE_HOME/bin:$EXTRA_PATH:$VIRTUALENV_BIN/bin:~/bin:/usr/local/bin:$PATH
 
 export WORKON_HOME=$HOME/.virtualenvs
 . $VIRTUALENV_BIN/bin/virtualenvwrapper.sh
