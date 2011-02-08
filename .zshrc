@@ -99,24 +99,24 @@ RPROMPT="%1(v|%F{green}%1v%f|)"
 ##################### Programming Env
 ########################################
 
-export MACPORTS_PREFIX=/opt/local
+# select .macosx_env or .linux_env 
+. ~/.os_env
 
 ### for Python
-export VIRTUALENV_BIN=$MACPORTS_PREFIX/Library/Frameworks/Python.framework/Versions/2.6
-export PYTHONPATH=$MACPORTS_PREFIX/lib/python2.6/:$PYTHONPATH.
-export MANPATH=$MACPORTS_PREFIX/share/man:/usr/local/man:$MANPATH
+export VIRTUALENV_BIN
+export PYTHONPATH
+export MANPATH
 
-### for OCaml
-export OCAML_VER=3.11.2
-export OCAML_HOME=/opt/ocaml/$OCAML_VER
+### for OCaml and OMAKE
+export OCAML_VER
+export OCAML_HOME
+export OMAKE_HOME
 
-### for OMake
-export OMAKE_HOME=/opt/ocaml/omake
-
-export PATH=.:$OCAML_HOME/bin:$OMAKE_HOME/bin:$MACPORTS_PREFIX/bin:$VIRTUALENV_BIN/bin:~/bin:/usr/local/bin:$PATH
+export EXTRA_PATH
+export PATH=.:$OCAML_HOME/bin:$OMAKE_HOME/bin:$EXTRA_PATH/bin:$VIRTUALENV_BIN/bin:~/bin:/usr/local/bin:$PATH
 
 export WORKON_HOME=$HOME/.virtualenvs
-. /opt/local/Library/Frameworks/Python.framework/Versions/2.6/bin/virtualenvwrapper.sh
+. $VIRTUALENV_BIN/bin/virtualenvwrapper.sh
 
 ########################################
 ##################### Programming Env

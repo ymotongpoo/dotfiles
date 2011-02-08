@@ -1,0 +1,12 @@
+MACPORTS_PREFIX=/opt/local
+
+VIRTUALENV_BIN=$MACPORTS_PREFIX/Library/Frameworks/Python.framework/Versions/2.6
+PYTHONPATH=$MACPORTS_PREFIX/lib/python2.6/:$PYTHONPATH.
+MANPATH=$MACPORTS_PREFIX/share/man:/usr/local/man:$MANPATH
+
+OCAML_VER=3.11.2
+OCAML_HOME=/opt/ocaml/$OCAML_VER
+OMAKE_HOME=/opt/ocaml/omake
+
+EXTRA_PATH=$MACPORTS_PREFIX/bin
+
