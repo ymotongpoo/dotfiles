@@ -8,7 +8,9 @@ OCAML_VER=3.11.2
 OCAML_HOME=/opt/ocaml/$OCAML_VER
 OMAKE_HOME=/opt/ocaml/omake
 
-EXTRA_PATH=$MACPORTS_PREFIX/bin
+FACTOR_BIN=/opt/factor
+
+EXTRA_PATH=$FACTOR_BIN:$MACPORTS_PREFIX/bin
 
 alias emacs="/Applications/Emacs.app/Contents/MacOS/Emacs"
 alias gvim="/Applications/MacVim.app/Contents/MacOS/MacVim"
