@@ -310,6 +310,9 @@
 (add-to-list 'auto-mode-alist '("\\.js$" . js2-mode))
 
 
+;;;;; FUEL (Factor) mode
+(load-file "~/.emacs.d/fuel/fu.el")
+
 
 ;;;;; Haskell mode
 (setq load-path (cons "~/.emacs.d/haskell" load-path))
