@@ -23,6 +23,9 @@
 ;;; シンボリックリンク先のVCS内で更新が入った場合にバッファを自動更新
 (setq auto-revert-check-vc-info t)
 
+;;; スタートアップスクリーンを表示しない
+(setq inhibit-splash-screen t)
+
 ;;; バックアップファイルの設定
 (setq make-backup-files t)
 (setq backup-directory-alist
