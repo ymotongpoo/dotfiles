@@ -146,12 +146,12 @@
    nil "myfont")
 
   (set-fontset-font "fontset-myfont"
-					'japanese-jisx0208
-					'("ヒラギノ丸ゴ pro w4*" . "jisx0208.*"))
+    'japanese-jisx0208
+    '("ヒラギノ丸ゴ pro w4*" . "jisx0208.*"))
 
   (set-fontset-font "fontset-myfont"
-					'katakana-jisx0201
-					'("ヒラギノ丸ゴ pro w4*" . "jisx0201.*"))
+    'katakana-jisx0201
+    '("ヒラギノ丸ゴ pro w4*" . "jisx0201.*"))
 
   (add-to-list 'default-frame-alist '(font . "fontset-myfont")))
 
@@ -159,25 +159,24 @@
   (set-default-font "Inconsolata-11")
   (set-face-font 'variable-pitch "Inconsolata-11")
   (set-fontset-font (frame-parameter nil 'font)
-					'japanese-jisx0208
-					'("Takaoゴシック" . "unicode-bmp")
-					))
+     'japanese-jisx0208
+     '("Takaoゴシック" . "unicode-bmp")))
+	
 
   
 ;;; 初期フレームの設定
 (setq default-frame-alist
-	  (append (list '(foreground-color . "white")
-					'(background-color . "black")
-					'(background-color . "gray")
-					'(border-color . "white")
-					'(mouse-color . "white")
-					'(width . 100)
-					'(height . 50)
-					'(top . 30)
-					'(left . 50)
-					'(alpha . (80 50))
-					)
-			  default-frame-alist))
+  (append (list '(foreground-color . "white")
+    '(background-color . "black")
+    '(background-color . "gray")
+    '(border-color . "white")
+    '(mouse-color . "white")
+    '(width . 100)
+    '(height . 50)
+    '(top . 30)
+    '(left . 50)
+    '(alpha . (80 50)))
+  default-frame-alist))
 
 ;;; mini-buffer 
 (setq resize-mini-windows nil)
