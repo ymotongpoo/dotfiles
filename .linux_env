@@ -8,3 +8,5 @@ OMAKE_HOME=/opt/ocaml/omake
 
 EXTRA_PATH=
 
+EDITOR=/usr/bin/vim
+
