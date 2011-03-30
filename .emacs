@@ -140,7 +140,7 @@
 ;;; フォントをInconsolataに設定
 ;;; Mac OS X -- http://www.levien.com/type/myfonts/inconsolata.html
 ;;; Ubuntu -- http://yamashita.dyndns.org/blog/inconsolata-as-a-programming-font/
-(when (eq window-system 'ns)
+(when (eq system-type 'darwin)
   (create-fontset-from-mac-roman-font
    "-apple-inconsolata-medium-r-normal--14-0-72-72-m-0-iso10646-1"
    nil "myfont")
@@ -155,7 +155,7 @@
 
   (add-to-list 'default-frame-alist '(font . "fontset-myfont")))
 
-(when (eq window-system 'x)
+(when (eq system-type 'gnu/linux)
   (set-default-font "Inconsolata-11")
   (set-face-font 'variable-pitch "Inconsolata-11")
   (set-fontset-font (frame-parameter nil 'font)
