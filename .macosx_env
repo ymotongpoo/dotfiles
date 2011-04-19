@@ -1,7 +1,7 @@
 MACPORTS_PREFIX=/opt/local
 
-VIRTUALENV_BIN=$MACPORTS_PREFIX/Library/Frameworks/Python.framework/Versions/2.6
-PYTHONPATH=$MACPORTS_PREFIX/lib/python2.6/:$PYTHONPATH.
+VIRTUALENV_BIN=$MACPORTS_PREFIX/Library/Frameworks/Python.framework/Versions/$PYTHON_VER
+PYTHONPATH=$MACPORTS_PREFIX/lib/python$PYTHON_VER/:$PYTHONPATH.
 MANPATH=$MACPORTS_PREFIX/share/man:/usr/local/man:$MANPATH
 
 OCAML_VER=3.11.2

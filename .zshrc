@@ -99,6 +99,8 @@ RPROMPT="%1(v|%F{green}%1v%f|)"
 ##################### Programming Env
 ########################################
 
+. ~/.versions
+
 # select .macosx_env or .linux_env 
 . ~/.os_env
 
