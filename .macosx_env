@@ -8,6 +8,9 @@ OCAML_VER=3.11.2
 OCAML_HOME=/opt/ocaml/$OCAML_VER
 OMAKE_HOME=/opt/ocaml/omake
 
+ERL_VER=R14B
+ERL_HOME=/opt/erlang/$ERL_VER
+
 FACTOR_BIN=/opt/factor
 
 EXTRA_PATH=$FACTOR_BIN:$MACPORTS_PREFIX/bin

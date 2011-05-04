@@ -230,7 +230,11 @@
 (autoload 'python-mode "python-mode" "Python editing mode." t)
 (add-hook 'python-mode-hook
 		  (function (lambda ()
-					  (setq indent-tabs-mode nil))))
+					  (setq indent-tabs-mode nil)
+					  (setq indent-level 2)
+					  (setq python-indent 2)
+					  (setq tab-width 2)
+					  )))
 
 ;; paren complete
 (add-hook 'python-mode-hook
