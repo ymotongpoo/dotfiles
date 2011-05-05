@@ -140,44 +140,43 @@
 ;;; フォントをInconsolataに設定
 ;;; Mac OS X -- http://www.levien.com/type/myfonts/inconsolata.html
 ;;; Ubuntu -- http://yamashita.dyndns.org/blog/inconsolata-as-a-programming-font/
-(when (eq window-system 'ns)
+(when (eq system-type 'darwin)
   (create-fontset-from-mac-roman-font
    "-apple-inconsolata-medium-r-normal--14-0-72-72-m-0-iso10646-1"
    nil "myfont")
 
   (set-fontset-font "fontset-myfont"
-					'japanese-jisx0208
-					'("ヒラギノ丸ゴ pro w4*" . "jisx0208.*"))
+    'japanese-jisx0208
+    '("ヒラギノ丸ゴ pro w4*" . "jisx0208.*"))
 
   (set-fontset-font "fontset-myfont"
-					'katakana-jisx0201
-					'("ヒラギノ丸ゴ pro w4*" . "jisx0201.*"))
+    'katakana-jisx0201
+    '("ヒラギノ丸ゴ pro w4*" . "jisx0201.*"))
 
   (add-to-list 'default-frame-alist '(font . "fontset-myfont")))
 
-(when (eq window-system 'x)
+(when (eq system-type 'gnu/linux)
   (set-default-font "Inconsolata-11")
   (set-face-font 'variable-pitch "Inconsolata-11")
   (set-fontset-font (frame-parameter nil 'font)
-					'japanese-jisx0208
-					'("Takaoゴシック" . "unicode-bmp")
-					))
+     'japanese-jisx0208
+     '("Takaoゴシック" . "unicode-bmp")))
+	
 
   
 ;;; 初期フレームの設定
 (setq default-frame-alist
-	  (append (list '(foreground-color . "white")
-					'(background-color . "black")
-					'(background-color . "gray")
-					'(border-color . "white")
-					'(mouse-color . "white")
-					'(width . 100)
-					'(height . 50)
-					'(top . 30)
-					'(left . 50)
-					'(alpha . (80 50))
-					)
-			  default-frame-alist))
+  (append (list '(foreground-color . "white")
+    '(background-color . "black")
+    '(background-color . "gray")
+    '(border-color . "white")
+    '(mouse-color . "white")
+    '(width . 100)
+    '(height . 50)
+    '(top . 30)
+    '(left . 50)
+    '(alpha . (80 50)))
+  default-frame-alist))
 
 ;;; mini-buffer 
 (setq resize-mini-windows nil)
@@ -231,7 +230,11 @@
 (autoload 'python-mode "python-mode" "Python editing mode." t)
 (add-hook 'python-mode-hook
 		  (function (lambda ()
-					  (setq indent-tabs-mode nil))))
+					  (setq indent-tabs-mode nil)
+					  (setq indent-level 2)
+					  (setq python-indent 2)
+					  (setq tab-width 2)
+					  )))
 
 ;; paren complete
 (add-hook 'python-mode-hook
