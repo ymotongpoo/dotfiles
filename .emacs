@@ -292,12 +292,12 @@
 ;(setq tuareg-lazy-paren t)
 
 ;;;;; Scala mode
-(require 'scala-mode-auto)
-(add-hook 
- 'scala-mode-hook
- '(lambda ()
-    (setq indent-tabs-mode nil)
-    ))
+;(require 'scala-mode-auto)
+;(add-hook 
+; 'scala-mode-hook
+; '(lambda ()
+;    (setq indent-tabs-mode nil)
+;    ))
 
 ;;;;; rst mode
 (require 'rst)
