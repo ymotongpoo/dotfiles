@@ -1,0 +1,29 @@
+Emacs mode for D major mode and the dlint syntax and warning minor mode.
+
+For more information see http://home.comcast.net/~benhinkle
+
+Put the d-mode.el and other .el files into your emacs site-lisp directory.
+The cc-engine.el file is a slightly modified version of the
+one from emacs-21.2 to have the following line:
+
+  ((and (not (c-major-mode-is 'd-mode)) (c-just-after-func-arglist-p))
+instead of
+  ((c-just-after-func-arglist-p)
+
+Replace the cc-engine.el file in lisp/progmodes with this one.
+
+Load the files into emacs and run
+  M-x byte-compile-file RET RET 
+to compile it into a .elc file
+
+Add this to your .emacs file:
+
+(autoload 'd-mode "d-mode" 
+  "Major mode for editing D code." t)
+(setq auto-mode-alist (cons '( "\\.d\\'" . d-mode ) auto-mode-alist ))
+(autoload 'dlint-minor-mode "dlint" nil t)
+(add-hook 'd-mode-hook (lambda () (dlint-minor-mode 1)))
+
+The dlint minor mode needs to be able to find the phobos standard library
+sources for resolving imports. The path to the root of phobos should be
+put into sc.ini on Windows or /etc/dmd.conf on Linux.
