@@ -297,6 +297,7 @@
 
 
 ;;;;; D mode
+(setq load-path (cons "~/.emacs.d/d-mode" load-path))
 (autoload 'd-mode "d-mode" "Major mode for editing D code." t)
 (setq auto-mode-alist 
 	  (cons '( "\\.d\\'" . d-mode ) auto-mode-alist))
