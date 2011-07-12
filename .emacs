@@ -213,14 +213,14 @@
 ;;c++ namespace no indent
 (add-hook 'c++-mode-hook
           '(lambda()
-			 (c-set-style "cc-mode")
+			 (c-set-style "stroustrup")
              (c-set-offset 'innamespace 0) ; namespace {}の中はインデントしない
 			 (c-set-offset 'c-basic-offset 2)
 			 (setq indent-tabs-mode nil)
              ))
 
 ;;;;*************** Major mode ***************
-;;;; python mode
+;;;;; python mode
 (progn (cd "~/.emacs.d/vendor")
        (normal-top-level-add-subdirs-to-load-path))
 
@@ -295,13 +295,23 @@
 
 ;(setq tuareg-lazy-paren t)
 
+
+;;;;; D mode
+(autoload 'd-mode "d-mode" "Major mode for editing D code." t)
+(setq auto-mode-alist 
+	  (cons '( "\\.d\\'" . d-mode ) auto-mode-alist))
+(autoload 'dlint-minor-mode "dlint" nil t)
+(add-hook 'd-mode-hook 
+		  (lambda () (dlint-minor-mode 1)))
+
+
 ;;;;; Scala mode
-(require 'scala-mode-auto)
-(add-hook 
- 'scala-mode-hook
- '(lambda ()
-    (setq indent-tabs-mode nil)
-    ))
+;(require 'scala-mode-auto)
+;(add-hook 
+; 'scala-mode-hook
+; '(lambda ()
+;    (setq indent-tabs-mode nil)
+;    ))
 
 ;;;;; rst mode
 (require 'rst)

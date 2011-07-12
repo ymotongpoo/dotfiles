@@ -13,7 +13,9 @@ ERL_HOME=/opt/erlang/$ERL_VER
 
 FACTOR_BIN=/opt/factor
 
-EXTRA_PATH=$FACTOR_BIN:$MACPORTS_PREFIX/bin
+DMD_BASE=/opt/dmd2
+
+EXTRA_PATH=$FACTOR_BIN:$MACPORTS_PREFIX/bin:$DMD_BASE/bin
 
 alias emacs="/Applications/Emacs.app/Contents/MacOS/Emacs"
 alias gvim="/Applications/MacVim.app/Contents/MacOS/MacVim"
