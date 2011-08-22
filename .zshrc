@@ -137,5 +137,5 @@ zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS} menu select=1
 alias docs="cd ~/docs"
 alias src="cd ~/src"
 
-
+alias tw="open -a TextWrangler"
 
