@@ -95,6 +95,14 @@ function _update_vcs_info_msg() {
 add-zsh-hook precmd _update_vcs_info_msg
 RPROMPT="%1(v|%F{green}%1v%f|)"
 
+# If 
+srchilite="/opt/local/bin/src-hilite-lesspipe.sh"
+if [ -f $srchilite ]; then
+  export LESS='-R'
+  export LESSOPEN='| /opt/local/bin/src-hilite-lesspipe.sh %s'
+fi
+
+
 ########################################
 ##################### Programming Env
 ########################################
