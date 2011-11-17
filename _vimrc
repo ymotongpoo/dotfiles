@@ -21,9 +21,9 @@ autocmd FileType cpp set omnifunc=cppcomplete#Complete
 autocmd FileType py set smarttab 
 autocmd FileType py set omnifunc=pythoncomplete#Complete
 autocmd FileType py set smartindent cinwords-if,elif,else,for,while,try,except,finally,def,class
-autocmd FileType py set tabstop-8 expandtab shiftwidth-4 softtabstop=4
+autocmd FileType py set tabstop=8 expandtab shiftwidth=2 softtabstop=2
 autocmd FileType scala set smarttab
-set tabstop=4 shiftwidth=4 softtabstop=0
+set tabstop=2 shiftwidth=2 softtabstop=0
 set autoindent smartindent
 set expandtab
 
