@@ -30,4 +30,5 @@ set cmdheight=2
 "colorscheme evening " (GUI使用時
 colorscheme asmdev
 
-
+" MacVim-Kaoriya
+inoremap <silent> <ESC> <ESC>:set iminsert=1<CR>
