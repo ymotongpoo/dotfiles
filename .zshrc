@@ -146,4 +146,4 @@ alias docs="cd ~/docs"
 alias src="cd ~/src"
 
 alias tw="open -a TextWrangler"
-
+alias gvim="open -a MacVim"

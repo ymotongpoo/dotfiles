@@ -74,3 +74,4 @@ nnoremap <F4> :bd<CR>
 
 " NERDTree
 nnoremap ,d :execute 'NERDTreeToggle ' . getcwd()<CR>
+
