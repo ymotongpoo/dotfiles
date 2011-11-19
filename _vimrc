@@ -75,3 +75,8 @@ nnoremap <F4> :bd<CR>
 " NERDTree
 nnoremap ,d :execute 'NERDTreeToggle ' . getcwd()<CR>
 
+
+
+" zen coding                                                                                    
+let g:user_zen_expandabbr_key = '<c-e>'
+let g:user_zen_settings = { 'indentation':'  ' }
