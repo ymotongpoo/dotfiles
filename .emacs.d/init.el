@@ -15,8 +15,21 @@
 ;;; C-hでBackSpace
 (keyboard-translate ?\C-h ?\C-?)
 
+;;; CmdをMetaキーに
+(when (>= emacs-major-version 23)
+  (setq ns-command-modifier (quote meta))
+  (setq ns-alternate-modifier (quote super)))
+
 ;;; 列数の表示
 (column-number-mode 1)
+
+;;; シンボリックリンクの読み込みを許可
+(setq vc-follow-symlinks t)
+;;; シンボリックリンク先のVCS内で更新が入った場合にバッファを自動更新
+(setq auto-revert-check-vc-info t)
+
+;;; スタートアップスクリーンを表示しない
+(setq inhibit-splash-screen t)
 
 ;;; バックアップファイルの設定
 (setq make-backup-files t)
@@ -48,6 +61,11 @@
 
 ;;リージョンを[delete][BS]で削除
 (delete-selection-mode 1)
+
+;;color-theme
+(require 'color-theme)
+(color-theme-initialize)
+(color-theme-dark-laptop)
 
 ;;フリンジの色の変更
 (set-face-background 'fringe "gray20")
@@ -125,35 +143,71 @@
 ;(setq font-lock-support-mode 'lazy-lock-mode)
 
 ;;; フォントをInconsolataに設定
-;;; http://www.levien.com/type/myfonts/inconsolata.html
-(create-fontset-from-mac-roman-font
- "-apple-inconsolata-medium-r-normal--14-0-72-72-m-0-iso10646-1"
- nil "myfont")
+;;; Mac OS X -- http://www.levien.com/type/myfonts/inconsolata.html
+;;; Ubuntu -- http://yamashita.dyndns.org/blog/inconsolata-as-a-programming-font/
+(when (>= emacs-major-version 23)
+  (set-face-attribute 'default nil
+					  :family "monaco"
+					  :height 140)
+  (set-fontset-font
+   (frame-parameter nil 'font)
+   'japanese-jisx0208
+   '("Hiragino Maru Gothic Pro" . "iso10646-1"))
+  (set-fontset-font
+   (frame-parameter nil 'font)
+   'japanese-jisx0212
+   '("Hiragino Maru Gothic Pro" . "iso10646-1"))
+  (set-fontset-font
+   (frame-parameter nil 'font)
+   'mule-unicode-0100-24ff
+   '("monaco" . "iso10646-1"))
+  (setq face-font-rescale-alist
+		'(("^-apple-hiragino.*" . 1.2)
+		  (".*osaka-bold.*" . 1.2)
+		  (".*osaka-medium.*" . 1.2)
+		  (".*courier-bold-.*-mac-roman" . 1.0)
+		  (".*monaco cy-bold-.*-mac-cyrillic" . 0.9)
+		  (".*monaco-bold-.*-mac-roman" . 0.9)
+		  ("-cdac$" . 1.3))))
 
-(set-fontset-font "fontset-myfont"
-                  'japanese-jisx0208
-                  '("ヒラギノ丸ゴ pro w4*" . "jisx0208.*"))
+(when (< emacs-major-version 23)
+  (when (eq system-type 'darwin)
+	(create-fontset-from-mac-roman-font
+	 "-apple-inconsolata-medium-r-normal--14-0-72-72-m-0-iso10646-1"
+	 nil "myfont")
 
-(set-fontset-font "fontset-myfont"
-                  'katakana-jisx0201
-                  '("ヒラギノ丸ゴ pro w4*" . "jisx0201.*"))
+	(set-fontset-font "fontset-myfont"
+					  'japanese-jisx0208
+					  '("ヒラギノ丸ゴ pro w4*" . "jisx0208.*"))
 
-(add-to-list 'default-frame-alist '(font . "fontset-myfont"))
+	(set-fontset-font "fontset-myfont"
+					  'katakana-jisx0201
+					  '("ヒラギノ丸ゴ pro w4*" . "jisx0201.*"))
+
+	(add-to-list 'default-frame-alist '(font . "fontset-myfont")))
+
+  (when (eq system-type 'gnu/linux)
+	(set-default-font "Inconsolata-11")
+	(set-face-font 'variable-pitch "Inconsolata-11")
+	(set-fontset-font (frame-parameter nil 'font)
+					  'japanese-jisx0208
+					  '("Takaoゴシック" . "unicode-bmp"))))
+	
+
   
 ;;; 初期フレームの設定
 (setq default-frame-alist
-	  (append (list '(foreground-color . "white")
-					'(background-color . "black")
-					'(background-color . "gray")
-					'(border-color . "white")
-					'(mouse-color . "white")
-					'(width . 100)
-					'(height . 50)
-					'(top . 30)
-					'(left . 50)
-					'(alpha . (80 50))
-					)
-			  default-frame-alist))
+  (append (list '(foreground-color . "white")
+    '(background-color . "black")
+    '(background-color . "gray")
+    '(border-color . "white")
+    '(mouse-color . "white")
+    '(width . 100)
+    '(height . 50)
+    '(top . 30)
+    '(left . 50)
+    '(alpha . (80 50)))
+  default-frame-alist))
 
 ;;; mini-buffer 
 (setq resize-mini-windows nil)
@@ -190,13 +244,14 @@
 ;;c++ namespace no indent
 (add-hook 'c++-mode-hook
           '(lambda()
-			 (c-set-style "cc-mode")
+			 (c-set-style "stroustrup")
              (c-set-offset 'innamespace 0) ; namespace {}の中はインデントしない
 			 (c-set-offset 'c-basic-offset 2)
+			 (setq indent-tabs-mode nil)
              ))
 
 ;;;;*************** Major mode ***************
-;;;; python mode
+;;;;; python mode
 (progn (cd "~/.emacs.d/vendor")
        (normal-top-level-add-subdirs-to-load-path))
 
@@ -207,7 +262,11 @@
 (autoload 'python-mode "python-mode" "Python editing mode." t)
 (add-hook 'python-mode-hook
 		  (function (lambda ()
-					  (setq indent-tabs-mode nil))))
+					  (setq indent-tabs-mode nil)
+					  (setq indent-level 2)
+					  (setq python-indent 2)
+					  (setq tab-width 2)
+					  )))
 
 ;; paren complete
 (add-hook 'python-mode-hook
@@ -267,13 +326,24 @@
 
 ;(setq tuareg-lazy-paren t)
 
+
+;;;;; D mode
+(setq load-path (cons "~/.emacs.d/d-mode" load-path))
+(autoload 'd-mode "d-mode" "Major mode for editing D code." t)
+(setq auto-mode-alist 
+	  (cons '( "\\.d\\'" . d-mode ) auto-mode-alist))
+(autoload 'dlint-minor-mode "dlint" nil t)
+(add-hook 'd-mode-hook 
+		  (lambda () (dlint-minor-mode 1)))
+
+
 ;;;;; Scala mode
-(require 'scala-mode-auto)
-(add-hook 
- 'scala-mode-hook
- '(lambda ()
-    (setq indent-tabs-mode nil)
-    ))
+;(require 'scala-mode-auto)
+;(add-hook 
+; 'scala-mode-hook
+; '(lambda ()
+;    (setq indent-tabs-mode nil)
+;    ))
 
 ;;;;; rst mode
 (require 'rst)
@@ -293,6 +363,9 @@
 (autoload 'js2-mode "js2" nil t)
 (add-to-list 'auto-mode-alist '("\\.js$" . js2-mode))
 
+
+;;;;; FUEL (Factor) mode
+(load-file "~/.emacs.d/fuel/fu.el")
 
 
 ;;;;; Haskell mode
@@ -355,7 +428,8 @@
   ;; If you edit it by hand, you could mess it up, so be careful.
   ;; Your init file should contain only one such instance.
   ;; If there is more than one, they won't work right.
- '(inhibit-startup-screen t))
+ '(inhibit-startup-screen t)
+ '(vc-follow-symlinks t))
 (custom-set-faces
   ;; custom-set-faces was added by Custom.
   ;; If you edit it by hand, you could mess it up, so be careful.

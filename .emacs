@@ -215,6 +215,7 @@
           '(lambda()
 			 (c-set-style "stroustrup")
              (c-set-offset 'innamespace 0) ; namespace {}の中はインデントしない
+			 (c-set-offset 'c-basic-offset 2)
 			 (setq indent-tabs-mode nil)
              ))
 

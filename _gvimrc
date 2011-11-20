@@ -21,7 +21,7 @@ endif
 " ウインドウに関する設定:
 "
 " ウインドウの幅
-set columns=100
+set columns=120
 " ウインドウの高さ
 set lines=58
 " コマンドラインの高さ(GUI使用時)
@@ -30,3 +30,5 @@ set cmdheight=2
 "colorscheme evening " (GUI使用時
 colorscheme asmdev
 
+" MacVim-Kaoriya
+inoremap <silent> <ESC> <ESC>:set iminsert=1<CR>
