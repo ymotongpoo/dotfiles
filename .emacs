@@ -142,7 +142,7 @@
 ;;; Ubuntu -- http://yamashita.dyndns.org/blog/inconsolata-as-a-programming-font/
 (when (eq system-type 'darwin)
   (create-fontset-from-mac-roman-font
-   "-apple-inconsolata-medium-r-normal--14-0-72-72-m-0-iso10646-1"
+   "-apple-inconsolata-medium-r-normal-*-18-*-*-*-m-0-iso10646-1"
    nil "myfont")
 
   (set-fontset-font "fontset-myfont"
@@ -296,6 +296,7 @@
 
 
 ;;;;; D mode
+(setq load-path (cons "~/.emacs.d/d-mode" load-path))
 (autoload 'd-mode "d-mode" "Major mode for editing D code." t)
 (setq auto-mode-alist 
 	  (cons '( "\\.d\\'" . d-mode ) auto-mode-alist))
