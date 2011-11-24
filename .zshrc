@@ -116,6 +116,7 @@ fi
 export VIRTUALENV_BIN
 export PYTHONPATH
 export MANPATH
+export VIRTUALENV_USE_DISITRIBUTE=1
 
 ### for OCaml and OMAKE
 export OCAML_VER
