@@ -18,11 +18,19 @@ autocmd FileType c set omnifunc=ccomplete#Complete
 autocmd FileType cpp set cindent
 autocmd FileType cpp set tabstop=4
 autocmd FileType cpp set omnifunc=cppcomplete#Complete
-autocmd FileType py set smarttab 
-autocmd FileType py set omnifunc=pythoncomplete#Complete
-autocmd FileType py set smartindent cinwords-if,elif,else,for,while,try,except,finally,def,class
-autocmd FileType py set tabstop=8 expandtab shiftwidth=2 softtabstop=2
+autocmd FileType python setl autoindent
+autocmd FileType python setl smartindent cinwords=if,elif,else,for,while,try,except,finally,def,class
+autocmd FileType python setl tabstop=8 expandtab shiftwidth=2 softtabstop=2
+autocmd FileType python set omnifunc=pythoncomplete#Complete
 autocmd FileType scala set smarttab
+autocmd FileType javascript set smarttab
+autocmd FileType javascript set tabstop=2 shiftwidth=2 softtabstop=2 expandtab
+autocmd FileType html set smarttab
+autocmd FileType html set tabstop=2 shiftwidth=2 expandtab
+autocmd BufNewFile *.py set filetype=python fenc=utf-8
+autocmd BufNewFile *.js set filetype=javascript fenc=utf-8
+autocmd BufNewFile *.html set filetype=html fenc=utf-8
+
 set tabstop=2 shiftwidth=2 softtabstop=0
 set autoindent smartindent
 set expandtab
@@ -74,8 +82,6 @@ nnoremap <F4> :bd<CR>
 
 " NERDTree
 nnoremap ,d :execute 'NERDTreeToggle ' . getcwd()<CR>
-
-
 
 " zen coding                                                                                    
 let g:user_zen_expandabbr_key = '<c-e>'

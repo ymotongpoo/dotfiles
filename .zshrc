@@ -116,6 +116,7 @@ fi
 export VIRTUALENV_BIN
 export PYTHONPATH
 export MANPATH
+export VIRTUALENV_USE_DISITRIBUTE=1
 
 ### for OCaml and OMAKE
 export OCAML_VER
@@ -128,8 +129,9 @@ export ERL_HOME
 export EXTRA_PATH
 export PATH=.:$OCAML_HOME/bin:$ERL_HOME/bin:$OMAKE_HOME/bin:$FACTOR_HOME/bin:$EXTRA_PATH:$VIRTUALENV_BIN/bin:~/bin:/usr/local/bin:$PATH
 
-export WORKON_HOME=$HOME/.virtualenvs
-. $VIRTUALENV_BIN/bin/virtualenvwrapper.sh
+# export WORKON_HOME=$HOME/.virtualenvs
+# . $VIRTUALENV_BIN/bin/virtualenvwrapper.sh
+source .pythonbrewrc
 
 ########################################
 ##################### Programming Env
