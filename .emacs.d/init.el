@@ -263,9 +263,9 @@
 (add-hook 'python-mode-hook
 		  (function (lambda ()
 					  (setq indent-tabs-mode nil)
-					  (setq indent-level 2)
-					  (setq python-indent 2)
-					  (setq tab-width 2)
+					  (setq indent-level 4)
+					  (setq python-indent 4)
+					  (setq tab-width 4)
 					  )))
 
 ;; paren complete
