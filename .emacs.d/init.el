@@ -187,7 +187,7 @@
 	(add-to-list 'default-frame-alist '(font . "fontset-myfont")))
 
   (when (eq system-type 'gnu/linux)
-	(set-default-font "Inconsolata-11")
+	(set-frame-font "Inconsolata-11")
 	(set-face-font 'variable-pitch "Inconsolata-11")
 	(set-fontset-font (frame-parameter nil 'font)
 					  'japanese-jisx0208
@@ -328,13 +328,16 @@
 
 
 ;;;;; D mode
-(setq load-path (cons "~/.emacs.d/d-mode" load-path))
 (autoload 'd-mode "d-mode" "Major mode for editing D code." t)
 (setq auto-mode-alist 
-	  (cons '( "\\.d\\'" . d-mode ) auto-mode-alist))
-(autoload 'dlint-minor-mode "dlint" nil t)
-(add-hook 'd-mode-hook 
-		  (lambda () (dlint-minor-mode 1)))
+	  (cons '( "\\.d[i]?\\'" . d-mode ) auto-mode-alist))
+
+(add-hook 'd-mode-hook
+          '(lambda()
+			 (c-set-style "python")
+			 (setq c-basic-offset 4)
+			 (setq indent-tabs-mode nil)
+			 ))
 
 
 ;;;;; Scala mode
