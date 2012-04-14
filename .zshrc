@@ -112,6 +112,11 @@ fi
 # select .macosx_env or .linux_env 
 . ~/.os_env
 
+### for development
+export C_INCLUDE_PATH
+export CPLUS_INCLUDE_PATH
+export LD_LIBRARY_PATH
+
 ### for Python
 export VIRTUALENV_BIN
 export PYTHONPATH
@@ -127,7 +132,7 @@ export OMAKE_HOME
 export ERL_HOME
 
 export EXTRA_PATH
-export PATH=.:$OCAML_HOME/bin:$ERL_HOME/bin:$OMAKE_HOME/bin:$FACTOR_HOME/bin:$EXTRA_PATH:$VIRTUALENV_BIN/bin:~/bin:/usr/local/bin:$PATH
+export PATH=.:$DMD_PATH/bin:$OCAML_HOME/bin:$ERL_HOME/bin:$OMAKE_HOME/bin:$FACTOR_HOME/bin:$EXTRA_PATH:$VIRTUALENV_BIN/bin:~/bin:/usr/local/bin:$PATH
 
 # export WORKON_HOME=$HOME/.virtualenvs
 # . $VIRTUALENV_BIN/bin/virtualenvwrapper.sh

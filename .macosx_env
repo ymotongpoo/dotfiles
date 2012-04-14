@@ -1,5 +1,9 @@
 MACPORTS_PREFIX=/opt/local
 
+C_INCLUDE_PATH=/usr/include:/opt/local/include
+CPLUS_INCLUDE_PATH=/usr/include:/opt/local/include
+LD_LIBRARY_PATH=/usr/lib:/opt/local/lib
+
 VIRTUALENV_BIN=$MACPORTS_PREFIX/Library/Frameworks/Python.framework/Versions/$PYTHON_VER
 PYTHONPATH=$MACPORTS_PREFIX/lib/python$PYTHON_VER/:$PYTHONPATH.
 MANPATH=$MACPORTS_PREFIX/share/man:/usr/local/man:$MANPATH
@@ -13,7 +17,7 @@ ERL_HOME=/opt/erlang/$ERL_VER
 
 FACTOR_BIN=/opt/factor
 
-DMD_BASE=/opt/dmd2
+DMD_BASE=/opt/d/osx
 
 EXTRA_PATH=$FACTOR_BIN:$MACPORTS_PREFIX/bin:$DMD_BASE/bin
 
