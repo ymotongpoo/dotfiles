@@ -6,7 +6,9 @@ OCAML_VER=3.11.2
 OCAML_HOME=/opt/ocaml/$OCAML_VER
 OMAKE_HOME=/opt/ocaml/omake
 
-EXTRA_PATH=
+PYTHON_BIN=/opt/python/2.7/bin
+
+EXTRA_PATH=$PYTHON_BIN:$PATH
 
 EDITOR=/usr/bin/vim
 
