@@ -134,9 +134,8 @@ export ERL_HOME
 export EXTRA_PATH
 export PATH=.:$DMD_PATH/bin:$OCAML_HOME/bin:$ERL_HOME/bin:$OMAKE_HOME/bin:$FACTOR_HOME/bin:$EXTRA_PATH:$VIRTUALENV_BIN/bin:~/bin:/usr/local/bin:$PATH
 
-# export WORKON_HOME=$HOME/.virtualenvs
-# . $VIRTUALENV_BIN/bin/virtualenvwrapper.sh
-source .pythonbrewrc
+export WORKON_HOME=$HOME/.virtualenvs
+. $VIRTUALENV_BIN/bin/virtualenvwrapper.sh
 
 ########################################
 ##################### Programming Env

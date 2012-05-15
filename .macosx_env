@@ -7,7 +7,6 @@ LD_LIBRARY_PATH=/usr/lib:/opt/local/lib
 VIRTUALENV_BIN=$MACPORTS_PREFIX/Library/Frameworks/Python.framework/Versions/$PYTHON_VER
 PYTHONPATH=$MACPORTS_PREFIX/lib/python$PYTHON_VER/:$PYTHONPATH.
 MANPATH=$MACPORTS_PREFIX/share/man:/usr/local/man:$MANPATH
-export PYTHONBREW_ROOT=/opt/python
 
 OCAML_VER=3.12.1
 OCAML_HOME=/opt/ocaml/$OCAML_VER

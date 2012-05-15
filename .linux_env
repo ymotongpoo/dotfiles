@@ -1,7 +1,6 @@
 VIRTUALENV_BIN=/usr/local
 PYTHONPATH=$PYTHONPATH
 MANPATH=usr/local/man:$MANPATH
-export PYTHONBREW_ROOT=/opt/python
 
 OCAML_VER=3.11.2
 OCAML_HOME=/opt/ocaml/$OCAML_VER
