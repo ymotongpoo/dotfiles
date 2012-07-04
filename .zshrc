@@ -137,6 +137,11 @@ export PATH=.:$DMD_PATH/bin:$OCAML_HOME/bin:$ERL_HOME/bin:$OMAKE_HOME/bin:$FACTO
 export WORKON_HOME=$HOME/.virtualenvs
 . $VIRTUALENV_BIN/bin/virtualenvwrapper.sh
 
+function mkvenv () {
+	base_python=`which python$1`
+	mkvirtualenv --distribute --python=$base_python $2
+}
+
 ########################################
 ##################### Programming Env
 ########################################
