@@ -165,8 +165,8 @@
 		'(("^-apple-hiragino.*" . 1.2)
 		  (".*osaka-bold.*" . 1.2)
 		  (".*osaka-medium.*" . 1.2)
-		  (".*courier-bold-.*-mac-roman" . 1.0)
-		  (".*monaco cy-bold-.*-mac-cyrillic" . 0.9)
+		  (".*courier-bold-.*-mac-roman" . 1.2)
+		  (".*monaco cy-bold-.*-mac-cyrillic" . 1.0)
 		  (".*monaco-bold-.*-mac-roman" . 0.9)
 		  ("-cdac$" . 1.3))))
 
@@ -340,6 +340,14 @@
 			 ))
 
 
+;;;;; shell-script mode
+(add-hook 'sh-mode-hook
+		  '(lambda()
+			 (setq sh-indentation 4)
+			 (setq indent-tabs-mode nil)
+			 ))
+
+
 ;;;;; Scala mode
 ;(require 'scala-mode-auto)
 ;(add-hook 
@@ -400,6 +408,11 @@
 ;;;;; Yaml mode
 (require 'yaml-mode)
 (add-to-list 'auto-mode-alist '("\\.yaml$" . yaml-mode))
+
+;;;;; html mode
+(add-hook 'html-mode-hook
+		  '(lambda()
+			 (setq indent-tabs-mode nil)))
 
 ;;;;; php mode
 (autoload 'php-mode "php-mode" "PHP mode" t)

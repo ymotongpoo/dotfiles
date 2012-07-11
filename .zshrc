@@ -138,8 +138,8 @@ export WORKON_HOME=$HOME/.virtualenvs
 . $VIRTUALENV_BIN/bin/virtualenvwrapper.sh
 
 function mkvenv () {
-    base_python=`which python$1` 
-    mkvirtualenv --distribute --python=$base_python $2
+  base_python=`which python$1` 
+  mkvirtualenv --distribute --python=$base_python $2
 }
 
 ########################################
