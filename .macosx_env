@@ -12,7 +12,7 @@ OCAML_VER=3.12.1
 OCAML_HOME=/opt/ocaml/$OCAML_VER
 OMAKE_HOME=/opt/ocaml/omake
 
-ERL_VER=R14B04
+ERL_VER=R15B01
 ERL_HOME=/opt/erlang/$ERL_VER
 
 FACTOR_BIN=/opt/factor
