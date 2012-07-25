@@ -326,6 +326,18 @@
 
 ;(setq tuareg-lazy-paren t)
 
+;;;;; Go mode
+(autoload 'go-mode "go-mode" "Go language mode" t)
+(setq auto-mode-alist
+	  (cons '("\\.go$" . go-mode) auto-mode-alist))
+
+(add-hook 'go-mode-hook
+          '(lambda()
+			 (c-set-style "python")
+			 (setq c-basic-offset 4)
+			 (setq indent-tabs-mode nil)
+			 ))
+
 
 ;;;;; D mode
 (autoload 'd-mode "d-mode" "Major mode for editing D code." t)
