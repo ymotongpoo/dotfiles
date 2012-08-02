@@ -133,6 +133,8 @@ export ERL_HOME
 
 ### for Go-lang
 export GOROOT
+export GOOS
+export GOARCH
 
 export EXTRA_PATH
 export PATH=.:$GOROOT/bin:$DMD_PATH/bin:$OCAML_HOME/bin:$ERL_HOME/bin:$OMAKE_HOME/bin:$FACTOR_HOME/bin:$EXTRA_PATH:$VIRTUALENV_BIN/bin:~/bin:/usr/local/bin:$PATH
