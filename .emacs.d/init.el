@@ -149,7 +149,7 @@
   (set-face-attribute 'default nil
 					  :family "monaco"
 					  :height 140)
-  (when (eq system-type 'darwin)
+  (when (and window-system (eq system-type 'darwin))
 	(set-fontset-font
 	 (frame-parameter nil 'font)
 	 'japanese-jisx0208
