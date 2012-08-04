@@ -15,7 +15,7 @@ OMAKE_HOME=/opt/ocaml/omake
 ERL_VER=R15B01
 ERL_HOME=/opt/erlang/$ERL_VER
 
-GOROOT=/opt/go
+GOROOT=/opt/go/goroot
 
 FACTOR_BIN=/opt/factor
 
