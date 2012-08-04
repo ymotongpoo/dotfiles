@@ -149,26 +149,27 @@
   (set-face-attribute 'default nil
 					  :family "monaco"
 					  :height 140)
-  (set-fontset-font
-   (frame-parameter nil 'font)
-   'japanese-jisx0208
-   '("Hiragino Maru Gothic Pro" . "iso10646-1"))
-  (set-fontset-font
-   (frame-parameter nil 'font)
-   'japanese-jisx0212
-   '("Hiragino Maru Gothic Pro" . "iso10646-1"))
-  (set-fontset-font
-   (frame-parameter nil 'font)
-   'mule-unicode-0100-24ff
-   '("monaco" . "iso10646-1"))
-  (setq face-font-rescale-alist
-		'(("^-apple-hiragino.*" . 1.2)
-		  (".*osaka-bold.*" . 1.2)
-		  (".*osaka-medium.*" . 1.2)
-		  (".*courier-bold-.*-mac-roman" . 1.2)
-		  (".*monaco cy-bold-.*-mac-cyrillic" . 1.0)
-		  (".*monaco-bold-.*-mac-roman" . 0.9)
-		  ("-cdac$" . 1.3))))
+  (when (and window-system (eq system-type 'darwin))
+	(set-fontset-font
+	 (frame-parameter nil 'font)
+	 'japanese-jisx0208
+	 '("Hiragino Maru Gothic Pro" . "iso10646-1"))
+	(set-fontset-font
+	 (frame-parameter nil 'font)
+	 'japanese-jisx0212
+	 '("Hiragino Maru Gothic Pro" . "iso10646-1"))
+	(set-fontset-font
+	 (frame-parameter nil 'font)
+	 'mule-unicode-0100-24ff
+	 '("monaco" . "iso10646-1"))
+	(setq face-font-rescale-alist
+		  '(("^-apple-hiragino.*" . 1.2)
+			(".*osaka-bold.*" . 1.2)
+			(".*osaka-medium.*" . 1.2)
+			(".*courier-bold-.*-mac-roman" . 1.2)
+			(".*monaco cy-bold-.*-mac-cyrillic" . 1.0)
+			(".*monaco-bold-.*-mac-roman" . 0.9)
+			("-cdac$" . 1.3)))))
 
 (when (< emacs-major-version 23)
   (when (eq system-type 'darwin)
@@ -325,6 +326,18 @@
     ))
 
 ;(setq tuareg-lazy-paren t)
+
+;;;;; Go mode
+(autoload 'go-mode "go-mode" "Go language mode" t)
+(setq auto-mode-alist
+	  (cons '("\\.go$" . go-mode) auto-mode-alist))
+
+(add-hook 'go-mode-hook
+          '(lambda()
+			 (c-set-style "python")
+			 (setq c-basic-offset 4)
+			 (setq indent-tabs-mode nil)
+			 ))
 
 
 ;;;;; D mode
