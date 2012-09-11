@@ -1,4 +1,5 @@
-VIRTUALENV_BIN=/usr/local
+VIRTUALENV=/usr/local
+VIRTUALENVWRAPPER=/etc/bash_completion.d/virtualenvwrapper
 PYTHONPATH=$PYTHONPATH
 MANPATH=usr/local/man:$MANPATH
 

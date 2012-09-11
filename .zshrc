@@ -118,7 +118,8 @@ export CPLUS_INCLUDE_PATH
 export LD_LIBRARY_PATH
 
 ### for Python
-export VIRTUALENV_BIN
+export VIRTUALENV
+export VIRTUALENVWRAPPER
 export PYTHONPATH
 export MANPATH
 export VIRTUALENV_USE_DISITRIBUTE=1
@@ -137,10 +138,10 @@ export GOOS
 export GOARCH
 
 export EXTRA_PATH
-export PATH=.:$GOROOT/bin:$DMD_PATH/bin:$OCAML_HOME/bin:$ERL_HOME/bin:$OMAKE_HOME/bin:$FACTOR_HOME/bin:$EXTRA_PATH:$VIRTUALENV_BIN/bin:~/bin:/usr/local/bin:$PATH
+export PATH=.:$GOROOT/bin:$DMD_PATH/bin:$OCAML_HOME/bin:$ERL_HOME/bin:$OMAKE_HOME/bin:$FACTOR_HOME/bin:$EXTRA_PATH:$VIRTUALENV/bin:~/bin:/usr/local/bin:$PATH
 
 export WORKON_HOME=$HOME/.virtualenvs
-. $VIRTUALENV_BIN/bin/virtualenvwrapper.sh
+. $VIRTUALENVWRAPPER/bin/virtualenvwrapper.sh
 
 function mkvenv () {
   base_python=`which python$1` 
