@@ -141,7 +141,7 @@ export EXTRA_PATH
 export PATH=.:$GOROOT/bin:$DMD_PATH/bin:$OCAML_HOME/bin:$ERL_HOME/bin:$OMAKE_HOME/bin:$FACTOR_HOME/bin:$EXTRA_PATH:$VIRTUALENV/bin:~/bin:/usr/local/bin:$PATH
 
 export WORKON_HOME=$HOME/.virtualenvs
-. $VIRTUALENVWRAPPER/bin/virtualenvwrapper.sh
+. $VIRTUALENVWRAPPER
 
 function mkvenv () {
   base_python=`which python$1` 
