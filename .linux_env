@@ -1,5 +1,5 @@
-VIRTUALENV=/usr/local
-VIRTUALENVWRAPPER=/etc/bash_completion.d/virtualenvwrapper
+VIRTUALENV=/opt/python/$PYTHON_VER
+VIRTUALENVWRAPPER=$VIRTUALENV/bin/virtualenvwrapper.sh
 PYTHONPATH=$PYTHONPATH
 MANPATH=usr/local/man:$MANPATH
 
