@@ -335,8 +335,7 @@
 (add-hook 'go-mode-hook
           '(lambda()
 			 (c-set-style "python")
-			 (setq c-basic-offset 4)
-			 (setq indent-tabs-mode nil)
+			 (setq tab-width 2)
 			 ))
 
 
