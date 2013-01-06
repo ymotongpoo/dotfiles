@@ -20,6 +20,10 @@ GOROOT=/opt/go/goroot
 GOOS=darwin
 GOARCH=amd64
 
+GENVHOME=/Users/ymotongpoo/src/go
+GENVWRAPPER=/opt/local/bin/genvwrapper.sh
+source $GENVWRAPPER
+
 FACTOR_BIN=/opt/factor
 
 DMD_BASE=/opt/d/osx
@@ -28,3 +32,6 @@ EXTRA_PATH=$FACTOR_BIN:$MACPORTS_PREFIX/bin:$DMD_BASE/bin
 
 alias emacs="/Applications/Emacs.app/Contents/MacOS/Emacs"
 alias gvim="/Applications/MacVim.app/Contents/MacOS/MacVim"
+alias godev_appserver=/opt/go/google_appengine/dev_appserver.py
+alias goappcfg=/opt/go/google_appengine/appcfg.py
+

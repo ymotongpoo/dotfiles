@@ -11,6 +11,8 @@
 
 ;;; 日本語環境設定
 (set-language-environment "Japanese")
+(set-default-coding-systems 'utf-8)
+(set-terminal-coding-system 'utf-8)
 
 ;;; C-hでBackSpace
 (keyboard-translate ?\C-h ?\C-?)
@@ -46,6 +48,7 @@
 (setq load-path (cons "~/.emacs.d/python" load-path))
 (setq load-path (cons "~/.emacs.d/scel" load-path))
 (setq load-path (cons "~/.emacs.d/ocaml-mode" load-path))
+
 
 ;; 常にホームディレクトリから
 (cd "~")
@@ -251,6 +254,43 @@
 			 (setq indent-tabs-mode nil)
              ))
 
+;;;; autoinsert
+(require 'autoinsert)
+
+(setq user-id-string "ymotongpoo")
+(setq user-full-name "Yoshifumi YAMAGUCHI")
+(setq user-mail-address "ymotongpoo AT gmail.com")
+
+;; テンプレートのディレクトリ
+(setq auto-insert-directory "~/.emacs.d/template")
+
+;; 各ファイルによってテンプレートを切り替える
+(setq auto-insert-alist
+      (nconc '(
+               ("\\.rst$" . ["template.rst" my-template])
+               ) auto-insert-alist))
+(require 'cl)
+
+(defvar template-replacements-alists
+  '(("%file%"             . (lambda () (file-name-nondirectory (buffer-file-name))))
+    ("%file-without-ext%" . (lambda () (file-name-sans-extension (file-name-nondirectory (buffer-file-name)))))
+    ("%date%" . (lambda() (current-time-string)))
+    ("%mail%" . (lambda () (identity user-mail-address)))
+    ("%name%" . (lambda () (identity user-full-name)))
+    ("%id%" . (lambda () (identity user-id-string)))
+))
+
+(defun my-template ()
+  (time-stamp)
+  (mapc #'(lambda(c)
+            (progn
+              (goto-char (point-min))
+              (replace-string (car c) (funcall (cdr c)) nil)))
+        template-replacements-alists)
+  (goto-char (point-max))
+  (message "done."))
+(add-hook 'find-file-not-found-hooks 'auto-insert)
+
 ;;;;*************** Major mode ***************
 ;;;;; python mode
 (progn (cd "~/.emacs.d/vendor")
@@ -367,6 +407,10 @@
 ; '(lambda ()
 ;    (setq indent-tabs-mode nil)
 ;    ))
+
+
+;;;;; flymake
+(require 'flymake)
 
 ;;;;; rst mode
 (require 'rst)
