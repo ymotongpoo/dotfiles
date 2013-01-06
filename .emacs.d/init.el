@@ -31,6 +31,9 @@
 ;;; スタートアップスクリーンを表示しない
 (setq inhibit-splash-screen t)
 
+;;; iswitchb-mode
+(setq iswitchb-mode t)
+
 ;;; バックアップファイルの設定
 (setq make-backup-files t)
 (setq backup-directory-alist
@@ -336,7 +339,7 @@
           '(lambda()
 			 (c-set-style "python")
 			 (setq c-basic-offset 4)
-			 (setq indent-tabs-mode nil)
+			 (setq indent-tabs-mode t)
 			 ))
 
 
@@ -356,7 +359,7 @@
 ;;;;; shell-script mode
 (add-hook 'sh-mode-hook
 		  '(lambda()
-			 (setq sh-indentation 4)
+			 (setq sh-indentation 2)
 			 (setq indent-tabs-mode nil)
 			 ))
 

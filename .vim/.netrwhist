@@ -1,5 +1,7 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =3
+let g:netrw_dirhist_cnt =5
 let g:netrw_dirhist_1='/Users/Yoshi/src/python/guestbook'
 let g:netrw_dirhist_2='/Users/ymotongpoo/src/project/py2ch/py2ch'
 let g:netrw_dirhist_3='/Users/yoshifumi/src/projects/projecteuler.net/Problem48'
+let g:netrw_dirhist_4='/Users/yoshifumi/src/works/01_Internal/20120702/itunes/bin_mac'
+let g:netrw_dirhist_5='/Users/yoshifumi/src/projects'
