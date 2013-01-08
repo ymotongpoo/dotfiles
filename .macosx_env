@@ -4,7 +4,8 @@ C_INCLUDE_PATH=/usr/include:/opt/local/include
 CPLUS_INCLUDE_PATH=/usr/include:/opt/local/include
 LD_LIBRARY_PATH=/usr/lib:/opt/local/lib
 
-VIRTUALENV_BIN=$MACPORTS_PREFIX/Library/Frameworks/Python.framework/Versions/$PYTHON_VER
+VIRTUALENV=$MACPORTS_PREFIX/Library/Frameworks/Python.framework/Versions/$PYTHON_VER
+VIRTUALENVWRAPPER=$VIRTUALENV/bin/virtualenvwrapper.sh
 PYTHONPATH=$MACPORTS_PREFIX/lib/python$PYTHON_VER/:$PYTHONPATH.
 MANPATH=$MACPORTS_PREFIX/share/man:/usr/local/man:$MANPATH
 
@@ -20,6 +21,9 @@ GOOS=darwin
 GOARCH=amd64
 GAEGO=/opt/go/google_appengine
 
+GENVHOME=/Users/ymotongpoo/src/go
+GENVWRAPPER=/opt/local/bin/genvwrapper.sh
+source $GENVWRAPPER
 
 FACTOR_BIN=/opt/factor
 
@@ -29,3 +33,6 @@ EXTRA_PATH=$GAEGO:$FACTOR_BIN:$MACPORTS_PREFIX/bin:$DMD_BASE/bin
 
 alias emacs="/Applications/Emacs.app/Contents/MacOS/Emacs"
 alias gvim="/Applications/MacVim.app/Contents/MacOS/MacVim"
+alias godev_appserver=/opt/go/google_appengine/dev_appserver.py
+alias goappcfg=/opt/go/google_appengine/appcfg.py
+

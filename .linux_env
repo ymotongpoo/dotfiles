@@ -1,4 +1,5 @@
-VIRTUALENV_BIN=/usr/local
+VIRTUALENV=/opt/python/$PYTHON_VER
+VIRTUALENVWRAPPER=$VIRTUALENV/bin/virtualenvwrapper.sh
 PYTHONPATH=$PYTHONPATH
 MANPATH=usr/local/man:$MANPATH
 
@@ -7,8 +8,12 @@ OCAML_HOME=/opt/ocaml/$OCAML_VER
 OMAKE_HOME=/opt/ocaml/omake
 
 PYTHON_BIN=/opt/python/2.7/bin
+VIRTUALENV_BIN=/opt/python/2.7
 
 EXTRA_PATH=$PYTHON_BIN:$PATH
+
+GOROOT=/opt/go
+
 
 EDITOR=/usr/bin/vim
 
