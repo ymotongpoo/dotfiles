@@ -21,9 +21,9 @@ GOOS=darwin
 GOARCH=amd64
 GAEGO=/opt/go/google_appengine
 
-GENVHOME=/Users/ymotongpoo/src/go
-GENVWRAPPER=/opt/local/bin/genvwrapper.sh
-source $GENVWRAPPER
+GOENVHOME=$HOME/src/go
+GOENVGOROOT=/opt/genv
+GOENVWRAPPER=/opt/local/bin/goenvwrapper.sh
 
 FACTOR_BIN=/opt/factor
 
