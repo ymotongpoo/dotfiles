@@ -154,6 +154,8 @@ function mkvenv () {
   mkvirtualenv --distribute --python=$base_python $2
 }
 
+source $GOENVWRAPPER
+
 ########################################
 ##################### Programming Env
 ########################################

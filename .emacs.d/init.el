@@ -378,12 +378,8 @@
 (add-hook 'go-mode-hook
           '(lambda()
 			 (c-set-style "python")
-<<<<<<< HEAD
 			 (setq c-basic-offset 4)
 			 (setq indent-tabs-mode t)
-=======
-			 (setq tab-width 2)
->>>>>>> 56ccd81c3a103f038dc5827a0a1aa7e8e4f47be1
 			 ))
 
 
@@ -403,6 +399,7 @@
 ;;;;; shell-script mode
 (add-hook 'sh-mode-hook
 		  '(lambda()
+			 (setq sh-basic-offset 2)
 			 (setq sh-indentation 2)
 			 (setq indent-tabs-mode nil)
 			 ))
