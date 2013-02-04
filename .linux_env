@@ -12,7 +12,9 @@ VIRTUALENV_BIN=/opt/python/2.7
 
 EXTRA_PATH=$PYTHON_BIN:$PATH
 
-GOROOT=/opt/go
+GENVGOROOT=/opt/genv
+GENVHOME=$HOME/src/go
+GOROOT=/opt/genv/default
 
 
 EDITOR=/usr/bin/vim
