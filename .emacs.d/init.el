@@ -371,9 +371,12 @@
 ;(setq tuareg-lazy-paren t)
 
 ;;;;; Go mode
-(autoload 'go-mode "go-mode" "Go language mode" t)
-(setq auto-mode-alist
-	  (cons '("\\.go$" . go-mode) auto-mode-alist))
+(add-to-list 'load-path "PATH CONTAINING go-mode-load.el" t)
+(require 'go-mode-load)
+
+;(autoload 'go-mode "go-mode" "Go language mode" t)
+;(setq auto-mode-alist
+;	  (cons '("\\.go$" . go-mode) auto-mode-alist))
 
 (add-hook 'go-mode-hook
           '(lambda()
@@ -382,6 +385,7 @@
 			 (setq indent-tabs-mode t)
 			 ))
 
+(add-hook 'before-save-hook #'gofmt-before-save)
 
 ;;;;; D mode
 (autoload 'd-mode "d-mode" "Major mode for editing D code." t)
