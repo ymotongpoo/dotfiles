@@ -11,7 +11,10 @@ PYTHON_BIN=/opt/python/2.7/bin
 
 EXTRA_PATH=$PYTHON_BIN:$VIRTUALENV/bin
 
-GOROOT=/opt/go
+GOENVGOROOT=/opt/goenv
+GOENVHOME=$HOME/src/go
+GOROOT=/opt/goenv/default
+GOENVWRAPPER=$GOENVGOROOT/goenvwrapper.sh
 
 GAEGO=${HOME}/pkg/gaego
 GAEPY=${HOME}/pkg/gaepy

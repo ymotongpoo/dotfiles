@@ -33,8 +33,8 @@
     ;; Operators (punctuation)
     (modify-syntax-entry ?+  "." st)
     (modify-syntax-entry ?-  "." st)
-    (modify-syntax-entry ?*  ". 23" st)                                    ; also part of comments
-    (modify-syntax-entry ?/ (if (featurep 'xemacs) ". 1456" ". 124b") st)  ; ditto
+    (modify-syntax-entry ?*  "." st)
+    (modify-syntax-entry ?/  "." st)
     (modify-syntax-entry ?%  "." st)
     (modify-syntax-entry ?&  "." st)
     (modify-syntax-entry ?|  "." st)
@@ -49,9 +49,6 @@
     (modify-syntax-entry ?\' "." st)
     (modify-syntax-entry ?`  "." st)
     (modify-syntax-entry ?\\ "." st)
-
-    ;; Newline is a comment-ender.
-    (modify-syntax-entry ?\n "> b" st)
 
     st)
   "Syntax table for Go mode.")
@@ -217,7 +214,7 @@ nesting caches from the modified point on."
 	(remove-text-properties
 	 b (min go-mode-mark-string-end (point-max)) '(go-mode-comment nil))
 	(setq go-mode-mark-comment-end b)))
-    
+
     (when (< b go-mode-mark-nesting-end)
       (remove-text-properties b (min go-mode-mark-nesting-end (point-max)) '(go-mode-nesting nil))
       (setq go-mode-mark-nesting-end b))))
@@ -264,7 +261,7 @@ directly; use `go-mode-cs'."
 	    ;; Back up to the last known state.
 	    (let ((last-cs
 		   (and (> go-mode-mark-cs-end 1)
-			(get-text-property (1- go-mode-mark-cs-end) 
+			(get-text-property (1- go-mode-mark-cs-end)
 					   'go-mode-cs))))
 	      (if last-cs
 		  (car last-cs)
@@ -332,7 +329,7 @@ comment or string."
 	    ;; Back up to the last known state.
 	    (let ((last-comment
 		   (and (> go-mode-mark-comment-end 1)
-			(get-text-property (1- go-mode-mark-comment-end) 
+			(get-text-property (1- go-mode-mark-comment-end)
 					   'go-mode-comment))))
 	      (if last-comment
 		  (car last-comment)
@@ -381,7 +378,7 @@ directly; use `go-mode-in-string'."
 	    ;; Back up to the last known state.
 	    (let ((last-cs
 		   (and (> go-mode-mark-string-end 1)
-			(get-text-property (1- go-mode-mark-string-end) 
+			(get-text-property (1- go-mode-mark-string-end)
 					   'go-mode-string))))
 	      (if last-cs
 		  (car last-cs)
@@ -389,7 +386,7 @@ directly; use `go-mode-in-string'."
        (while (< pos end)
 	 (goto-char pos)
 	 (let ((cs-end			; end of the text property
-		(cond 
+		(cond
 		 ((looking-at "\"")
 		  (goto-char (1+ pos))
 		  (if (looking-at "[^\"\n\\\\]*\\(\\\\.[^\"\n\\\\]*\\)*\"")
@@ -432,7 +429,7 @@ if no further tokens of the type exist."
       (if (or (>= (point) limit) (eobp))
 	  (setq result nil)
 	(setq cs (go-mode-cs))
-	(if cs
+	(if (and cs (>= (car cs) (point)))
 	    (if (eq (= (char-after (car cs)) ?/) comment)
 		;; If inside the expected comment/string, highlight it.
 		(progn
@@ -552,9 +549,8 @@ token on the line."
          (not (looking-at go-mode-non-terminating-keywords-regexp)))))))
 
 (defun go-mode-whitespace-p (char)
-  "Is newline, or char whitespace in the syntax table for go."
-  (or (eq char ?\n)
-      (= (char-syntax char) ?\ )))
+  "Is char whitespace in the syntax table for go."
+  (eq 32 (char-syntax char)))
 
 (defun go-mode-backward-skip-comments ()
   "Skip backward over comments and whitespace."
@@ -573,7 +569,7 @@ token on the line."
 		((go-mode-in-comment)
 		 ;; move point to char preceeding current comment
 		 (goto-char (1- (car (go-mode-in-comment)))))
-		
+
 		;; not in a comment or whitespace? we must be done.
 		(t (setq loop-guard nil)
 		   (forward-char 1)))))))
@@ -727,6 +723,8 @@ functions, and some types.  It also provides indentation that is
   ;; Comments
   (set (make-local-variable 'comment-start) "// ")
   (set (make-local-variable 'comment-end)   "")
+  (set (make-local-variable 'comment-use-syntax) nil)
+  (set (make-local-variable 'comment-start-skip) "\\([ \t]*\\)// ")
 
   ;; Go style
   (setq indent-tabs-mode t)
@@ -819,8 +817,12 @@ Replace the current buffer on success; display errors on failure."
   (require 'diff-mode)
   ;; apply all the patch hunks
   (with-current-buffer patchbuf
-    (replace-regexp "^--- /tmp/gofmt[0-9]*" (concat "--- " filename)
-                      nil (point-min) (point-max))
+    (goto-char (point-min))
+    ;; The .* is for TMPDIR, but to avoid dealing with TMPDIR
+    ;; having a trailing / or not, it's easier to just search for .*
+    ;; especially as we're only replacing the first instance.
+    (if (re-search-forward "^--- \\(.*/gofmt[0-9]*\\)" nil t)
+      (replace-match filename nil nil nil 1))
     (condition-case nil
         (while t
           (diff-hunk-next)
@@ -831,9 +833,10 @@ Replace the current buffer on success; display errors on failure."
 (defun gofmt-process-errors (filename errbuf)
   ;; Convert the gofmt stderr to something understood by the compilation mode.
   (with-current-buffer errbuf
-    (beginning-of-buffer)
+    (goto-char (point-min))
     (insert "gofmt errors:\n")
-    (replace-string gofmt-stdin-tag (file-name-nondirectory filename) nil (point-min) (point-max))
+    (if (search-forward gofmt-stdin-tag nil t)
+      (replace-match (file-name-nondirectory filename) nil t))
     (display-buffer errbuf)
     (compilation-mode)))
 

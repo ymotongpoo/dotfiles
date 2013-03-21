@@ -9,6 +9,10 @@
 ##################### General settings
 ########################################
 
+if [ -f "$HOME/.zsh_profile" ]; then
+  source "$HOME/.zsh_profile"
+fi
+
 # LANG
 export LANG=ja_JP.UTF-8
 
@@ -133,6 +137,8 @@ export OMAKE_HOME
 export ERL_HOME
 
 ### for Go-lang
+export GENVHOME
+export GENVGOROOT
 export GOROOT
 export GOOS
 export GOARCH
@@ -147,6 +153,8 @@ function mkvenv () {
   base_python=`which python$1` 
   mkvirtualenv --distribute --python=$base_python $2
 }
+
+source $GOENVWRAPPER
 
 ########################################
 ##################### Programming Env
