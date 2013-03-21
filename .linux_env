@@ -1,19 +1,20 @@
 VIRTUALENV=/opt/python/$PYTHON_VER
 VIRTUALENVWRAPPER=$VIRTUALENV/bin/virtualenvwrapper.sh
-PYTHONPATH=$PYTHONPATH
-MANPATH=usr/local/man:$MANPATH
+PYTHONPATH=/opt/python/$PYTHON_VER:$PYTHONPATH
+MANPATH=/opt/python/$PYTHON_VER/share/man:$MANPATH
 
 OCAML_VER=3.11.2
 OCAML_HOME=/opt/ocaml/$OCAML_VER
 OMAKE_HOME=/opt/ocaml/omake
 
 PYTHON_BIN=/opt/python/2.7/bin
-VIRTUALENV_BIN=/opt/python/2.7
 
-EXTRA_PATH=$PYTHON_BIN:$PATH
+EXTRA_PATH=$PYTHON_BIN:$VIRTUALENV/bin
 
 GOROOT=/opt/go
 
+GAEGO=${HOME}/pkg/gaego
+GAEPY=${HOME}/pkg/gaepy
 
 EDITOR=/usr/bin/vim
 

@@ -138,7 +138,7 @@ export GOOS
 export GOARCH
 
 export EXTRA_PATH
-export PATH=.:$GOROOT/bin:$DMD_PATH/bin:$OCAML_HOME/bin:$ERL_HOME/bin:$OMAKE_HOME/bin:$FACTOR_HOME/bin:$EXTRA_PATH:$VIRTUALENV/bin:~/bin:/usr/local/bin:$PATH
+export PATH=.:$GOROOT/bin:$DMD_PATH/bin:$OCAML_HOME/bin:$ERL_HOME/bin:$OMAKE_HOME/bin:$FACTOR_HOME/bin:$EXTRA_PATH:~/bin:/usr/local/bin:$GAEPY:$GAEGO:$PATH
 
 export WORKON_HOME=$HOME/.virtualenvs
 . $VIRTUALENVWRAPPER
