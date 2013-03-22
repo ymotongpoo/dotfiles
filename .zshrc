@@ -44,8 +44,12 @@ setopt nolistbeep
 HISTFILE=~/.zsh_history
 HISTSIZE=10000
 SAVEHIST=10000
-setopt hist_ignore_dups # ignore duplication command history list
-setopt share_history # share command history data
+setopt hist_ignore_dups  # ignore duplication command history list
+setopt share_history     # share command history data
+setopt hist_ignore_space # ignore command if it starts from space 
+setopt hist_no_store     # do not store 'history' command in hitory file
+setopt extended_history  # record command hit time
+
 
 
 ########################################
@@ -172,3 +176,6 @@ alias src="cd ~/src"
 
 alias tw="open -a TextWrangler"
 alias gvim="open -a MacVim"
+
+### Added by the Heroku Toolbelt
+export PATH="/usr/local/heroku/bin:$PATH"
