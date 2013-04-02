@@ -19,3 +19,13 @@ ln -s "$DOTFILES"/.vim .vim
 # set terminal multiplexer configuration files
 ln -s "$DOTFILES"/.tmux.conf .tmux.conf
 ln -s "$DOTFILES"/.screenrc .screenrc
+
+# create private bin directory
+mkdir "$HOME"/bin
+
+cd "$HOME"/bin
+
+# setup OPAM
+wget http://www.ocamlpro.com/pub/opam_installer.sh
+sh ./opam_installer.sh .
+
