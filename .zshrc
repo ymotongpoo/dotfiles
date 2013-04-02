@@ -151,3 +151,4 @@ zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS} menu select=1
 
 ### Added by the Heroku Toolbelt
 PATH="$PATH":/usr/local/heroku/bin
+

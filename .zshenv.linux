@@ -1,0 +1,73 @@
+C_INCLUDE_PATH=/usr/include:/opt/local/include
+CPLUS_INCLUDE_PATH=/usr/include:/opt/local/include
+LD_LIBRARY_PATH=/usr/lib:/opt/local/lib
+
+### for Python
+# basic Python setting
+PYTHON_VER=2.7
+PYTHON_HOME=/opt/python/"$PYTHON_VER"
+# for virtualenv
+VIRTUALENV_HOME="$PYTHON_HOME"
+VIRTUALENVWRAPPER="$VIRTUALENV_HOME"/bin/virtualenvwrapper.sh
+VIRTUALENVWRAPPER_PYTHON="$VIRTUALENV_HOME"/bin/python
+
+### for OCaml
+OCAML_VER=4.00.1
+OCAML_HOME=/opt/ocaml/"$OCAML_VER"
+OMAKE_HOME=/opt/ocaml/omake
+
+### for Erlang
+ERL_VER=R15B02
+ERL_HOME=/opt/erlang/"$ERL_VER"
+
+### for Golang
+# basic Go setting
+GOROOT=/opt/go/goroot
+GOOS=darwin
+GOARCH=amd64
+# Google App Engine for Go
+GAEGO=/opt/go/google_appengine
+# goenv setting
+GOENVHOME=$HOME/src/go
+GOENVGOROOT=/opt/genv
+GOENVWRAPPER=$GOENVGOROOT/goenvwrapper.sh
+
+### for Factor
+FACTOR_HOME=/opt/factor
+
+### for D-lang
+DMD_HOME=/opt/d/osx
+
+### Set extra paths
+if [ -d "$PYTHON_HOME/bin" ]; then
+  EXTRA_PATH="$PYTHON_HOME/bin"
+fi
+if [ -d "$DMD_HOME/bin" ]; then
+  export DMD_HOME
+  EXTRA_PATH="$EXTRA_PATH":$DMD_HOME/bin
+fi
+if [ -d "$FACTOR_HOME" ]; then
+  export FACTOR_HOME
+  EXTRA_PATH="$EXTRA_PATH":"$FACTOR_HOME"/bin
+fi
+if [ -d "$ERL_HOME/bin" ]; then
+  export ERL_HOME
+  EXTRA_PATH="$EXTRA_PATH":"$ERL_HOME/bin"
+fi
+if [ -d "$GAEGO" ]; then
+  export GAEGO
+  EXTRA_PATH=$GAEGO:"$EXTRA_PATH"
+fi
+if [ -d "$GOROOT" ]; then
+  export GOROOT
+  export GOOS
+  export GOARCH
+  EXTRA_PATH="$GOROOT/bin":"$EXTRA_PATH"
+fi
+if [ -d "$VIRTUALENV" ]; then
+  EXTRA_PATH="$VIRTUALENV/bin":"$EXTRA_PATH"
+fi
+
+PATH="$EXTRA_PATH":"$PATH"
+
+alias EDITOR=/usr/bin/vim
