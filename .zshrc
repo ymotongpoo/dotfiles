@@ -61,11 +61,11 @@ colors
 # PROMPT
 case ${UID} in
 0)
-    PROMPT="${fg[white]}[${fg[red]}%* %n${fg[white]}@%m ${fg[green]}%~${fg[white]}]
+    PROMPT="${fg[white]}[${fg[red]}%DT%* %n${fg[white]}@%M ${fg[green]}%~${fg[white]}]
  %# "
     ;;
 *)
-    PROMPT="${fg[white]}[${fg[green]}%* ${fg[cyan]}%n${fg[white]}@%m ${fg[green]}%~${fg[white]}]
+    PROMPT="${fg[white]}[${fg[green]}%DT%* ${fg[cyan]}%n${fg[white]}@%M ${fg[green]}%~${fg[white]}]
  %# "
     ;;
 esac
@@ -140,14 +140,16 @@ if [ -n "$GOENVWRAPPER" -a -f "$GOENVWRAPPER" ]; then
 fi
 
 ########################################
-##################### Programming Env
+##################### Utilities 
 ########################################
-
 # complete process ID
 zstyle ':completion:*:processes' command 'ps x -o pid,s,args'
 
 # put colors on completion candidates
 zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS} menu select=1
+
+alias l=ls
+alias ls='ls --color'
 
 ### Added by the Heroku Toolbelt
 PATH="$PATH":/usr/local/heroku/bin

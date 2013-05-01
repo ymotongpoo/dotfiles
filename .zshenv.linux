@@ -29,7 +29,7 @@ GOARCH=amd64
 GAEGO=/opt/go/google_appengine
 # goenv setting
 GOENVHOME=$HOME/src/go
-GOENVGOROOT=/opt/genv
+GOENVGOROOT=/opt/goenv
 GOENVWRAPPER=$GOENVGOROOT/goenvwrapper.sh
 
 ### for Factor
@@ -71,3 +71,5 @@ fi
 PATH="$EXTRA_PATH":"$PATH"
 
 alias EDITOR=/usr/bin/vim
+
+which xclip > /dev/null 2>&1 && alias toclipboard="xclip -selection clipboard"
