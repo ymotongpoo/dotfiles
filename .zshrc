@@ -149,7 +149,14 @@ zstyle ':completion:*:processes' command 'ps x -o pid,s,args'
 zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS} menu select=1
 
 alias l=ls
-alias ls='ls --color'
+case "$OSTYPE" in
+  darwin*)
+    alias ls='ls -G'
+    ;;
+  linux*)
+    alias ls='ls --color'
+    ;;
+esac
 
 ### Added by the Heroku Toolbelt
 PATH="$PATH":/usr/local/heroku/bin
