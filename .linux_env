@@ -3,7 +3,7 @@ VIRTUALENVWRAPPER=$VIRTUALENV/bin/virtualenvwrapper.sh
 PYTHONPATH=/opt/python/$PYTHON_VER:$PYTHONPATH
 MANPATH=/opt/python/$PYTHON_VER/share/man:$MANPATH
 
-OCAML_VER=3.11.2
+OCAML_VER=4.00.1
 OCAML_HOME=/opt/ocaml/$OCAML_VER
 OMAKE_HOME=/opt/ocaml/omake
 

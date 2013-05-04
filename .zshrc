@@ -1,5 +1,5 @@
 # zshrc >= 4.3.10
-# 2011.01.19 4.3.11
+# 2013.04.02 4.3.11
 #
 # If you want MacPorts' zsh as login shell, you should run:
 # % sudo sh -c "echo '/opt/local/bin/zsh' >> /etc/shells"
@@ -8,9 +8,8 @@
 ########################################
 ##################### General settings
 ########################################
-
-if [ -f "$HOME/.zsh_profile" ]; then
-  source "$HOME/.zsh_profile"
+if [ -f "$HOME/.zprofile" ]; then
+  source "$HOME/.zprofile"
 fi
 
 # LANG
@@ -32,7 +31,7 @@ setopt magic_equal_subst
 #setopt correct
 
 # auto change directory (i.e. cd foo -> foo)
-setopt auto_cd
+#setopt auto_cd
 
 # auto directory pushd that you can get dirs list by cd -[tab]
 setopt auto_pushd
@@ -42,11 +41,13 @@ setopt nolistbeep
 
 # history setting
 HISTFILE=~/.zsh_history
-HISTSIZE=10000
-SAVEHIST=10000
-setopt hist_ignore_dups # ignore duplication command history list
-setopt share_history # share command history data
-
+HISTSIZE=100000
+SAVEHIST=100000
+setopt hist_ignore_dups  # ignore duplication command history list
+setopt share_history     # share command history data
+setopt hist_ignore_space # ignore command if it starts from space 
+setopt hist_no_store     # do not store 'history' command in hitory file
+setopt extended_history  # record command hit time
 
 ########################################
 ##################### PROMPT settings
@@ -60,11 +61,11 @@ colors
 # PROMPT
 case ${UID} in
 0)
-    PROMPT="${fg[white]}[${fg[red]}%* %n${fg[white]}@%m ${fg[green]}%~${fg[white]}]
+    PROMPT="${fg[white]}[${fg[red]}%DT%* %n${fg[white]}@%M ${fg[green]}%~${fg[white]}]
  %# "
     ;;
 *)
-    PROMPT="${fg[white]}[${fg[green]}%* ${fg[cyan]}%n${fg[white]}@%m ${fg[green]}%~${fg[white]}]
+    PROMPT="${fg[white]}[${fg[green]}%DT%* ${fg[cyan]}%n${fg[white]}@%M ${fg[green]}%~${fg[white]}]
  %# "
     ;;
 esac
@@ -99,7 +100,7 @@ function _update_vcs_info_msg() {
 add-zsh-hook precmd _update_vcs_info_msg
 RPROMPT="%1(v|%F{green}%1v%f|)"
 
-# If 
+# use color less if possible
 srchilite="/opt/local/bin/src-hilite-lesspipe.sh"
 if [ -f $srchilite ]; then
   export LESS='-R'
@@ -110,12 +111,6 @@ fi
 ########################################
 ##################### Programming Env
 ########################################
-
-. ~/.versions
-
-# select .macosx_env or .linux_env 
-. ~/.os_env
-
 ### for development
 export C_INCLUDE_PATH
 export CPLUS_INCLUDE_PATH
@@ -128,47 +123,41 @@ export PYTHONPATH
 export MANPATH
 export VIRTUALENV_USE_DISITRIBUTE=1
 
-### for OCaml and OMAKE
-export OCAML_VER
-export OCAML_HOME
-export OMAKE_HOME
-
-### for Erlang
-export ERL_HOME
-
-### for Go-lang
-export GENVHOME
-export GENVGOROOT
-export GOROOT
-export GOOS
-export GOARCH
-
 export EXTRA_PATH
-export PATH=.:$GOROOT/bin:$DMD_PATH/bin:$OCAML_HOME/bin:$ERL_HOME/bin:$OMAKE_HOME/bin:$FACTOR_HOME/bin:$EXTRA_PATH:~/bin:/usr/local/bin:$GAEPY:$GAEGO:$PATH
-
+export PATH=.:~/bin:/usr/local/bin:$PATH
 export WORKON_HOME=$HOME/.virtualenvs
-. $VIRTUALENVWRAPPER
 
-function mkvenv () {
-  base_python=`which python$1` 
-  mkvirtualenv --distribute --python=$base_python $2
-}
+if [ -f "$VIRTUALENVWRAPPER" ]; then
+  source "$VIRTUALENVWRAPPER"
 
-source $GOENVWRAPPER
+  function mkvenv () {
+    base_python=`which python$1` 
+    mkvirtualenv --distribute --python=$base_python $2
+  }
+fi
+if [ -n "$GOENVWRAPPER" -a -f "$GOENVWRAPPER" ]; then
+  source "$GOENVWRAPPER"
+fi
 
 ########################################
-##################### Programming Env
+##################### Utilities 
 ########################################
-
 # complete process ID
 zstyle ':completion:*:processes' command 'ps x -o pid,s,args'
 
 # put colors on completion candidates
 zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS} menu select=1
 
+alias l=ls
+case "$OSTYPE" in
+  darwin*)
+    alias ls='ls -G'
+    ;;
+  linux*)
+    alias ls='ls --color'
+    ;;
+esac
 
-alias docs="cd ~/docs"
-alias src="cd ~/src"
+### Added by the Heroku Toolbelt
+PATH="$PATH":/usr/local/heroku/bin
 
-alias tw="open -a TextWrangler"
-alias gvim="open -a MacVim"

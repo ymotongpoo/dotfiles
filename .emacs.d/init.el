@@ -439,6 +439,10 @@
 ;;;;; JavaScript mode
 (autoload 'js2-mode "js2" nil t)
 (add-to-list 'auto-mode-alist '("\\.js$" . js2-mode))
+(custom-set-variables  
+ '(js2-basic-offset 2)  
+ '(js2-bounce-indent-p t)  
+)
 
 
 ;;;;; FUEL (Factor) mode
@@ -475,10 +479,25 @@
 (require 'yaml-mode)
 (add-to-list 'auto-mode-alist '("\\.yaml$" . yaml-mode))
 
-;;;;; html mode
-(add-hook 'html-mode-hook
-		  '(lambda()
-			 (setq indent-tabs-mode nil)))
+;;;;; web mode
+(require 'web-mode)
+;;; emacs 23以下の互換
+(when (< emacs-major-version 24)
+  (defalias 'prog-mode 'fundamental-mode))
+
+;;; 適用する拡張子
+(add-to-list 'auto-mode-alist '("\\.html?$" . web-mode))
+
+;;; インデント数
+(defun web-mode-hook ()
+  "Hooks for Web mode."
+  (setq web-mode-html-offset   2)
+  (setq web-mode-css-offset    2)
+  (setq web-mode-script-offset 2)
+  (setq web-mode-php-offset    2)
+  (setq web-mode-java-offset   2)
+  (setq web-mode-asp-offset    2))
+(add-hook 'web-mode-hook 'web-mode-hook)
 
 ;;;;; php mode
 (autoload 'php-mode "php-mode" "PHP mode" t)
