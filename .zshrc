@@ -19,7 +19,7 @@ export LANG=ja_JP.UTF-8
 bindkey -e
 
 # completion
-autoload -U compinit
+autoload -U compinit compdef
 compinit
 
 setopt auto_menu
