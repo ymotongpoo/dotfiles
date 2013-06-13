@@ -19,7 +19,7 @@ export LANG=ja_JP.UTF-8
 bindkey -e
 
 # completion
-autoload -U compinit compdef
+autoload -Uz compinit
 compinit
 
 setopt auto_menu
@@ -161,3 +161,4 @@ esac
 ### Added by the Heroku Toolbelt
 PATH="$PATH":/usr/local/heroku/bin
 
+export DISPLAY=:0.0
