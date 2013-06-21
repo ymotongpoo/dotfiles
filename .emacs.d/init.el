@@ -46,12 +46,12 @@
 (setq delete-old-versions t)
 
 ;;;load-pathに~/.emacs.dを追加
-(setq load-path (cons "~/.emacs.d" load-path))
-(setq load-path (cons "~/.emacs.d/tuareg-mode-1.45.6" load-path))
-(setq load-path (cons "~/.emacs.d/python" load-path))
-(setq load-path (cons "~/.emacs.d/scel" load-path))
-(setq load-path (cons "~/.emacs.d/ocaml-mode" load-path))
-
+(add-to-list 'load-path "~/.emacs.d")
+(add-to-list 'load-path "~/.emacs.d/tuareg-mode-1.45.6")
+(add-to-list 'load-path "~/.emacs.d/python")
+(add-to-list 'load-path "~/.emacs.d/scel")
+(add-to-list 'load-path "~/.emacs.d/ocaml-mode")
+(add-to-list 'load-path "~/.emacs.d/auto-complete")
 
 ;; 常にホームディレクトリから
 (cd "~")
@@ -257,6 +257,12 @@
 			 (setq indent-tabs-mode nil)
              ))
 
+;;;; auto-complete
+(require 'auto-complete-config)
+(global-auto-complete-mode t)
+(add-to-list 'ac-dictionary-directories "~/.emacs.d/auto-complete/ac-dict")
+(ac-config-default)
+
 ;;;; autoinsert
 (require 'autoinsert)
 
@@ -295,6 +301,15 @@
 (add-hook 'find-file-not-found-hooks 'auto-insert)
 
 ;;;;*************** Major mode ***************
+;;;;; Common
+(add-hook 'c-mode-common-hook '(lambda ()
+          (add-to-list 'ac-omni-completion-sources
+                       (cons "\\." '(ac-source-semantic)))
+          (add-to-list 'ac-omni-completion-sources
+                       (cons "->" '(ac-source-semantic)))
+          (setq ac-sources '(ac-source-semantic ac-source-yasnippet))
+))
+
 ;;;;; python mode
 (progn (cd "~/.emacs.d/vendor")
        (normal-top-level-add-subdirs-to-load-path))
@@ -308,7 +323,7 @@
 		  (function (lambda ()
 					  (setq indent-tabs-mode nil)
 					  (setq indent-level 4)
-					  (setq python-indent 4)
+					  (setq python-indent-offset 4)
 					  (setq tab-width 4)
 					  )))
 
@@ -371,8 +386,10 @@
 ;(setq tuareg-lazy-paren t)
 
 ;;;;; Go mode
-(add-to-list 'load-path "PATH CONTAINING go-mode-load.el" t)
 (require 'go-mode-load)
+
+;; interaction with gocode
+(require 'go-autocomplete)
 
 ;(autoload 'go-mode "go-mode" "Go language mode" t)
 ;(setq auto-mode-alist
@@ -383,9 +400,11 @@
 			 (c-set-style "python")
 			 (setq c-basic-offset 4)
 			 (setq indent-tabs-mode t)
-			 ))
+			 (local-set-key (kbd "M-." 'godef-jump)
+             (define-key ac-mode-map (kbd "M-TAB") 'auto-complete)
+			 )))
 
-(add-hook 'before-save-hook #'gofmt-before-save)
+(add-hook 'before-save-hook 'gofmt-before-save)
 
 ;;;;; D mode
 (autoload 'd-mode "d-mode" "Major mode for editing D code." t)
