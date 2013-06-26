@@ -396,11 +396,10 @@
              (c-set-style "python")
              (setq c-basic-offset 4)
              (setq indent-tabs-mode t)
-             (local-set-key (kbd "M-." 'godef-jump)
-                            (local-set-key (kbd "C-c C-r" 'go-remove-unused-imports))
-                            (local-set-key (kbd "C-c C-i") 'go-goto-imports)
-                            (define-key ac-mode-map (kbd "M-TAB") 'auto-complete)
-                            )))
+             (local-set-key (kbd "M-.") 'godef-jump)
+             (local-set-key (kbd "C-c C-r") 'go-remove-unused-imports)
+             (local-set-key (kbd "C-c C-i") 'go-goto-imports)
+             (define-key ac-mode-map (kbd "M-TAB") 'auto-complete)))
 
 (add-hook 'before-save-hook 'gofmt-before-save)
 
