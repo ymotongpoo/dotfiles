@@ -319,7 +319,6 @@
 (add-hook 'python-mode-hook
           (function (lambda ()
                       (setq indent-tabs-mode nil)
-                      (setq indent-level 4)
                       (setq python-indent-offset 4)
                       (setq tab-width 4)
                       )))
@@ -392,13 +391,14 @@
 ;;     (cons '("\\.go$" . go-mode) auto-mode-alist))
 
 (add-hook 'go-mode-hook
-          '(lambda()
-             (c-set-style "python")
+          '(lambda ()
              (setq c-basic-offset 4)
              (setq indent-tabs-mode t)
              (local-set-key (kbd "M-.") 'godef-jump)
-             (local-set-key (kbd "C-c C-r") 'go-remove-unused-imports)
-             (local-set-key (kbd "C-c C-i") 'go-goto-imports)
+             (local-set-key (kbd "C-c r") 'go-remove-unused-imports)
+             (local-set-key (kbd "C-c i") 'go-goto-imports)
+             (local-set-key (kbd "C-c d") 'godoc)
+             (local-set-key (kbd "C-c s") 'shell)
              (define-key ac-mode-map (kbd "M-TAB") 'auto-complete)))
 
 (add-hook 'before-save-hook 'gofmt-before-save)
@@ -503,17 +503,6 @@
 
 ;;; 適用する拡張子
 (add-to-list 'auto-mode-alist '("\\.html?$" . web-mode))
-
-;;; インデント数
-(defun web-mode-hook ()
-  "Hooks for Web mode."
-  (setq web-mode-html-offset   2)
-  (setq web-mode-css-offset    2)
-  (setq web-mode-script-offset 2)
-  (setq web-mode-php-offset    2)
-  (setq web-mode-java-offset   2)
-  (setq web-mode-asp-offset    2))
-(add-hook 'web-mode-hook 'web-mode-hook)
 
 ;;;;; php mode
 (autoload 'php-mode "php-mode" "PHP mode" t)
