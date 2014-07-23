@@ -64,7 +64,7 @@ if [ -d "$GOROOT" ]; then
   export GOROOT
   export GOOS
   export GOARCH
-  EXTRA_PATH="$GOROOT/bin":"$EXTRA_PATH"
+  EXTRA_PATH="$GOROOT/bin":"$GOENVTARGET":"$EXTRA_PATH"
 fi
 if [ -d "$VIRTUALENV" ]; then
   EXTRA_PATH="$VIRTUALENV/bin":"$EXTRA_PATH"
