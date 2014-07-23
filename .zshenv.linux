@@ -27,7 +27,7 @@ GOROOT="$GOENVGOROOT"/default
 GOOS=linux
 GOARCH=amd64
 # Google App Engine for Go
-GAEGO=/opt/go/google_appengine
+GAEGO=/opt/go/go_appengine
 # goenv setting
 GOENVHOME=$HOME/src/go
 
