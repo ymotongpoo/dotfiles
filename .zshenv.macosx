@@ -28,7 +28,7 @@ GOROOT="$GOENVGOROOT"/default
 GOOS=darwin
 GOARCH=amd64
 # Google App Engine for Go
-GAEGO=/opt/go/google_appengine
+GAEGO=/opt/go/go_appengine
 # goenv setting
 GOENVHOME=$HOME/src/go
 
@@ -56,6 +56,9 @@ fi
 if [ -d "$ERL_HOME/bin" ]; then
   export ERL_HOME
   EXTRA_PATH="$EXTRA_PATH":"$ERL_HOME/bin"
+fi
+if [ -d "$GOENVTARGET" ]; then
+  EXTRA_PATH="$EXTRA_PATH":"$GOENVTARGET"
 fi
 if [ -d "$GAEGO" ]; then
   export GAEGO

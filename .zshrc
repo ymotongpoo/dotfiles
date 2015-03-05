@@ -160,4 +160,8 @@ esac
 ### Added by the Heroku Toolbelt
 PATH="$PATH":/usr/local/heroku/bin
 
+### Google Cloud Platform
+GCPTOOLS="$HOME/google-cloud-sdk"
+export PATH="$PATH:$GCPTOOLS/bin"
+
 export DISPLAY=:0.0
