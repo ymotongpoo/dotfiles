@@ -1,3 +1,4 @@
+;;;;;;;;;; package loading
 (when (> emacs-major-version 23)
   (defvar user-emacs-directory "~/.emacs.d"))
 
@@ -17,13 +18,17 @@
   (auto-install-update-emacswiki-package-name t)
   (auto-install-compatibility-setup))
 
-;;;;;;;;;; key binds
-(define-key global-map (kbd "C-c l") 'toggle-truncate-lines)
-(define-key global-map (kbd "C-t") 'other-window)
-(define-key global-map (kbd "C-h") 'delete-backward-char)
-
-(when (eq system-type 'darwin)
-  (setq ns-command-modifier (quote meta)))
+(when (>= emacs-major-version 24)
+  (require 'package)
+  (setq package-user-dir "~/.emacs.d/elpa")
+  (add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/"))
+  (package-initialize)
+  (message "loading init-loader")
+  (unless (package-installed-p 'init-loader)
+    (package-refresh-contents)
+    (package-install 'init-loader))
+  (require 'init-loader)
+  (init-loader-load))
 
 ;;;;;;;;;; env path
 (add-to-list 'exec-path "/opt/local/bin")
@@ -89,3 +94,7 @@
 ;;;;;;;;;; multi-term
 (when (require 'multi-term nil t)
   (setq multi-term-program shell-file-name))
+
+
+;;;;;;;;;; misc
+(setq vc-follow-syslinks t)
