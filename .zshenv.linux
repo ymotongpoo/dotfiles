@@ -27,12 +27,13 @@ GOROOT="$GOENVGOROOT"/default
 GOOS=linux
 GOARCH=amd64
 # Google App Engine for Go
-GAEGO=/opt/go/google_appengine
+GAEGO=/opt/go/go_appengine
 # goenv setting
 GOENVHOME=$HOME/src/go
 
 GOENVTARGET=/opt/goenv
 GOENVWRAPPER=$GOENVTARGET/goenvwrapper.sh
+PATH="$GOENVTARGET":"$PATH"
 
 ### for Factor
 FACTOR_HOME=/opt/factor
@@ -75,3 +76,7 @@ PATH="$EXTRA_PATH":"$PATH"
 alias EDITOR=/usr/bin/vim
 
 which xclip > /dev/null 2>&1 && alias toclipboard="xclip -selection clipboard"
+
+### GCP
+export PATH=$HOME/google-cloud-sdk/bin:$PATH
+source $HOME/google-cloud-sdk/completion.zsh.inc

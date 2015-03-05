@@ -19,8 +19,7 @@ export LANG=ja_JP.UTF-8
 bindkey -e
 
 # completion
-autoload -Uz compinit
-compinit
+autoload -Uz compinit && compinit
 
 setopt auto_menu
 setopt list_packed
