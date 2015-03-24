@@ -21,6 +21,7 @@
 (when (>= emacs-major-version 24)
   (require 'package)
   (setq package-user-dir "~/.emacs.d/elpa")
+  (add-to-list 'package-archives  '("marmalade" . "http://marmalade-repo.org/packages/"))
   (add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/"))
   (package-initialize)
   (message "loading init-loader")
@@ -33,6 +34,12 @@
 ;;;;;;;;;; env path
 (add-to-list 'exec-path "/opt/local/bin")
 (add-to-list 'exec-path "/usr/local/bin")
+
+(setq make-backup-files nil)
+
+;;;;;;;;;; auto byte compile (from "Emacs technique bible")
+(require 'auto-async-byte-compile)
+(add-hook 'emacs-lisp-mode-hook 'enable-auto-async-byte-compile-mode)
 
 ;;;;;;;;;; character encoding
 (set-language-environment "Japanese")
@@ -69,7 +76,6 @@
 (add-to-list 'mode-line-format
              '(:eval (count-lines-and-chars)))
 
-
 ;;;;;;;;;; indent
 (setq-default tab-width 4)
 (setq-default indent-tabs-mode nil)
@@ -77,12 +83,10 @@
           (lambda ()
             (c-set-style "stroustrup")))
 
-
 ;;;;;;;;;; theme
 (when (require 'color-theme nil t)
   (color-theme-initialize)
   (color-theme-hober))
-
 
 ;;;;;;;;;; highlight
 (setq hl-line-face 'underline)
@@ -90,11 +94,38 @@
 (setq show-paren-delay 0)
 (show-paren-mode t)
 
+;;;;;;;;;; Buffer operations
+;;;;; make duplicated named buffer more unique (from "Emacs technique bible")
+(require 'uniquify)
+(setq uniquify-buffer-name-style 'post-forward-angle-brackets)
+(setq uniquify-ignore-buffers-re "*[^*]+*")
+
+;;;;; reinforce switching buffer (from "Emacs technique bible")
+(iswitchb-mode 1)
+(setq read-buffer-function 'iswitchb-read-buffer)
+(setq iswitchb-reqexp nil)
+(setq iswitchb-prompt-newbuffer nil)
+
+;;;;; open recent files (from "Emacs technique bible")
+(setq recentf-max-saved-items 500)
+(setq recentf-exclude '("/TAGS$" "/var/tmp/"))
+(require 'recentf-ext)
+
+;;;;;;;;;; edit
+;;;;; completion
+(require 'auot-complete-config)
+(global-auto-complete-mode 1)
 
 ;;;;;;;;;; multi-term
 (when (require 'multi-term nil t)
   (setq multi-term-program shell-file-name))
 
-
 ;;;;;;;;;; misc
 (setq vc-follow-syslinks t)
+
+
+;;;;;;;;;; init-loader
+(require 'init-loader)
+(init-loader-load "~/.emacs.d/inits")
+
+

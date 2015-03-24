@@ -9,7 +9,6 @@
             (local-set-key (kbd "C-c d") 'godoc)))
 (add-hook 'before-save-hook 'gofmt-before-save)
 
-(require 'go-direx)
-(define-key go-mode-map (kbd "C-c C-j") 'go-direx-pop-to-buffer)
-(push '(direx:direx-mode :position left :width 0.4 :dedicated t :stick t)
-      popwin:special-display-config)
+;;(define-key go-mode-map (kbd "C-c C-j") 'go-direx-pop-to-buffer)
+;;(push '(direx:direx-mode :position left :width 0.4 :dedicated t :stick t)
+;;      popwin:special-display-config)
