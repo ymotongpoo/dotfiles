@@ -113,8 +113,9 @@
 
 ;;;;;;;;;; edit
 ;;;;; completion
-(require 'auot-complete-config)
+(require 'auto-complete-config)
 (global-auto-complete-mode 1)
+(ac-config-default)
 
 ;;;;;;;;;; multi-term
 (when (require 'multi-term nil t)
@@ -123,9 +124,6 @@
 ;;;;;;;;;; misc
 (setq vc-follow-syslinks t)
 
-
 ;;;;;;;;;; init-loader
 (require 'init-loader)
 (init-loader-load "~/.emacs.d/inits")
-
-
