@@ -35,6 +35,9 @@ GOENVHOME=$HOME/src/go
 GOENVTARGET=/opt/goenv
 GOENVWRAPPER="$GOENVTARGET"/goenvwrapper.sh
 
+### for Node
+NODEBREW=$HOME/.nodebrew/current/bin
+
 ### for Factor
 FACTOR_HOME=/opt/factor
 
@@ -72,6 +75,9 @@ if [ -d "$GOROOT" ]; then
 fi
 if [ -d "$VIRTUALENV" ]; then
   EXTRA_PATH="$VIRTUALENV/bin":"$EXTRA_PATH"
+fi
+if [ -d "$NODEBREW" ]; then
+  EXTRA_PATH="$NODEBREW":"$EXTRA_PATH"
 fi
 
 PATH="$EXTRA_PATH":"$PATH"
