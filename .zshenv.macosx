@@ -24,9 +24,10 @@ ERL_HOME=/opt/erlang/"$ERL_VER"
 ### for Golang
 # basic Go setting
 GOENVGOROOT=/opt/go
-GOROOT="$GOENVGOROOT"/default
+GOROOT="$GOENVGOROOT"/master
 GOOS=darwin
 GOARCH=amd64
+GOROOT_BOOTSTRAP="$GOENVGOROOT"/go1.4.2
 # Google App Engine for Go
 GAEGO=/opt/go/go_appengine
 # goenv setting
@@ -34,6 +35,9 @@ GOENVHOME=$HOME/src/go
 
 GOENVTARGET=/opt/goenv
 GOENVWRAPPER="$GOENVTARGET"/goenvwrapper.sh
+
+### for node
+NODEBREW_ROOT=$HOME/.nodebrew
 
 ### for Factor
 FACTOR_HOME=/opt/factor
@@ -72,6 +76,9 @@ if [ -d "$GOROOT" ]; then
 fi
 if [ -d "$VIRTUALENV" ]; then
   EXTRA_PATH="$VIRTUALENV/bin":"$EXTRA_PATH"
+fi
+if [ -d "$NODEBREW_ROOT" ]; then
+  EXTRA_PATH="$NODEBREW_ROOT"/current/bin:"$EXTRA_PATH"
 fi
 
 PATH="$EXTRA_PATH":"$PATH"
