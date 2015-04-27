@@ -2,6 +2,9 @@ C_INCLUDE_PATH=/usr/include:/opt/local/include
 CPLUS_INCLUDE_PATH=/usr/include:/opt/local/include
 LD_LIBRARY_PATH=/usr/lib:/opt/local/lib
 
+LANGUAGE=ja_JP
+LC_ALL=Japanese
+
 ### for Python
 # basic Python setting
 PYTHON_VER=2.7
@@ -23,9 +26,10 @@ ERL_HOME=/opt/erlang/"$ERL_VER"
 ### for Golang
 # basic Go setting
 GOENVGOROOT=/opt/go
-GOROOT="$GOENVGOROOT"/default
+GOROOT="$GOENVGOROOT"/master
 GOOS=linux
 GOARCH=amd64
+GOROOT_BOOTSTRAP="$GOENVGOROOT"/go1.4.2
 # Google App Engine for Go
 GAEGO=/opt/go/go_appengine
 # goenv setting
@@ -78,5 +82,7 @@ alias EDITOR=/usr/bin/vim
 which xclip > /dev/null 2>&1 && alias toclipboard="xclip -selection clipboard"
 
 ### GCP
-export PATH=$HOME/google-cloud-sdk/bin:$PATH
-source $HOME/google-cloud-sdk/completion.zsh.inc
+if [ -d "$HOME/google-cloud-sdk" ]; then
+  export PATH=$HOME/google-cloud-sdk/bin:$PATH
+  source $HOME/google-cloud-sdk/completion.zsh.inc
+fi
