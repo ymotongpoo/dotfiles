@@ -1,3 +1,15 @@
+;;;;;;;;;; emmet-mode
+(require 'emmet-mode)
+(add-hook 'sgml-mode-hook 'emmet-mode)
+(add-hook 'php-mode-hook 'emmet-mode)
+(add-hook 'emmet-mode-hook 
+          (lambda () 
+            (setq emmet-indentation 2)
+            (define-key emmet-mode-keymap (kbd "C-c w") 'web-mode)
+            ))
+(setq emmet-move-cursor-between-quotes t)
+
+;;;;;;;;;; web-mode
 (setq auto-mode-alist
       (append '(
                 ("\\.\\(html\\|xhtml\\|shtml\\|tpl\\)\\'" . web-mode))
@@ -11,6 +23,7 @@
   (setq web-mode-enable-block-face t)
   (setq web-mode-enable-auto-closing t)
   (setq web-mode-auto-close-style 2)
+  (define-key web-mode-map (kbd "C-c e") 'emmet-mode)
 )
 
 (add-hook 'web-mode-hook 'web-mode-hook)

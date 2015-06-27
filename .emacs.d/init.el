@@ -11,7 +11,7 @@
         (if (fboundp 'normal-top-level-add-subdirs-to-load-path)
             (normal-top-level-add-subdirs-to-load-path))))))
 
-(add-to-load-path "elisp" "conf" "public_repos")
+(add-to-load-path "elisp" "conf" "public_repos" "snippets")
 
 (when (require 'auto-install nil t)
   (setq auto-install-directory "~/.emacs.d/elisp")
