@@ -3,7 +3,7 @@
 # key: dm
 # binding: direct-keybinding
 # --
-<link ref="import" href="bower_components/polymer/polymer.html">
+<link rel="import" href="bower_components/polymer/polymer.html">
 <dom-module id="`(file-name-nondirectory (file-name-sans-extension (buffer-file-name)))`">
   <style>
   </style>

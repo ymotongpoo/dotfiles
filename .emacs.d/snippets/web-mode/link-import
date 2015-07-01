@@ -1,0 +1,5 @@
+# -*- mode: snippet; require-final-newline: nil -*-
+# name: link-import
+# key: im
+# --
+<link rel="import" href="../bower_components/$1">
