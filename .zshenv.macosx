@@ -33,7 +33,7 @@ GAEGO=/opt/go/go_appengine
 # goenv setting
 GOENVHOME=$HOME/src/go
 
-GOENVTARGET=/opt/goenv
+GOENVTARGET=/opt/go/goenv
 GOENVWRAPPER="$GOENVTARGET"/goenvwrapper.sh
 
 ### for node
