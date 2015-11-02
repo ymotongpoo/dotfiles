@@ -36,6 +36,10 @@ GOENVHOME=$HOME/src/go
 GOENVTARGET=/opt/go/goenv
 GOENVWRAPPER="$GOENVTARGET"/goenvwrapper.sh
 
+### for Android
+ANDROID_HOME=/Users/$USER/Library/Android/sdk
+export ANDROID_HOME
+
 ### for node
 NODEBREW_ROOT=$HOME/.nodebrew
 
