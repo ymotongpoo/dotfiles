@@ -146,7 +146,18 @@ fi
 zstyle ':completion:*:processes' command 'ps x -o pid,s,args'
 
 # put colors on completion candidates
-zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS} menu select=1
+zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS} menu select=2
+
+zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z} r:|[._-]=*'
+
+zstyle ':completion:*' completer \
+    _oldlist _complete _match _history _ignored _approximate _prefix
+
+# complete from the cursor position
+setopt complete_in_word
+
+# do not expand glob and find candidates from the list
+setopt glob_complete
 
 alias l=ls
 case "$OSTYPE" in
@@ -157,6 +168,12 @@ case "$OSTYPE" in
     alias ls='ls --color'
     ;;
 esac
+
+# extended globbing
+setopt EXTENDED_GLOB
+
+# suffix alias
+alias -s go='go run'
 
 ### Added by the Heroku Toolbelt
 PATH="$PATH":/usr/local/heroku/bin
