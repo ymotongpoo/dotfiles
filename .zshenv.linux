@@ -3,7 +3,6 @@ CPLUS_INCLUDE_PATH=/usr/include:/opt/local/include
 LD_LIBRARY_PATH=/usr/lib:/opt/local/lib
 
 LANGUAGE=ja_JP
-LC_ALL=Japanese
 
 ### for Python
 # basic Python setting

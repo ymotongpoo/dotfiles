@@ -122,8 +122,14 @@
   (setq multi-term-program shell-file-name))
 
 ;;;;;;;;;; misc
+;;;;; support for symblic links
 (setq vc-follow-syslinks t)
+
+;;;;; auto revert buffer, useful for update of VCS repo
+(global-auto-revert-mode 1)
 
 ;;;;;;;;;; init-loader
 (require 'init-loader)
 (init-loader-load "~/.emacs.d/inits")
+(put 'set-goal-column 'disabled nil)
+(put 'narrow-to-region 'disabled nil)
