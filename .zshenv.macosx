@@ -24,7 +24,7 @@ ERL_HOME=/opt/erlang/"$ERL_VER"
 ### for Golang
 # basic Go setting
 GOENVGOROOT=/opt/go
-GOROOT="$GOENVGOROOT"/master
+GOROOT="$GOENVGOROOT"/go1.5.1
 GOOS=darwin
 GOARCH=amd64
 GOROOT_BOOTSTRAP="$GOENVGOROOT"/go1.4.2
@@ -33,8 +33,12 @@ GAEGO=/opt/go/go_appengine
 # goenv setting
 GOENVHOME=$HOME/src/go
 
-GOENVTARGET=/opt/goenv
+GOENVTARGET=/opt/go/goenv
 GOENVWRAPPER="$GOENVTARGET"/goenvwrapper.sh
+
+### for Android
+ANDROID_HOME=/Users/$USER/Library/Android/sdk
+export ANDROID_HOME
 
 ### for node
 NODEBREW_ROOT=$HOME/.nodebrew

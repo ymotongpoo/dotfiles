@@ -26,6 +26,6 @@ mkdir "$HOME"/bin
 cd "$HOME"/bin
 
 # setup OPAM
-wget http://www.ocamlpro.com/pub/opam_installer.sh
-sh ./opam_installer.sh .
+# wget http://www.ocamlpro.com/pub/opam_installer.sh
+# sh ./opam_installer.sh .
 
