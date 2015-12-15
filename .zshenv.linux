@@ -87,8 +87,3 @@ alias EDITOR=/usr/bin/vim
 
 which xclip > /dev/null 2>&1 && alias toclipboard="xclip -selection clipboard"
 
-### GCP
-if [ -d "$HOME/google-cloud-sdk" ]; then
-  export PATH=$HOME/google-cloud-sdk/bin:$PATH
-  source $HOME/google-cloud-sdk/completion.zsh.inc
-fi

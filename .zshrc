@@ -1,5 +1,6 @@
 # zshrc >= 4.3.10
 # 2013.04.02 4.3.11
+# 2015.12.15 5.0.5
 #
 # If you want MacPorts' zsh as login shell, you should run:
 # % sudo sh -c "echo '/opt/local/bin/zsh' >> /etc/shells"
@@ -162,6 +163,9 @@ PATH="$PATH":/usr/local/heroku/bin
 
 ### Google Cloud Platform
 GCPTOOLS="$HOME/google-cloud-sdk"
-export PATH="$PATH:$GCPTOOLS/bin"
+if [ -d "$GCPTOOLS" ]; then
+  export PATH="$HOME/$GCPTOOLS:$PATH"
+  source $HOME/google-cloud-sdk/completion.zsh.inc
+fi
 
 export DISPLAY=:0.0
