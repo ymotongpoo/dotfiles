@@ -36,8 +36,10 @@ GAEGO=/opt/go/go_appengine
 GOENVHOME=$HOME/src/go
 
 GOENVTARGET=/opt/goenv
-GOENVWRAPPER=$GOENVTARGET/goenvwrapper.sh
-PATH="$GOENVTARGET":"$PATH"
+if [ -d "$GOENVTARGET" ]; then
+  GOENVWRAPPER=$GOENVTARGET/goenvwrapper.sh
+  EXTRA_PATH="$GOENVTARGET":"$PATH"
+fi
 
 ### for node
 NODEBREW_ROOT=$HOME/.nodebrew
