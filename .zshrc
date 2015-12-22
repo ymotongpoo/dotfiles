@@ -62,11 +62,11 @@ colors
 # PROMPT
 case ${UID} in
 0)
-    PROMPT="${fg[white]}[${fg[red]}%DT%* %n${fg[white]}@%M ${fg[green]}%~${fg[white]}]
+    PROMPT="${fg[white]}[${fg[red]}%DT%* %n${fg[white]}@%m ${fg[green]}%~${fg[white]}]
  %# "
     ;;
 *)
-    PROMPT="${fg[white]}[${fg[green]}%DT%* ${fg[cyan]}%n${fg[white]}@%M ${fg[green]}%~${fg[white]}]
+    PROMPT="${fg[white]}[${fg[green]}%DT%* ${fg[cyan]}%n${fg[white]}@%m ${fg[green]}%~${fg[white]}]
  %# "
     ;;
 esac
