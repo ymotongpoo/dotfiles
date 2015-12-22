@@ -12,8 +12,10 @@ set-option -g status-bg white
 set-window-option -g window-status-current-bg blue
 set-window-option -g window-status-current-fg white
 
+set-option -g mouse on
+
 # install "tmux-pasteboard" from MacPorts
-set-option -g default-command "/opt/local/bin/reattach-to-user-namespace zsh"
+if-shell "test -d /opt/local/bin/reattach-to-user-namespace" "set-option -g default-command '/opt/local/bin/reattach-to-user-namespace zsh'"
 
 set-window-option -g mode-keys vi
 
