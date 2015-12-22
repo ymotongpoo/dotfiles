@@ -1,0 +1,24 @@
+set-option -g prefix C-z
+bind-key z send-prefix
+bind-key r source-file ~/.tmux.conf
+bind-key C-z send-prefix
+
+set-option -g history-limit 10000
+
+set-option -g status-utf8 on
+set-option -g status-interval 5
+set-option -g status-bg black
+set-option -g status-bg white
+set-window-option -g window-status-current-bg blue
+set-window-option -g window-status-current-fg white
+
+set-option -g mouse-select-pane on
+set-option -g mouse-select-window on
+set-option -g mouse-resize-pane on
+set-option -g mode-mouse on
+set-option -g mouse-utf8 on
+
+set-window-option -g mode-keys vi
+
+# install "xclip" from apt-get
+bind-key C-c vi-copy y copy-pipe "xclip -sel clip -i"

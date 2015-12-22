@@ -1,0 +1,21 @@
+set-option -g prefix C-z
+bind-key z send-prefix
+bind-key r source-file ~/.tmux.conf
+bind-key C-z send-prefix
+
+set-option -g history-limit 10000
+
+set-option -g status-utf8 on
+set-option -g status-interval 5
+set-option -g status-bg black
+set-option -g status-bg white
+set-window-option -g window-status-current-bg blue
+set-window-option -g window-status-current-fg white
+
+# install "tmux-pasteboard" from MacPorts
+set-option -g default-command "/opt/local/bin/reattach-to-user-namespace zsh"
+
+set-window-option -g mode-keys vi
+
+bind-key C-c run "tmux save-buffer - | reattach-to-user-namespace pbcopy"
+bind-key C-v run "reattach-to-user-namespace pbpaste | tmux load-buffer - && tmux paste-buffer" 
