@@ -1,18 +1,4 @@
 (1
- (hugo .
-       [(0 0 2)
-	((s
-	  (1 10 0))
-	 (ht
-	  (2 0))
-	 (f
-	  (0 17 0))
-	 (dash
-	  (2 12 0)))
-	"Helper functions for Hugo" tar])
- (dockerfile-mode .
-		  [(0 1)
-		   nil "Major mode for editing Docker's Dockerfiles" single])
  (zone-nyan .
 	    [(0 2 2)
 	     ((esxml
@@ -2593,6 +2579,17 @@
  (hungry-delete .
 		[(1 1 2)
 		 nil "hungry delete minor mode" single])
+ (hugo .
+       [(0 0 2)
+	((s
+	  (1 10 0))
+	 (ht
+	  (2 0))
+	 (f
+	  (0 17 0))
+	 (dash
+	  (2 12 0)))
+	"Helper functions for Hugo" tar])
  (httpd .
 	[(1 0 1)
 	 nil "HTTP/1.0 web server for emacs" single])
@@ -3788,6 +3785,9 @@
  (doctags .
 	  [(0 1)
 	   nil "Generation of tags documentation in Doxygen syntax" single])
+ (dockerfile-mode .
+		  [(0 1)
+		   nil "Major mode for editing Docker's Dockerfiles" single])
  (dna-mode .
 	   [(1 44)
 	    nil "a major mode for editing dna sequences" single])

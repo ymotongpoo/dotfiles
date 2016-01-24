@@ -5,6 +5,8 @@
 
 (define-abbrev-table 'completion-list-mode-abbrev-table '())
 
+(define-abbrev-table 'direx:direx-mode-abbrev-table '())
+
 (define-abbrev-table 'display-time-world-mode-abbrev-table '())
 
 (define-abbrev-table 'emacs-lisp-byte-code-mode-abbrev-table '())
@@ -36,6 +38,8 @@
 (define-abbrev-table 'occur-edit-mode-abbrev-table '())
 
 (define-abbrev-table 'occur-mode-abbrev-table '())
+
+(define-abbrev-table 'outline-mode-abbrev-table '())
 
 (define-abbrev-table 'package-menu-mode-abbrev-table '())
 

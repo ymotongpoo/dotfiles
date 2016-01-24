@@ -485,7 +485,7 @@
 	   ((:url . "http://elpa.gnu.org/packages/minimap.html")
 	    (:keywords))])
  (multishell .
-	     [(1 0 5)
+	     [(1 0 6)
 	      nil "facilitate multiple local and remote shell buffers" single
 	      ((:url . "https://github.com/kenmanheimer/EmacsMultishell")
 	       (:keywords "processes"))])
