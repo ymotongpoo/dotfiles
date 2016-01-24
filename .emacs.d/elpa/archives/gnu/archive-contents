@@ -82,12 +82,12 @@
 		 ((:keywords "extensions")
 		  (:url . "http://www.dr-qubit.org/emacs.php"))])
  (avy .
-      [(0 3 0)
+      [(0 4 0)
        ((emacs
 	 (24 1))
 	(cl-lib
 	 (0 5)))
-       "set-based completion" tar
+       "tree-based completion" tar
        ((:keywords "point" "location")
 	(:url . "https://github.com/abo-abo/avy"))])
  (beacon .
@@ -485,7 +485,7 @@
 	   ((:url . "http://elpa.gnu.org/packages/minimap.html")
 	    (:keywords))])
  (multishell .
-	     [(1 0 6)
+	     [(1 0 7)
 	      nil "facilitate multiple local and remote shell buffers" single
 	      ((:url . "https://github.com/kenmanheimer/EmacsMultishell")
 	       (:keywords "processes"))])
