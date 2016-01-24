@@ -16,17 +16,20 @@
               auto-mode-alist))
 
 (require 'web-mode)
-(defun web-mode-hook ()
-  (setq web-mode-markup-indent-offset 2)
-  (setq web-mode-css-indent-offset 2)
-  (setq web-mode-code-indent-offset 2)
-  (setq web-mode-enable-block-face t)
-  (setq web-mode-enable-auto-closing t)
-  (setq web-mode-auto-close-style 2)
-  (define-key web-mode-map (kbd "C-c e") 'emmet-mode)
-)
-
-(add-hook 'web-mode-hook 'web-mode-hook)
+(require 'company)
+(require 'company-web-html)
+(require 'company-web-jade)
+(require 'company-web-slim)
+(add-hook 'web-mode-hook
+          (lambda ()
+            (setq web-mode-markup-indent-offset 2)
+            (setq web-mode-css-indent-offset 2)
+            (setq web-mode-code-indent-offset 2)
+            (setq web-mode-enable-block-face t)
+            (setq web-mode-enable-auto-closing t)
+            (setq web-mode-auto-close-style 2)
+            (define-key web-mode-map (kbd "C-c e") 'emmet-mode)
+            (define-key web-mode-map (kbd "C-'") 'company-web-html)))
 
 (custom-set-faces
  '(web-mode-doctype-face
