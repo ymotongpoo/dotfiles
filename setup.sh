@@ -36,10 +36,12 @@ if [ $platform = "Linux" ]; then
   wget "https://github.com/monochromegane/the_platinum_searcher/releases/download/v2.0.2/pt_linux_amd64.tar.gz"
   wget "https://github.com/peco/peco/releases/download/v0.3.5/peco_linux_amd64.tar.gz"
   wget "https://drive.google.com/uc?id=0B3X9GlR6Embnb095MGxEYmJhY2c"
+  wget -qO- https://raw.githubusercontent.com/creationix/nvm/v0.30.2/install.sh | bash
 elif [ $platform = "Darwin" ]; then
   curl -O "https://github.com/monochromegane/the_platinum_searcher/releases/download/v2.0.2/pt_linux_amd64.tar.gz"
   curl -O "https://github.com/peco/peco/releases/download/v0.3.5/peco_darwin_amd64.zip"
   curl -O -L "https://drive.google.com/uc?id=0B3X9GlR6EmbnVjIzMDRqck1aekE" --output drive
+  curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.30.2/install.sh | bash
 fi
 
 ##### set Go workspace

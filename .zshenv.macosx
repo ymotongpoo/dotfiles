@@ -84,8 +84,13 @@ fi
 if [ -d "$NODEBREW_ROOT" ]; then
   EXTRA_PATH="$NODEBREW_ROOT"/current/bin:"$EXTRA_PATH"
 fi
-
 PATH="$EXTRA_PATH":"$PATH"
+
+# This loads nvm
+NVM_DIR="$HOME/.nvm"
+if [ -d $NVM_DIR ]; then
+  [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  
+fi
 
 alias emacs="/Applications/Emacs.app/Contents/MacOS/Emacs"
 alias gvim="/Applications/MacVim.app/Contents/MacOS/MacVim"
