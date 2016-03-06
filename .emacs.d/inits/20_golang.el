@@ -3,21 +3,7 @@
 (require 'go-mode)
 (require 'company)
 
-(defvar my-gopath)
-(setq my-gopath (concat (getenv "HOME") "/src/go/workspace"))
-(setenv "GOPATH" my-gopath)
-(add-to-list 'exec-path (concat my-gopath "/bin"))
-
-;; setting for godoc
-(defun set-exec-path-from-shell-PATH ()
-  (let ((path-from-shell (replace-regexp-in-string
-                          "[ \t\n]*"
-                          ""
-                          (shell-command-to-string "$SHELL --login -i -c 'echo $PATH'"))))
-    (setenv "PATH" path-from-shell)
-    (setq eshell-path-env path-from-shell)
-    (setq exec-path (split-string path-from-shell path-separator))))
-(when window-system (set-exec-path-from-shell-PATH))
+(exec-path-from-shell-copy-env "GOPATH")
 
 (add-hook 'go-mode-hook
           (lambda ()
