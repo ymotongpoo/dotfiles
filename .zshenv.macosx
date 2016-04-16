@@ -40,8 +40,11 @@ GOENVWRAPPER="$GOENVTARGET"/goenvwrapper.sh
 ANDROID_HOME=/Users/$USER/Library/Android/sdk
 export ANDROID_HOME
 
-### for node
-NODEBREW_ROOT=$HOME/.nodebrew
+### for node (nvm)
+NVM_DIR="$HOME/.nvm"
+if [ -d $NVM_DIR ]; then
+  [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  
+fi
 
 ### for Factor
 FACTOR_HOME=/opt/factor
@@ -86,11 +89,6 @@ if [ -d "$NODEBREW_ROOT" ]; then
 fi
 PATH="$EXTRA_PATH":"$PATH"
 
-# This loads nvm
-NVM_DIR="$HOME/.nvm"
-if [ -d $NVM_DIR ]; then
-  [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  
-fi
 
 alias emacs="/Applications/Emacs.app/Contents/MacOS/Emacs"
 alias gvim="/Applications/MacVim.app/Contents/MacOS/MacVim"
