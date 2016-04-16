@@ -24,10 +24,10 @@ ERL_HOME=/opt/erlang/"$ERL_VER"
 ### for Golang
 # basic Go setting
 GOENVGOROOT=/opt/go
-GOROOT="$GOENVGOROOT"/go1.5.1
+GOROOT="$GOENVGOROOT"/go1.6
 GOOS=darwin
 GOARCH=amd64
-GOROOT_BOOTSTRAP="$GOENVGOROOT"/go1.4.2
+GOROOT_BOOTSTRAP="$GOENVGOROOT"/go1.4.3
 # Google App Engine for Go
 GAEGO=/opt/go/go_appengine
 # goenv setting
