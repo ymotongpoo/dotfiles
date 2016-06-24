@@ -41,9 +41,6 @@ export ANDROID_HOME
 
 ### for node (nvm)
 NVM_DIR="$HOME/.nvm"
-if [ -d $NVM_DIR ]; then
-  [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  
-fi
 
 ### for Factor
 FACTOR_HOME=/opt/factor
@@ -86,11 +83,13 @@ fi
 if [ -d "$NODEBREW_ROOT" ]; then
   EXTRA_PATH="$NODEBREW_ROOT"/current/bin:"$EXTRA_PATH"
 fi
+if [ -d $NVM_DIR ]; then
+  [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  
+fi
 PATH="$EXTRA_PATH":"$PATH"
 if [ -d "$OCAML_HOME" ]; then
   . /Users/yoshifumi/.opam/opam-init/init.zsh > /dev/null 2> /dev/null || true
 fi
-
 
 alias emacs="/Applications/Emacs.app/Contents/MacOS/Emacs"
 alias gvim="/Applications/MacVim.app/Contents/MacOS/MacVim"
