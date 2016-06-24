@@ -13,9 +13,8 @@ PYTHONPATH="$MACPORTS_PREFIX"/lib/python"$PYTHON_VER"/:"$PYTHONPATH"
 MANPATH="$MACPORTS_PREFIX"/share/man:/usr/local/man:"$MANPATH"
 
 ### for OCaml
-OCAML_VER=4.00.1
-OCAML_HOME=/opt/ocaml/"$OCAML_VER"
-OMAKE_HOME=/opt/ocaml/omake
+OCAML_VER=4.03.0
+OCAML_HOME="$HOME/.opam/$OCAML_VER"
 
 ### for Erlang
 ERL_VER=R15B02
@@ -88,10 +87,12 @@ if [ -d "$NODEBREW_ROOT" ]; then
   EXTRA_PATH="$NODEBREW_ROOT"/current/bin:"$EXTRA_PATH"
 fi
 PATH="$EXTRA_PATH":"$PATH"
+if [ -d "$OCAML_HOME" ]; then
+  . /Users/yoshifumi/.opam/opam-init/init.zsh > /dev/null 2> /dev/null || true
+fi
 
 
 alias emacs="/Applications/Emacs.app/Contents/MacOS/Emacs"
 alias gvim="/Applications/MacVim.app/Contents/MacOS/MacVim"
 alias godev_appserver="$GAEGO/dev_appserver.py"
 alias goappcfg="$GAEGO/appcfg.py"
-alias tw="open -a TextWrangler"
