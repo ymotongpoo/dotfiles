@@ -29,6 +29,7 @@ GOROOT="$GOENVGOROOT"/go1.6
 GOOS=linux
 GOARCH=amd64
 GOROOT_BOOTSTRAP="$GOENVGOROOT"/go1.4.2
+GOPATH="$HOME"/src/go/workspace
 # Google App Engine for Go
 GAEGO=/opt/go/go_appengine
 # goenv setting
@@ -73,7 +74,8 @@ if [ -d "$GOROOT" ]; then
   export GOROOT
   export GOOS
   export GOARCH
-  EXTRA_PATH="$GOROOT/bin":"$GOENVTARGET":"$EXTRA_PATH"
+  export GOPATH
+  EXTRA_PATH="$GOROOT/bin":"$GOPATH"/bin:"$GOENVTARGET":"$EXTRA_PATH"
 fi
 if [ -d "$VIRTUALENV" ]; then
   EXTRA_PATH="$VIRTUALENV/bin":"$EXTRA_PATH"

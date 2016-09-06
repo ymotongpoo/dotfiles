@@ -23,9 +23,10 @@ ERL_HOME=/opt/erlang/"$ERL_VER"
 ### for Golang
 # basic Go setting
 GOENVGOROOT=/opt/go
-GOROOT="$GOENVGOROOT"/go1.6
+GOROOT="$GOENVGOROOT"/go1.7
 GOOS=darwin
 GOARCH=amd64
+GOPATH="$HOME"/src/go/workspace
 GOROOT_BOOTSTRAP="$GOENVGOROOT"/go1.4.3
 # Google App Engine for Go
 GAEGO=/opt/go/go_appengine
@@ -75,7 +76,8 @@ if [ -d "$GOROOT" ]; then
   export GOROOT
   export GOOS
   export GOARCH
-  EXTRA_PATH="$GOROOT/bin":"$GOENVTARGET":"$EXTRA_PATH"
+  export GOPATH
+  EXTRA_PATH="$GOROOT/bin":"$GOPATH/bin":"$GOENVTARGET":"$EXTRA_PATH"
 fi
 if [ -d "$VIRTUALENV" ]; then
   EXTRA_PATH="$VIRTUALENV/bin":"$EXTRA_PATH"
