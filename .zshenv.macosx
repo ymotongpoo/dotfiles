@@ -5,7 +5,7 @@ CPLUS_INCLUDE_PATH=/usr/include:/opt/local/include
 LD_LIBRARY_PATH=/usr/lib:/opt/local/lib
 
 ### for virtualenv
-PYTHON_VER=2.7
+PYTHON_VER=3.5
 VIRTUALENV_HOME="$MACPORTS_PREFIX"/Library/Frameworks/Python.framework/Versions/"$PYTHON_VER"
 VIRTUALENVWRAPPER="$VIRTUALENV_HOME"/bin/virtualenvwrapper.sh
 VIRTUALENVWRAPPER_PYTHON="$VIRTUALENV_HOME"/bin/python
