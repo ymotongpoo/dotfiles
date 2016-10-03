@@ -79,8 +79,8 @@ if [ -d "$GOROOT" ]; then
   export GOPATH
   EXTRA_PATH="$GOROOT/bin":"$GOPATH/bin":"$GOENVTARGET":"$EXTRA_PATH"
 fi
-if [ -d "$VIRTUALENV" ]; then
-  EXTRA_PATH="$VIRTUALENV/bin":"$EXTRA_PATH"
+if [ -d "$VIRTUALENV_HOME" ]; then
+  EXTRA_PATH="$VIRTUALENV_HOME/bin":"$EXTRA_PATH"
 fi
 if [ -d "$NODEBREW_ROOT" ]; then
   EXTRA_PATH="$NODEBREW_ROOT"/current/bin:"$EXTRA_PATH"
@@ -97,3 +97,4 @@ alias emacs="/Applications/Emacs.app/Contents/MacOS/Emacs"
 alias gvim="/Applications/MacVim.app/Contents/MacOS/MacVim"
 alias godev_appserver="$GAEGO/dev_appserver.py"
 alias goappcfg="$GAEGO/appcfg.py"
+alias vscode="open -a Visual\ Studio\ Code $1"

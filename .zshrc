@@ -118,7 +118,7 @@ export CPLUS_INCLUDE_PATH
 export LD_LIBRARY_PATH
 
 ### for Python
-export VIRTUALENV
+export VIRTUALENV_HOME
 export VIRTUALENVWRAPPER
 export PYTHONPATH
 export MANPATH
