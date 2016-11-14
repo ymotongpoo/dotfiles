@@ -1,8 +1,8 @@
 MACPORTS_PREFIX=/opt/local
 
-C_INCLUDE_PATH=/usr/include:/opt/local/include
-CPLUS_INCLUDE_PATH=/usr/include:/opt/local/include
-LD_LIBRARY_PATH=/usr/lib:/opt/local/lib
+#C_INCLUDE_PATH=/usr/include:/opt/local/include
+#CPLUS_INCLUDE_PATH=/usr/include:/opt/local/include
+#LD_LIBRARY_PATH=/usr/lib:/opt/local/lib
 
 ### for virtualenv
 PYTHON_VER=3.5

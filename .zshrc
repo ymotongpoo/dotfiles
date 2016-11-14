@@ -24,9 +24,13 @@ bindkey -e
 autoload -Uz compinit && compinit
 
 setopt auto_menu
+setopt auto_list
 setopt list_packed
 setopt list_types
 setopt magic_equal_subst
+setopt print_eight_bit
+setopt mark_dirs
+setopt numeric_glob_sort
 
 # correct typo
 #setopt correct
@@ -44,11 +48,12 @@ setopt nolistbeep
 HISTFILE=~/.zsh_history
 HISTSIZE=100000
 SAVEHIST=100000
-setopt hist_ignore_dups  # ignore duplication command history list
+#setopt hist_ignore_dups  # ignore duplication command history list
 setopt share_history     # share command history data
 setopt hist_ignore_space # ignore command if it starts from space 
 setopt hist_no_store     # do not store 'history' command in hitory file
 setopt extended_history  # record command hit time
+
 
 ########################################
 ##################### PROMPT settings
@@ -148,17 +153,18 @@ zstyle ':completion:*:processes' command 'ps x -o pid,s,args'
 
 # put colors on completion candidates
 zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS} menu select=2
-
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z} r:|[._-]=*'
-
 zstyle ':completion:*' completer \
-    _oldlist _complete _match _history _ignored _approximate _prefix
+       _complete _match _history _ignored _prefix
+zstyle ':completion:*:sudo:*' \
+       command-path /sbin /usr/sbin /usr/local/sbin /opt/local/sbin \
+       /bin /usr/bin /usr/local/bin /opt/local/sbin
 
 # complete from the cursor position
 setopt complete_in_word
-
 # do not expand glob and find candidates from the list
 setopt glob_complete
+setopt extended_glob
 
 alias l=ls
 case "$OSTYPE" in
@@ -170,11 +176,10 @@ case "$OSTYPE" in
     ;;
 esac
 
-# extended globbing
-setopt EXTENDED_GLOB
-
 # suffix alias
 alias -s go='go run'
+alias -s py='python'
+alias -s js='node'
 
 ### Added by the Heroku Toolbelt
 PATH="$PATH":/usr/local/heroku/bin

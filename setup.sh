@@ -9,7 +9,8 @@ platform=`uname`
 if [ platform = "Linux" ]; then
   ln -s "$DOTFILES"/.zshenv.linux .zshenv
 elif [ platform = "Darwin" ]; then
-  ln -s "$DOTFILES"/.zshenv.macosx .zshenv
+  ln -s "$DOTFILES"/.zshenv.macos .zshenv
+  ln -s "$DOTFILES"/.zprofile.macos .zprofile
 fi
 
 ##### set editor configuration files
@@ -21,7 +22,7 @@ ln -s "$DOTFILES"/.screenrc .screenrc
 if [ platform = "Linux" ]; then
   ln -s "$DOTFILES"/.tmux.conf.linux .tmux.conf
 elif [ platform = "Darwin" ]; then
-  ln -s "$DOTFILES"/.tmux.conf.macosx .tmux.conf
+  ln -s "$DOTFILES"/.tmux.conf.macos .tmux.conf
 fi
 
 ##### create private bin directory

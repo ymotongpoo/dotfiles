@@ -1,0 +1,4 @@
+# .zprofile for macOS
+
+alias pull-ss=`adb shell ls /sdcard/Pictures/Screenshots/* | grep 'Screenshots' | tr '\r' ' ' | xargs -n1 adb pull`
+alias rm-ss=`adb shell ls /sdcard/Pictures/Screenshots/* | grep 'Screenshots' | tr '\r' ' ' | xargs -n1 rm`
