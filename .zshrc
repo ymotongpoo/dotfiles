@@ -191,4 +191,3 @@ if [ -d "$GCPTOOLS" ]; then
   source $HOME/google-cloud-sdk/completion.zsh.inc
 fi
 
-export DISPLAY=:0.0
