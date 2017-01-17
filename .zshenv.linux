@@ -1,13 +1,10 @@
-C_INCLUDE_PATH=/usr/include:/opt/local/include
-CPLUS_INCLUDE_PATH=/usr/include:/opt/local/include
-LD_LIBRARY_PATH=/usr/lib:/opt/local/lib
-
 LANGUAGE=ja_JP
 
 ### for Python
 # basic Python setting
-PYTHON_VER=2.7
+PYTHON_VER=3.6.0
 PYTHON_HOME=/opt/python/"$PYTHON_VER"
+
 # for virtualenv
 VIRTUALENV_HOME="$PYTHON_HOME"
 VIRTUALENVWRAPPER="$VIRTUALENV_HOME"/bin/virtualenvwrapper.sh
@@ -84,9 +81,9 @@ if [ -d "$NODEBREW_ROOT" ]; then
   EXTRA_PATH="$NODEBREW_ROOT"/current/bin:"$EXTRA_PATH"
 fi
 
-PATH="$EXTRA_PATH":"$PATH"
+export PATH="$EXTRA_PATH":"$PATH"
 
 alias EDITOR=/usr/bin/vim
 
-which xclip > /dev/null 2>&1 && alias toclipboard="xclip -selection clipboard"
+which xclip > /dev/null 2>&1 && alias clipboard="xclip -selection clipboard"
 

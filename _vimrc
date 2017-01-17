@@ -11,7 +11,12 @@ set fenc=utf-8
 set fencs=iso-2022-jp,euc-jp,cp932
 
 " 書式設定
+colorscheme monokai
 syntax on
+autocmd BufNewFile *.py set filetype=python fenc=utf-8
+autocmd BufNewFile *.js set filetype=javascript fenc=utf-8
+autocmd BufNewFile *.html set filetype=html fenc=utf-8
+autocmd BufNewFile *.go set filetype=go fenc=utf-8
 autocmd FileType c set cindent
 autocmd FileType c set tabstop=4
 autocmd FileType c set omnifunc=ccomplete#Complete
@@ -27,9 +32,6 @@ autocmd FileType javascript set smarttab
 autocmd FileType javascript set tabstop=2 shiftwidth=2 softtabstop=2 expandtab
 autocmd FileType html set smarttab
 autocmd FileType html set tabstop=2 shiftwidth=2 expandtab
-autocmd BufNewFile *.py set filetype=python fenc=utf-8
-autocmd BufNewFile *.js set filetype=javascript fenc=utf-8
-autocmd BufNewFile *.html set filetype=html fenc=utf-8
 
 "set tabstop=2 shiftwidth=2 softtabstop=0
 set autoindent smartindent
@@ -81,6 +83,8 @@ let g:qb_hotkey = "<F3>"
 nnoremap <F4> :bd<CR>
 
 " NERDTree
+autocmd StdinReadPre * let s:std_in=1
+autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 nnoremap ,d :execute 'NERDTreeToggle ' . getcwd()<CR>
 
 " zen coding                                                                                    
