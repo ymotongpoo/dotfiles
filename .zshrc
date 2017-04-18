@@ -181,9 +181,6 @@ alias -s go='go run'
 alias -s py='python'
 alias -s js='node'
 
-### Added by the Heroku Toolbelt
-PATH="$PATH":/usr/local/heroku/bin
-
 ### Google Cloud Platform
 GCPTOOLS="$HOME/google-cloud-sdk"
 if [ -d "$GCPTOOLS" ]; then
@@ -191,6 +188,7 @@ if [ -d "$GCPTOOLS" ]; then
   source $HOME/google-cloud-sdk/completion.zsh.inc
 fi
 
-
-export NVM_DIR="/usr/local/google/home/yoshifumi/.nvm"
+export NVM_DIR="/Users/yoshifumi/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
+
+export PATH="/usr/local/git/current/bin/":"$PATH"
