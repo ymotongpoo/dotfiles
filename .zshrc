@@ -188,7 +188,4 @@ if [ -d "$GCPTOOLS" ]; then
   source $HOME/google-cloud-sdk/completion.zsh.inc
 fi
 
-export NVM_DIR="/Users/yoshifumi/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
-
 export PATH="/usr/local/git/current/bin/":"$PATH"
