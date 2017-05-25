@@ -65,6 +65,9 @@ autoload colors
 colors
 
 # PROMPT
+# color definition
+
+
 case ${UID} in
 0)
     PROMPT="${fg[white]}[${fg[red]}%DT%* %n${fg[white]}@%m ${fg[green]}%~${fg[white]}]

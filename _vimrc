@@ -86,6 +86,7 @@ nnoremap <F4> :bd<CR>
 autocmd StdinReadPre * let s:std_in=1
 autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 nnoremap ,d :execute 'NERDTreeToggle ' . getcwd()<CR>
+let NERDTreeShowHidden = 1
 
 " zen coding                                                                                    
 let g:user_zen_expandabbr_key = '<c-e>'

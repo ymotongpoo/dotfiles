@@ -2,7 +2,7 @@ LANGUAGE=ja_JP
 
 ### for Python
 # basic Python setting
-PYTHON_VER=3.6.0
+PYTHON_VER=3.6.1
 PYTHON_HOME=/opt/python/"$PYTHON_VER"
 
 # for virtualenv
@@ -22,7 +22,8 @@ ERL_HOME=/opt/erlang/"$ERL_VER"
 ### for Golang
 # basic Go setting
 GOENVGOROOT=/opt/go
-GOROOT="$GOENVGOROOT"/go1.7
+GO_VER=1.7.4
+GOROOT="$GOENVGOROOT"/go${GO_VER}
 GOOS=linux
 GOARCH=amd64
 GOROOT_BOOTSTRAP="$GOENVGOROOT"/go1.4.2
