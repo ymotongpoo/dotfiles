@@ -2,7 +2,7 @@ LANGUAGE=ja_JP
 
 ### for Python
 # basic Python setting
-PYTHON_VER=3.6.1
+PYTHON_VER=3.6.3
 PYTHON_HOME=/opt/python/"$PYTHON_VER"
 
 # for virtualenv
@@ -40,7 +40,8 @@ if [ -d "$GOENVTARGET" ]; then
 fi
 
 ### for node
-NODEBREW_ROOT=$HOME/.nodebrew
+NVM_DIR="$HOME/.nvm"
+
 
 ### for Factor
 FACTOR_HOME=/opt/factor
@@ -78,8 +79,9 @@ fi
 if [ -d "$VIRTUALENV" ]; then
   EXTRA_PATH="$VIRTUALENV/bin":"$EXTRA_PATH"
 fi
-if [ -d "$NODEBREW_ROOT" ]; then
-  EXTRA_PATH="$NODEBREW_ROOT"/current/bin:"$EXTRA_PATH"
+if [ -d $NVM_DIR ]; then
+   export NVM_DIR
+   [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  
 fi
 
 export PATH="$EXTRA_PATH":"$PATH"

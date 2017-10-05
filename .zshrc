@@ -192,3 +192,5 @@ if [ -d "$GCPTOOLS" ]; then
 fi
 
 export PATH="/usr/local/git/current/bin/":"$PATH"
+
+export PATH="$HOME/.yarn/bin:$PATH"
