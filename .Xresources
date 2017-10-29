@@ -1,0 +1,47 @@
+!! ================================================================
+!! Xterm
+!! ================================================================
+
+!! General
+XTerm*termName: xterm-256color
+XTerm*scrollBar: False
+XTerm*cursorBlink: True
+
+!! Fonts and Encoding
+XTerm*utf8: True
+XTerm*locale: True
+XTerm*utf8Title: True
+XTerm*faceName: xft:Source Code Pro
+XTerm*faceNameDoublesize: xft:Noto Sans CJK JP
+XTerm*faceSize: 12
+XTerm*scaleHeight: 1.08
+
+!! Color Scheme : Tomorrow Night Bright with my custom
+!! https://github.com/chriskempson/tomorrow-theme
+
+XTerm*background: #1D1F21
+XTerm*foreground: #C5C8C6
+! black
+XTerm*color0: #282A2E
+XTerm*color8: #373B41
+! red
+XTerm*color1: #D54E53
+XTerm*color9: #CC6666
+! green
+XTerm*color2: #B9CA4A
+XTerm*color10: #B5BD68
+! yellow
+XTerm*color3: #E7C547
+XTerm*color11: #F0C674
+! blue
+XTerm*color4: #7AA6DA
+XTerm*color12: #81A2BE
+! magenta
+XTerm*color5: #85678F
+XTerm*color13: #B294BB
+! cyan
+XTerm*color6: #5E8D87
+XTerm*color14: #8ABEB7
+! white
+XTerm*color7: #707880
+XTerm*color15: #C5C8C6

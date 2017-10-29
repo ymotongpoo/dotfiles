@@ -74,7 +74,7 @@ case ${UID} in
  %# "
     ;;
 *)
-    PROMPT="${fg[white]}[${fg[green]}%DT%* ${fg[cyan]}%n${fg[white]}@%m ${fg[green]}%~${fg[white]}]
+    PROMPT="${fg[white]}[${fg[aqua]}%DT%* ${fg[cyan]}%n${fg[white]}@%m ${fg[aqua]}%~${fg[white]}]
  %# "
     ;;
 esac
@@ -194,3 +194,6 @@ fi
 export PATH="/usr/local/git/current/bin/":"$PATH"
 
 export PATH="$HOME/.yarn/bin:$PATH"
+
+export NVM_DIR="/home/ymotongpoo/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
