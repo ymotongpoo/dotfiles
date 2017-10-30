@@ -20,8 +20,9 @@ ERL_HOME=/opt/erlang/"$ERL_VER"
 
 ### for Golang
 # basic Go setting
+GO_VER=1.8.3
 GOENVGOROOT=/opt/go
-GOROOT="$GOENVGOROOT"/go1.7
+GOROOT="$GOENVGOROOT"/go"$GO_VER"
 GOOS=darwin
 GOARCH=amd64
 GOPATH="$HOME"/src/go/workspace
@@ -84,6 +85,7 @@ if [ -d "$NODEBREW_ROOT" ]; then
   EXTRA_PATH="$NODEBREW_ROOT"/current/bin:"$EXTRA_PATH"
 fi
 if [ -d $NVM_DIR ]; then
+  export NVM_DIR
   [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  
 fi
 PATH="$EXTRA_PATH":"$PATH"

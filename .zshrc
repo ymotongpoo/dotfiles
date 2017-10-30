@@ -61,17 +61,16 @@ setopt extended_history  # record command hit time
 
 setopt prompt_subst
 autoload -Uz add-zsh-hook
-autoload colors
-colors
 
 # PROMPT
+
 case ${UID} in
 0)
-    PROMPT="${fg[white]}[${fg[red]}%DT%* %n${fg[white]}@%m ${fg[green]}%~${fg[white]}]
+    PROMPT="%F{255}[%f%F{161}%DT%* %f%F{99}%n%f%F{255}@%m %f%F{191}%~%f%F{255}]%f
  %# "
     ;;
 *)
-    PROMPT="${fg[white]}[${fg[green]}%DT%* ${fg[cyan]}%n${fg[white]}@%m ${fg[green]}%~${fg[white]}]
+    PROMPT="%F{255}[%f%F{121}%DT%* %f%F{99}%n%f%F{255}@%m %f%F{191}%~%f%F{255}]%f
  %# "
     ;;
 esac
@@ -179,7 +178,9 @@ if [ -d "$GCPTOOLS" ]; then
   source $HOME/google-cloud-sdk/completion.zsh.inc
 fi
 
-export NVM_DIR="/Users/yoshifumi/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
-
 export PATH="/usr/local/git/current/bin/":"$PATH"
+
+export PATH="$HOME/.yarn/bin:$PATH"
+
+export NVM_DIR="/home/ymotongpoo/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm

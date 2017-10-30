@@ -2,7 +2,7 @@ LANGUAGE=ja_JP
 
 ### for Python
 # basic Python setting
-PYTHON_VER=3.6.0
+PYTHON_VER=3.6.3
 PYTHON_HOME=/opt/python/"$PYTHON_VER"
 
 # for virtualenv
@@ -22,7 +22,8 @@ ERL_HOME=/opt/erlang/"$ERL_VER"
 ### for Golang
 # basic Go setting
 GOENVGOROOT=/opt/go
-GOROOT="$GOENVGOROOT"/go1.8
+GO_VER=1.7.4
+GOROOT="$GOENVGOROOT"/go${GO_VER}
 GOOS=linux
 GOARCH=amd64
 GOROOT_BOOTSTRAP="$GOENVGOROOT"/go1.4.2
@@ -39,7 +40,7 @@ if [ -d "$GOENVTARGET" ]; then
 fi
 
 ### for node
-NODEBREW_ROOT=$HOME/.nodebrew
+NVM_DIR="$HOME/.nvm"
 
 ### for Factor
 FACTOR_HOME=/opt/factor
@@ -77,11 +78,14 @@ fi
 if [ -d "$VIRTUALENV" ]; then
   EXTRA_PATH="$VIRTUALENV/bin":"$EXTRA_PATH"
 fi
-if [ -d "$NODEBREW_ROOT" ]; then
-  EXTRA_PATH="$NODEBREW_ROOT"/current/bin:"$EXTRA_PATH"
+if [ -d $NVM_DIR ]; then
+   export NVM_DIR
+   [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  
 fi
 
 export PATH="$EXTRA_PATH":"$PATH"
+
+export TERMINAL=xterm
 
 alias EDITOR=/usr/bin/vim
 
