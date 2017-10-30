@@ -7,8 +7,6 @@ MACPORTS_PREFIX=/opt/local
 ### for virtualenv
 PYTHON_VER=3.5
 VIRTUALENV_HOME="$MACPORTS_PREFIX"/Library/Frameworks/Python.framework/Versions/"$PYTHON_VER"
-VIRTUALENVWRAPPER="$VIRTUALENV_HOME"/bin/virtualenvwrapper.sh
-VIRTUALENVWRAPPER_PYTHON="$VIRTUALENV_HOME"/bin/python
 PYTHONPATH="$MACPORTS_PREFIX"/lib/python"$PYTHON_VER"/:"$PYTHONPATH"
 MANPATH="$MACPORTS_PREFIX"/share/man:/usr/local/man:"$MANPATH"
 

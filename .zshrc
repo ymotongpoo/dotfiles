@@ -127,20 +127,11 @@ export VIRTUALENV_HOME
 export VIRTUALENVWRAPPER
 export PYTHONPATH
 export MANPATH
-export VIRTUALENV_USE_DISITRIBUTE=1
 
 export EXTRA_PATH
 export PATH=.:~/bin:/usr/local/bin:$PATH
 export WORKON_HOME=$HOME/.virtualenvs
 
-if [ -f "$VIRTUALENVWRAPPER" ]; then
-  source "$VIRTUALENVWRAPPER"
-
-  function mkvenv () {
-    base_python=`which python$1` 
-    mkvirtualenv --distribute --python=$base_python $2
-  }
-fi
 if [ -n "$GOENVWRAPPER" -a -f "$GOENVWRAPPER" ]; then
   source "$GOENVWRAPPER"
 fi
