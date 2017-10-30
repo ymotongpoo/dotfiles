@@ -63,14 +63,27 @@ setopt prompt_subst
 autoload -Uz add-zsh-hook
 
 # PROMPT
-
+# Tomorrow Night Eighties
+# Actual color -----------> Xterm 256
+# #2d2d2d Background        235 Grey15          #262626
+# #393939 Current Line      237 Grey23          #3a3a3a
+# #515151 Selection         240 Grey35          #585858
+# #cccccc Foreground        251 Grey78          #c6c6c6
+# #999999 Comment           247 Grey62          #9e9e9e
+# #f2777a Red               210 LightCoral      #ff8787
+# #f99157 Orange            209 Salmon1         #ff875f
+# #ffcc66 Yellow            221 LightGoldenrod2 #ffd75f
+# #99cc99 Green             154 GreenYellow     #afff00
+# #66cccc Aqua              080 MediumTurquoise #5fd7d7
+# #6699cc Blue              068 SteelBlue3      #5f87d7
+# #cc99cc Purple            135 MediumPurple2   #af5fff
 case ${UID} in
 0)
     PROMPT="%F{255}[%f%F{161}%DT%* %f%F{99}%n%f%F{255}@%m %f%F{191}%~%f%F{255}]%f
  %# "
     ;;
 *)
-    PROMPT="%F{255}[%f%F{121}%DT%* %f%F{99}%n%f%F{255}@%m %f%F{191}%~%f%F{255}]%f
+    PROMPT="%F{251}[%f%F{154}%DT%* %f%F{135}%n%f%F{251}@%m %f%F{221}%~%f%F{251}]%f
  %# "
     ;;
 esac
