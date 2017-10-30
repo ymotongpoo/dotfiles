@@ -42,7 +42,6 @@ fi
 ### for node
 NVM_DIR="$HOME/.nvm"
 
-
 ### for Factor
 FACTOR_HOME=/opt/factor
 
@@ -85,6 +84,8 @@ if [ -d $NVM_DIR ]; then
 fi
 
 export PATH="$EXTRA_PATH":"$PATH"
+
+export TERMINAL=xterm
 
 alias EDITOR=/usr/bin/vim
 

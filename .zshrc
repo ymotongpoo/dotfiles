@@ -61,20 +61,16 @@ setopt extended_history  # record command hit time
 
 setopt prompt_subst
 autoload -Uz add-zsh-hook
-autoload colors
-colors
 
 # PROMPT
-# color definition
-
 
 case ${UID} in
 0)
-    PROMPT="${fg[white]}[${fg[red]}%DT%* %n${fg[white]}@%m ${fg[green]}%~${fg[white]}]
+    PROMPT="%F{255}[%f%F{161}%DT%* %f%F{99}%n%f%F{255}@%m %f%F{191}%~%f%F{255}]%f
  %# "
     ;;
 *)
-    PROMPT="${fg[white]}[${fg[aqua]}%DT%* ${fg[cyan]}%n${fg[white]}@%m ${fg[aqua]}%~${fg[white]}]
+    PROMPT="%F{255}[%f%F{121}%DT%* %f%F{99}%n%f%F{255}@%m %f%F{191}%~%f%F{255}]%f
  %# "
     ;;
 esac
