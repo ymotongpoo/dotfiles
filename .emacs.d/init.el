@@ -1,64 +1,15 @@
-;;;;;;;;;; package loading
-(when (> emacs-major-version 23)
-  (defvar user-emacs-directory "~/.emacs.d"))
+;;;;; package initialization
+(package-initialize)
+(require 'cask "~/.cask/cask.el")
+(cask-initialize)
+(require 'pallet)
+(pallet-mode t)
 
-(defun add-to-load-path (&rest paths)
-  (let (path)
-    (dolist (path paths paths)
-      (let ((default-directory
-              (expand-file-name (concat user-emacs-directory path))))
-        (add-to-list 'load-path default-directory)
-        (if (fboundp 'normal-top-level-add-subdirs-to-load-path)
-            (normal-top-level-add-subdirs-to-load-path))))))
-
-(add-to-load-path "elisp" "conf" "public_repos" "snippets")
-
-(when (require 'auto-install nil t)
-  (setq auto-install-directory "~/.emacs.d/elisp")
-  (auto-install-update-emacswiki-package-name t)
-  (auto-install-compatibility-setup))
-
-(when (>= emacs-major-version 24)
-  (require 'package)
-  (setq package-user-dir "~/.emacs.d/elpa")
-  (add-to-list 'package-archives  '("marmalade" . "http://marmalade-repo.org/packages/"))
-  (add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/"))
-  (package-initialize)
-  (message "loading init-loader")
-  (unless (package-installed-p 'init-loader)
-    (package-refresh-contents)
-    (package-install 'init-loader))
-  (require 'init-loader)
-  (init-loader-load))
-
-;;;;;;;;;; env path
+;;;;; env path
 (add-to-list 'exec-path "/opt/local/bin")
 (add-to-list 'exec-path "/usr/local/bin")
 
-(when (memq window-system '(mac ns))
-  (exec-path-from-shell-initialize))
-
-(setq make-backup-files nil)
-
-;;;;;;;;;; auto byte compile (from "Emacs technique bible")
-(require 'auto-async-byte-compile)
-(add-hook 'emacs-lisp-mode-hook 'enable-auto-async-byte-compile-mode)
-
-;;;;;;;;;; character encoding
-(set-language-environment "Japanese")
-(prefer-coding-system 'utf-8)
-
-(when (eq system-type 'darwin)
-  (require 'ucs-normalize)
-  (set-file-name-coding-system 'utf-8-hfs)
-  (setq locale-coding-system 'utf-8-hfs))
-
-(when (eq system-type 'w32)
-  (require 'ucs-normalize)
-  (set-file-name-coding-system 'cp932)
-  (setq locale-coding-system 'cp932))
-
-;;;;;;;;;; frame
+;;;;; frame
 (column-number-mode t)
 (line-number-mode t)
 (size-indication-mode t)
@@ -66,71 +17,31 @@
 (setq display-time-24hr-format t)
 (display-time-mode t)
 (setq frame-title-format "%f")
+(menu-bar-mode -1)
+(tool-bar-mode -1)
 
-;;;; count number of lines and chars
-;;;; http://d.hatena.ne.jp/sonota88/20110224/1298557375
-(defun count-lines-and-chars ()
-  (if mark-active
-      (format "%d lines,%d chars "
-              (count-lines (region-beginning) (region-end))
-              (- (region-end) (region-beginning)))
-    ""))
+;;;;; theme
+(load-theme 'sanityinc-tomorrow-eighties t)
 
-(add-to-list 'mode-line-format
-             '(:eval (count-lines-and-chars)))
-
-;;;;;;;;;; indent
-(setq-default tab-width 4)
-(setq-default indent-tabs-mode nil)
-(add-hook 'c-mode-common-hook
-          (lambda ()
-            (c-set-style "stroustrup")))
-
-;;;;;;;;;; theme
-(when (require 'color-theme nil t)
-  (color-theme-initialize)
-  (color-theme-hober))
-
-;;;;;;;;;; highlight
+;;;;; highlight
 (setq hl-line-face 'underline)
 (global-hl-line-mode)
 (setq show-paren-delay 0)
 (show-paren-mode t)
 
-;;;;;;;;;; Buffer operations
-;;;;; make duplicated named buffer more unique (from "Emacs technique bible")
-(require 'uniquify)
-(setq uniquify-buffer-name-style 'post-forward-angle-brackets)
-(setq uniquify-ignore-buffers-re "*[^*]+*")
-
-;;;;; reinforce switching buffer (from "Emacs technique bible")
-(iswitchb-mode 1)
-(setq read-buffer-function 'iswitchb-read-buffer)
-(setq iswitchb-reqexp nil)
-(setq iswitchb-prompt-newbuffer nil)
-
-;;;;; open recent files (from "Emacs technique bible")
-(setq recentf-max-saved-items 500)
-(setq recentf-exclude '("/TAGS$" "/var/tmp/"))
-(require 'recentf-ext)
-
-;;;;;;;;;; edit
-;;;;; completion
+;;;;; edit
+;; completion
 (require 'company)
 (global-company-mode)
 (setq company-idle-delay 0)
 (setq company-minimum-prefix-length 2)
 (setq company-selection-wrap-around t)
 
-;;;;;;;;;; multi-term
-(when (require 'multi-term nil t)
-  (setq multi-term-program shell-file-name))
-
-;;;;;;;;;; misc
-;;;;; support for symblic links
+;;;;; misc
+;; support for symblic links
 (setq vc-follow-syslinks t)
 
-;;;;; auto revert buffer, useful for update of VCS repo
+;; auto revert buffer, useful for update of VCS repo
 (global-auto-revert-mode 1)
 
 ;;;;;;;;;; init-loader
@@ -138,3 +49,17 @@
 (init-loader-load "~/.emacs.d/inits")
 (put 'set-goal-column 'disabled nil)
 (put 'narrow-to-region 'disabled nil)
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(package-selected-packages
+   (quote
+    (emmet-mode js2-mode yasnippet web-mode use-package smex smartparens recentf-ext projectile prodigy popwin pallet nyan-mode multiple-cursors magit init-loader idle-highlight-mode htmlize go-mode flycheck-cask expand-region exec-path-from-shell drag-stuff company color-theme-sanityinc-tomorrow))))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )

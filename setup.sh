@@ -14,15 +14,19 @@ elif [ platform = "Darwin" ]; then
 fi
 
 ##### set editor configuration files
-ln -s "$DOTFILES"/.emacs.d .emacs.d
-ln -s "$DOTFILES"/.vim .vim
+ln -s "$DOTFILES"/.emacs.d "$HOME"/.emacs.d
+ln -s "$DOTFILES"/.vim "$HOME"/.vim
+
+##### install cask for Emacs
+cd "$HOME"
+curl -fsSL https://raw.githubusercontent.com/cask/cask/master/go | python
 
 ##### set terminal multiplexer configuration files
-ln -s "$DOTFILES"/.screenrc .screenrc
+ln -s "$DOTFILES"/.screenrc "$HOME"/.screenrc
 if [ platform = "Linux" ]; then
-  ln -s "$DOTFILES"/.tmux.conf.linux .tmux.conf
+  ln -s "$DOTFILES"/.tmux.conf.linux "$HOME"/.tmux.conf
 elif [ platform = "Darwin" ]; then
-  ln -s "$DOTFILES"/.tmux.conf.macos .tmux.conf
+  ln -s "$DOTFILES"/.tmux.conf.macos "$HOME"/.tmux.conf
 fi
 
 ##### create private bin directory

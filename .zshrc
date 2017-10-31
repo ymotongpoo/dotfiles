@@ -192,8 +192,8 @@ if [ -d "$GCPTOOLS" ]; then
 fi
 
 export PATH="/usr/local/git/current/bin/":"$PATH"
-
 export PATH="$HOME/.yarn/bin:$PATH"
+export PATH="$HOME/.cask/bin/:$PATH"
 
 export NVM_DIR="/home/ymotongpoo/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
