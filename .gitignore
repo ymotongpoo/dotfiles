@@ -4,4 +4,5 @@
 .netrwhist
 .emacs.d/ac-comphist.dat
 .emacs.d/recentf
+.emacs.d/.cask
 *archive-contents
