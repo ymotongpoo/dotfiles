@@ -5,13 +5,13 @@ MACPORTS_PREFIX=/opt/local
 #LD_LIBRARY_PATH=/usr/lib:/opt/local/lib
 
 ### for virtualenv
-PYTHON_VER=3.5
+PYTHON_VER="3.5"
 VIRTUALENV_HOME="$MACPORTS_PREFIX"/Library/Frameworks/Python.framework/Versions/"$PYTHON_VER"
 PYTHONPATH="$MACPORTS_PREFIX"/lib/python"$PYTHON_VER"/:"$PYTHONPATH"
 MANPATH="$MACPORTS_PREFIX"/share/man:/usr/local/man:"$MANPATH"
 
 ### for OCaml
-OCAML_VER=4.03.0
+OCAML_VER="4.03.0"
 OCAML_HOME="$HOME/.opam/$OCAML_VER"
 
 ### for Erlang
@@ -20,7 +20,7 @@ ERL_HOME=/opt/erlang/"$ERL_VER"
 
 ### for Golang
 # basic Go setting
-GO_VER=1.8.3
+GO_VER="1.9.2"
 GOENVGOROOT=/opt/go
 GOROOT="$GOENVGOROOT"/go"$GO_VER"
 GOOS=darwin
@@ -48,10 +48,8 @@ FACTOR_HOME=/opt/factor
 ### for D-lang
 DMD_HOME=/opt/d/osx
 
+EXTRA_PATH="."
 ### Set extra paths
-if [ -d "$MACPORTS_PREFIX/bin" ]; then
-  EXTRA_PATH="$MACPORTS_PREFIX/bin"
-fi
 if [ -d "$DMD_HOME/bin" ]; then
   export DMD_HOME
   EXTRA_PATH="$EXTRA_PATH":$DMD_HOME/bin
@@ -81,19 +79,18 @@ fi
 if [ -d "$VIRTUALENV_HOME" ]; then
   EXTRA_PATH="$VIRTUALENV_HOME/bin":"$EXTRA_PATH"
 fi
-if [ -d "$NODEBREW_ROOT" ]; then
-  EXTRA_PATH="$NODEBREW_ROOT"/current/bin:"$EXTRA_PATH"
-fi
 if [ -d $NVM_DIR ]; then
   export NVM_DIR
   [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  
+fi
+if [ -d "$MACPORTS_PREFIX/bin" ]; then
+  EXTRA_PATH="$MACPORTS_PREFIX/bin":"$EXTRA_PATH"
 fi
 PATH="$EXTRA_PATH":"$PATH"
 if [ -d "$OCAML_HOME" ]; then
   . /Users/yoshifumi/.opam/opam-init/init.zsh > /dev/null 2> /dev/null || true
 fi
 
-alias emacs="/Applications/Emacs.app/Contents/MacOS/Emacs"
 alias gvim="/Applications/MacVim.app/Contents/MacOS/MacVim"
 alias godev_appserver="$GAEGO/dev_appserver.py"
 alias goappcfg="$GAEGO/appcfg.py"

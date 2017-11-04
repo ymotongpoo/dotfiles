@@ -141,7 +141,7 @@ export PYTHONPATH
 export MANPATH
 
 export EXTRA_PATH
-export PATH=.:~/bin:/usr/local/bin:$PATH
+export PATH=~/bin:$PATH
 export WORKON_HOME=$HOME/.virtualenvs
 
 if [ -n "$GOENVWRAPPER" -a -f "$GOENVWRAPPER" ]; then
@@ -187,13 +187,9 @@ alias -s js='node'
 ### Google Cloud Platform
 GCPTOOLS="$HOME/google-cloud-sdk"
 if [ -d "$GCPTOOLS" ]; then
-  export PATH="$HOME/$GCPTOOLS:$PATH"
+  export PATH="$GCPTOOLS:$PATH"
   source $HOME/google-cloud-sdk/completion.zsh.inc
 fi
 
 export PATH="/usr/local/git/current/bin/":"$PATH"
-export PATH="$HOME/.yarn/bin:$PATH"
-export PATH="$HOME/.cask/bin/:$PATH"
-
-export NVM_DIR="/home/ymotongpoo/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
+export PATH="$HOME/.yarn/bin":"$HOME/.cask/bin":"$PATH"
