@@ -5,22 +5,20 @@ bind-key C-z send-prefix
 
 set-option -g history-limit 10000
 
-set-option -g status-utf8 on
 set-option -g status-interval 5
 set-option -g status-bg black
 set-option -g status-bg white
 set-window-option -g window-status-current-bg blue
 set-window-option -g window-status-current-fg white
 
-set-option -g mouse-select-pane on
-set-option -g mouse-select-window on
-set-option -g mouse-resize-pane on
-set-option -g mode-mouse on
-set-option -g mouse-utf8 on
-
+set-option -g mouse on
+bind -n WheelUpPane if-shell -F -t = "#{mouse_any_flag}" "send-keys -M" "if -Ft= '#{pane_in_mode}' 'send-keys -M' 'select-pane -t=; copy-mode -e; send-keys -M'"
+bind -n WheelDownPane select-pane -t= \; send-keys -M
 set-window-option -g mode-keys vi
 
 set -g default-terminal "screen-256color"
 
 # install "xclip" from apt-get
-bind-key C-c vi-copy y copy-pipe "xclip -sel clip -i"
+bind-key -T copy-mode-vi v send-keys -X begin-selection
+bind-key -T copy-mode-vi y send-keys -X copy-pipe-and-cancel "reattach-to-user-namespace pbcopy"
+bind-key -T copy-mode-vi Enter send-keys -X copy-pipe-and-cancel "reattach-to-user-namespace pbcopy"

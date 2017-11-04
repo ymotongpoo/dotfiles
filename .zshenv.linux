@@ -22,7 +22,7 @@ ERL_HOME=/opt/erlang/"$ERL_VER"
 ### for Golang
 # basic Go setting
 GOENVGOROOT=/opt/go
-GO_VER=1.7.4
+GO_VER=1.9.2
 GOROOT="$GOENVGOROOT"/go${GO_VER}
 GOOS=linux
 GOARCH=amd64
