@@ -12,12 +12,9 @@ set-option -g status-bg white
 set-window-option -g window-status-current-bg blue
 set-window-option -g window-status-current-fg white
 
-set-option -g mouse-select-pane on
-set-option -g mouse-select-window on
-set-option -g mouse-resize-pane on
-set-option -g mode-mouse on
-set-option -g mouse-utf8 on
-
+set-option -g mouse on
+bind -n WheelUpPane if-shell -F -t = "#{mouse_any_flag}" "send-keys -M" "if -Ft= '#{pane_in_mode}' 'send-keys -M' 'select-pane -t=; copy-mode -e; send-keys -M'"
+bind -n WheelDownPane select-pane -t= \; send-keys -M
 set-window-option -g mode-keys vi
 
 set -g default-terminal "screen-256color"
