@@ -42,22 +42,8 @@ export ANDROID_HOME
 ### for node (nvm)
 NVM_DIR="$HOME/.nvm"
 
-### for Factor
-FACTOR_HOME=/opt/factor
-
-### for D-lang
-DMD_HOME=/opt/d/osx
-
 EXTRA_PATH="."
 ### Set extra paths
-if [ -d "$DMD_HOME/bin" ]; then
-  export DMD_HOME
-  EXTRA_PATH="$EXTRA_PATH":$DMD_HOME/bin
-fi
-if [ -d "$FACTOR_HOME" ]; then
-  export FACTOR_HOME
-  EXTRA_PATH="$EXTRA_PATH":"$FACTOR_HOME"/bin
-fi
 if [ -d "$ERL_HOME/bin" ]; then
   export ERL_HOME
   EXTRA_PATH="$EXTRA_PATH":"$ERL_HOME/bin"

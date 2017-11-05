@@ -42,23 +42,9 @@ fi
 ### for node
 NVM_DIR="$HOME/.nvm"
 
-### for Factor
-FACTOR_HOME=/opt/factor
-
-### for D-lang
-DMD_HOME=/opt/d/osx
-
 ### Set extra paths
 if [ -d "$PYTHON_HOME/bin" ]; then
   EXTRA_PATH="$PYTHON_HOME/bin"
-fi
-if [ -d "$DMD_HOME/bin" ]; then
-  export DMD_HOME
-  EXTRA_PATH="$EXTRA_PATH":$DMD_HOME/bin
-fi
-if [ -d "$FACTOR_HOME" ]; then
-  export FACTOR_HOME
-  EXTRA_PATH="$EXTRA_PATH":"$FACTOR_HOME"/bin
 fi
 if [ -d "$ERL_HOME/bin" ]; then
   export ERL_HOME
@@ -66,14 +52,14 @@ if [ -d "$ERL_HOME/bin" ]; then
 fi
 if [ -d "$GAEGO" ]; then
   export GAEGO
-  EXTRA_PATH=$GAEGO:"$EXTRA_PATH"
+  EXTRA_PATH="$GAEGO":"$EXTRA_PATH"
 fi
 if [ -d "$GOROOT" ]; then
   export GOROOT
   export GOOS
   export GOARCH
   export GOPATH
-  EXTRA_PATH="$GOROOT/bin":"$GOPATH"/bin:"$GOENVTARGET":"$EXTRA_PATH"
+  EXTRA_PATH="$GOROOT/bin":"$GOPATH/bin":"$GOENVTARGET":"$EXTRA_PATH"
 fi
 if [ -d "$VIRTUALENV" ]; then
   EXTRA_PATH="$VIRTUALENV/bin":"$EXTRA_PATH"
@@ -84,10 +70,9 @@ if [ -d $NVM_DIR ]; then
 fi
 
 export PATH="$EXTRA_PATH":"$PATH"
-
 export TERMINAL=xterm
 
-alias EDITOR=/usr/bin/vim
-
 which xclip > /dev/null 2>&1 && alias clipboard="xclip -selection clipboard"
+
+alias EDITOR=/usr/bin/vim
 
