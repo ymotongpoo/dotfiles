@@ -125,11 +125,17 @@ mkdir -p "$goworkspace"
 cd "$goworkspace"
 export GOPATH="$goworkspace"
 
-# go get -u golang.org/x/tools/cmd/goimports
-# go get -u golang.org/x/tools/cmd/oracle
-# go get -u github.com/rogpeppe/godef
-# go get -u github.com/nsf/gocode
+declare -a repos=(
+    "github.com/nsf/gocode"
+    "github.com/rogpeppe/godef"
+    "golang.org/x/tools/cmd/goimports"
+    "golang.org/x/tools/cmd/guru"
+)
 
+for repo in repos; do
+    go get -u "$repo"
+    go install "$repo"
+done
 
 # setup OPAM
 # wget http://www.ocamlpro.com/pub/opam_installer.sh
