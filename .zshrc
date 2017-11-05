@@ -193,3 +193,7 @@ fi
 
 export PATH="/usr/local/git/current/bin/":"$PATH"
 export PATH="$HOME/.yarn/bin":"$HOME/.cask/bin":"$PATH"
+
+alias start-emacs="emacs -nw --daemon"
+alias kill-emacs="emacsclient -e '(kill-emacs)'"
+alias emacsclient="emacsclient -nw"

@@ -5,6 +5,11 @@
 (require 'pallet)
 (pallet-mode t)
 
+;;;;; start Emacs server
+(require 'server)
+(unless (server-running-p)
+  (server-start))
+
 ;;;;; env path
 (add-to-list 'exec-path "/opt/local/bin")
 (add-to-list 'exec-path "/usr/local/bin")
@@ -54,3 +59,17 @@
 (init-loader-load "~/.emacs.d/inits")
 (put 'set-goal-column 'disabled nil)
 (put 'narrow-to-region 'disabled nil)
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(package-selected-packages
+   (quote
+    (company-go company-web yasnippet web-mode use-package tuareg tide smex smartparens recentf-ext projectile prodigy popwin pallet ocp-indent nyan-mode neotree multiple-cursors monokai-theme merlin magit js2-mode init-loader idle-highlight-mode htmlize go-mode flycheck-cask expand-region exec-path-from-shell emmet-mode drag-stuff company color-theme-sanityinc-tomorrow auto-async-byte-compile))))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
