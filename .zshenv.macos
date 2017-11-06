@@ -77,6 +77,7 @@ if [ -d "$OCAML_HOME" ]; then
   . /Users/yoshifumi/.opam/opam-init/init.zsh > /dev/null 2> /dev/null || true
 fi
 
+alias emacs="/opt/local/bin/emacs"
 alias gvim="/Applications/MacVim.app/Contents/MacOS/MacVim"
 alias godev_appserver="$GAEGO/dev_appserver.py"
 alias goappcfg="$GAEGO/appcfg.py"
