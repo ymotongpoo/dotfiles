@@ -131,7 +131,7 @@ bindsym $mod+Control+l exec i3lock
 # audio (requires 'pactl' package)
 bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 0 +5%
 bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 0 -5%
-bindsym XF86AudioAudioMute exec --no-startup-id pactl set-sink-mute 0 toggle 
+bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute 0 toggle 
 
 # display (requires 'xbacklight' package)
 bindsym XF86MonBrightnessUp exec xbacklight -inc 10
@@ -173,4 +173,20 @@ bindsym $mod+r mode "resize"
 # finds out, if available)
 bar {
         status_command i3status
+        tray_output primary
+        position top
+        font pango:Source Han Code JP,DejaVu Sans Mono,Noto Sans CJK 10
+        workspace_buttons yes
+        binding_mode_indicator yes
+        colors {
+                background: #FFC107
+                separator: #BDBDBD
+
+                focused_workspace   #0288D1 #03A9F4 #FFFFFF
+                active_workspace    #0288D1 #B3E5FC #FFFFFF
+                inactive_workspace  #0288D1 #212121 #FFFFFF 
+        }
+
+        status_command i3status
+        position top
 }
