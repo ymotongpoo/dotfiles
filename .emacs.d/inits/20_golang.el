@@ -4,6 +4,8 @@
 (require 'company)
 
 (exec-path-from-shell-copy-env "GOPATH")
+(add-to-list 'exec-path (expand-file-name "/usr/local/go/bin/"))
+(add-to-list 'exec-path (expand-file-name "/Users/ryo/.go/bin"))
 
 (add-hook 'go-mode-hook
           (lambda ()
@@ -18,6 +20,7 @@
                      "go-generate && go build -v && go test -v && go vet"))
             (set (make-local-variable 'company-backends) '(company-go))
             (company-mode)
+	    (flycheck-mode)
             (local-set-key (kbd "M-.") 'godef-jump)
             (local-set-key (kbd "C-c C-r") 'go-remove-unused-imports)
             (local-set-key (kbd "C-c i") 'go-goto-imports)
