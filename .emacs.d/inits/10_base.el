@@ -39,7 +39,16 @@
 ;; auto revert buffer, useful for update of VCS repo
 (global-auto-revert-mode 1)
 
-;; change backup file location
+;; flexible match using IDO
+(require 'ido-completing-read+)
+(require 'ido-vertical-mode)
+(ido-mode 1)
+(ido-everywhere 1)
+(setq ido-enable-flex-matching t)
+(ido-ubiquitous-mode 1)
+(ido-vertical-mode 1)
+
+;; Changebackup file location
 (setq backup-directory-alist
       (cons (cons ".*" (expand-file-name "~/.emacs.d/backup"))
         backup-directory-alist))

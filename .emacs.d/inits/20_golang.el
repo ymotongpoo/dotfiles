@@ -1,11 +1,8 @@
-(message "20. Go programming language settings")
-
 (require 'go-mode)
 (require 'company)
+(require 'company-go)
 
 (exec-path-from-shell-copy-env "GOPATH")
-(add-to-list 'exec-path (expand-file-name "/usr/local/go/bin/"))
-(add-to-list 'exec-path (expand-file-name "/Users/ryo/.go/bin"))
 
 (add-hook 'go-mode-hook
           (lambda ()
