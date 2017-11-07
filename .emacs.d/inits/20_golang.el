@@ -4,8 +4,10 @@
 (require 'go-eldoc)
 (require 'golint)
 (require 'go-guru)
+(require 'exec-path-from-shell)
 
 (exec-path-from-shell-copy-env "GOPATH")
+(add-to-list 'exec-path (expand-file-name "~/src/go/workspace/bin"))
 
 (add-hook 'go-mode-hook
           (lambda ()
