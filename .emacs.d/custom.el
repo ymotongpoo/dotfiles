@@ -5,7 +5,7 @@
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-    (company-go ocp-indent yasnippet web-mode use-package tuareg tide smex smartparens recentf-ext projectile prodigy popwin pallet nyan-mode multiple-cursors monokai-theme merlin magit js2-mode init-loader idle-highlight-mode htmlize go-mode flycheck-cask expand-region exec-path-from-shell emmet-mode drag-stuff company color-theme-sanityinc-tomorrow base16-theme auto-async-byte-compile))))
+    (go-guru golint ocp-indent yasnippet web-mode use-package tuareg tide smex smartparens recentf-ext projectile prodigy popwin pallet nyan-mode multiple-cursors monokai-theme merlin magit js2-mode init-loader idle-highlight-mode htmlize go-mode flycheck-cask expand-region exec-path-from-shell emmet-mode drag-stuff company color-theme-sanityinc-tomorrow base16-theme auto-async-byte-compile))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
