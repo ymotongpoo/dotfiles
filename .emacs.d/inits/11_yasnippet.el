@@ -1,12 +1,12 @@
 (use-package yasnippet
   :ensure t
-  :defer t
+  :diminish yas-minor-mode
+  :bind (("C-c y i" . yas-insert-snippet)
+	 ("C-c y n" . yas-new-snippet)
+	 ("C-c y v" . yas-visit-snippet-file))
   :config
   (yas-global-mode 1)
   (setq yas-snippet-dirs
 	'("~/.emacs.d/snippets/"))
-  ;; editing snippets themselves
-  (define-key yas-minor-mode-map (kbd "C-c y i") 'yas-insert-snippet)
-  (define-key yas-minor-mode-map (kbd "C-c y n") 'yas-new-snippet)
-  (define-key yas-minor-mode-map (kbd "C-c y v") 'yas-visit-snippet-file))
+  (setq yas-prompt-functions '(yas-ido-prompt)))
 
