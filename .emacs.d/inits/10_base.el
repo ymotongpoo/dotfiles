@@ -1,5 +1,7 @@
 ;; neotree
-(use-package neotree :ensure t
+(use-package neotree
+  :ensure t
+  :defer t
   :config
   (global-set-key [f8] 'neotree-toggle))
 
@@ -18,7 +20,8 @@
 (setq frame-title-format "%f")
 
 ;;;;; theme
-(use-package monokai-theme :ensure t
+(use-package monokai-theme
+  :ensure t
   :config
   (load-theme 'monokai t))
 
@@ -30,7 +33,9 @@
 
 ;;;;; edit
 ;; completion (company-mode)
-(use-package company :ensure t
+(use-package company
+  :ensure t
+  :defer t
   :config
   (global-company-mode)
   (setq company-idle-delay 0)
@@ -48,8 +53,12 @@
 (global-auto-revert-mode 1)
 
 ;; flexible match using IDO
-(use-package ido-completing-read+ :ensure t)
-(use-package ido-vertical-mode :ensure t
+(use-package ido-completing-read+
+  :ensure t
+  :defer t)
+(use-package ido-vertical-mode
+  :ensure t
+  :defer t
   :config
   (ido-vertical-mode 1))
 (ido-mode 1)

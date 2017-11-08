@@ -9,6 +9,9 @@
 (define-key global-map (kbd "C-x M-f") 'recentf-open-files)
 
 ;;;;; smex
-(use-package smex :ensure t)
-(global-set-key (kbd "M-x") 'smex)
-(global-set-key (kbd "M-X") 'smex-major-mode-commands)
+(use-package smex
+  :ensure t
+  :defer t
+  :config
+  (global-set-key (kbd "M-x") 'smex)
+  (global-set-key (kbd "M-X") 'smex-major-mode-commands))

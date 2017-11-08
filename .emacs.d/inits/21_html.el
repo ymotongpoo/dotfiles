@@ -1,5 +1,5 @@
 ;;;;;;;;;; emmet-mode
-(use-package emmet-mode :ensure t)
+(use-package emmet-mode :ensure t :defer t)
 (add-hook 'sgml-mode-hook 'emmet-mode)
 (add-hook 'php-mode-hook 'emmet-mode)
 (add-hook 'emmet-mode-hook 
@@ -15,11 +15,11 @@
                 ("\\.\\(html\\|xhtml\\|shtml\\|tpl\\)\\'" . web-mode))
               auto-mode-alist))
 
-(use-package web-mode :ensure t)
-(use-package company :ensure t)
-(use-package company-web-html :ensure t)
-(use-package company-web-jade :ensure t)
-(use-package company-web-slim :ensure t)
+(use-package web-mode :ensure t :defer t)
+(use-package company :ensure t :defer t)
+(use-package company-web-html :ensure t :defer t)
+(use-package company-web-jade :ensure t :defer t)
+(use-package company-web-slim :ensure t :defer t)
 (add-hook 'web-mode-hook
           (lambda ()
             (setq web-mode-markup-indent-offset 2)

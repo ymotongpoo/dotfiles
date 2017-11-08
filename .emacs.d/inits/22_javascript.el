@@ -1,4 +1,4 @@
-(use-package js2-mode :ensure t)
+(use-package js2-mode :ensure t :defer t)
 
 (setq auto-mode-alist
       (append '(
