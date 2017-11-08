@@ -9,8 +9,10 @@
 (line-number-mode t)
 (size-indication-mode t)
 (display-time-mode t)
-(menu-bar-mode -1)
-(tool-bar-mode 0)
+(if window-system
+    (lambda ()
+      (menu-bar-mode -1)
+      (tool-bar-mode 0)))
 (setq display-time-day-and-date t)
 (setq display-time-24hr-format t)
 (setq frame-title-format "%f")
