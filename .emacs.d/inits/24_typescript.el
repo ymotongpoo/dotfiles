@@ -1,7 +1,7 @@
-(require 'typescript-mode)
+(use-package typescript-mode :ensure t)
 (add-to-list 'auto-mode-alist '("\\.ts\\'" . typescript-mode))
 
-(require 'tide)
+(use-package tide :ensure t)
 (add-hook 'typescript-mode-hook
 	  (lambda ()
 	    (tide-setup)

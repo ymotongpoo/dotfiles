@@ -6,4 +6,6 @@
 .emacs.d/recentf
 .emacs.d/.cask
 .emacs.d/elpa
+.emacs.d/smex-items
+.emacs.d/ido.last
 *archive-contents

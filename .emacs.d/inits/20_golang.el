@@ -1,10 +1,10 @@
-(require 'go-mode)
-(require 'company)
-(require 'company-go)
-(require 'go-eldoc)
-(require 'golint)
-(require 'go-guru)
-(require 'exec-path-from-shell)
+(use-package go-mode :ensure t)
+(use-package company :ensure t)
+(use-package company-go :ensure t)
+(use-package go-eldoc :ensure t)
+(use-package golint :ensure t)
+(use-package go-guru :ensure t)
+(use-package exec-path-from-shell :ensure t)
 
 ;; Go settings require the following tools
 ;; go get -u github.com/nsf/gocode

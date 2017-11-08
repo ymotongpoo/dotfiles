@@ -1,34 +1,39 @@
 ;; neotree
-(require 'neotree)
-(global-set-key [f8] 'neotree-toggle)
+(use-package neotree :ensure t
+  :config
+  (global-set-key [f8] 'neotree-toggle))
+
 
 ;;;;; frame
 (column-number-mode t)
 (line-number-mode t)
 (size-indication-mode t)
+(display-time-mode t)
+(menu-bar-mode -1)
+(tool-bar-mode 0)
 (setq display-time-day-and-date t)
 (setq display-time-24hr-format t)
-(display-time-mode t)
 (setq frame-title-format "%f")
-(menu-bar-mode -1)
-(tool-bar-mode -1)
 
 ;;;;; theme
-(load-theme 'monokai t)
+(use-package monokai-theme :ensure t
+  :config
+  (load-theme 'monokai t))
 
 ;;;;; highlight
-(setq hl-line-face 'underline)
 (global-hl-line-mode)
-(setq show-paren-delay 0)
 (show-paren-mode t)
+(setq hl-line-face 'underline)
+(setq show-paren-delay 0)
 
 ;;;;; edit
-;; completion
-(require 'company)
-(global-company-mode)
-(setq company-idle-delay 0)
-(setq company-minimum-prefix-length 2)
-(setq company-selection-wrap-around t)
+;; completion (company-mode)
+(use-package company :ensure t
+  :config
+  (global-company-mode)
+  (setq company-idle-delay 0)
+  (setq company-minimum-prefix-length 2)
+  (setq company-selection-wrap-around t))
 
 (put 'set-goal-column 'disabled nil)
 (put 'narrow-to-region 'disabled nil)
@@ -41,13 +46,14 @@
 (global-auto-revert-mode 1)
 
 ;; flexible match using IDO
-(require 'ido-completing-read+)
-(require 'ido-vertical-mode)
+(use-package ido-completing-read+ :ensure t)
+(use-package ido-vertical-mode :ensure t
+  :config
+  (ido-vertical-mode 1))
 (ido-mode 1)
 (ido-everywhere 1)
-(setq ido-enable-flex-matching t)
 (ido-ubiquitous-mode 1)
-(ido-vertical-mode 1)
+(setq ido-enable-flex-matching t)
 
 ;; Changebackup file location
 (setq backup-directory-alist
