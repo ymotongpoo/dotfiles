@@ -6,6 +6,13 @@
 (require 'go-guru)
 (require 'exec-path-from-shell)
 
+;; Go settings require the following tools
+;; go get -u github.com/nsf/gocode
+;; go get =u github.com/rogpeppe/godef
+;; go get -u github.com/golang/lint/golint
+;; go get -u golang.org/x/tools/cmd/goimports
+;; go get -u golang.org/x/tools/cmd/guru
+
 (exec-path-from-shell-copy-env "GOPATH")
 (add-to-list 'exec-path (expand-file-name "~/src/go/workspace/bin"))
 
