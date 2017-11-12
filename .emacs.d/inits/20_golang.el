@@ -39,8 +39,10 @@
     :ensure t)
   (setq godef-command "godef")
   (setq gofmt-command "gofmt")
+  (setq go-guru-debug t)
   (setq company-go-show-annotation t)
-  (flycheck-mode t)
+  (flycheck-mode)
+  (setq flycheck-check-syntax-automatically t)
   (add-to-list 'company-backends '(company-go :with company-dabbrev-code))
   (setq company-transformers '(company-sort-by-backend-importance))
   (add-hook 'before-save-hook 'gofmt-before-save)
@@ -52,10 +54,9 @@
 ;; go get -u github.com/golang/lint/golint
 ;; go get -u golang.org/x/tools/cmd/goimports
 ;; go get -u golang.org/x/tools/cmd/guru
-
-(exec-path-from-shell-copy-env "GOPATH")
+;; go get -u golang.org/x/tools/cmd/godoc
 (add-to-list 'exec-path (expand-file-name "~/src/go/workspace/bin"))
-
+(add-to-list 'exec-path (expand-file-name "/opt/go/go1.9.2/bin"))
 
 ;;(define-key go-mode-map (kbd "C-c C-j") 'go-direx-pop-to-buffer)
 ;;(push '(direx:direx-mode :position left :width 0.4 :dedicated t :stick t)

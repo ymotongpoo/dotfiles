@@ -181,12 +181,8 @@ bar {
         colors {
                 background: #FFC107
                 separator: #BDBDBD
-
                 focused_workspace   #0288D1 #03A9F4 #FFFFFF
                 active_workspace    #0288D1 #B3E5FC #FFFFFF
                 inactive_workspace  #0288D1 #212121 #FFFFFF 
         }
-
-        status_command i3status
-        position top
 }
