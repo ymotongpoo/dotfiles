@@ -149,6 +149,7 @@ case ${info[0]} in
 "arch")
     echo "arch linux additional setup"
     sudo pacman -S i3 i3lock feh pulseaudio-control xbacklight playerctl networkmanager rxvt-unicode
+    yaourt -S ttf-ricty
     ;;
 "ubuntu" | "debian")
     echo "ubuntu or degian additional setup"
