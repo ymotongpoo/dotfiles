@@ -16,8 +16,8 @@ xvt.depth: 32
 URxvt.geometry: 90x30
 URxvt.transparent: false
 URxvt.fading: 0
-! URxvt.urgentOnBell:         true
-! URxvt.visualBell:           true
+! URxvt.urgentOnBell: true
+! URxvt.visualBell: true
 URxvt.loginShell: true
 URxvt.saveLines: 10000
 URxvt.internalBorder: 3
@@ -25,7 +25,7 @@ URxvt.lineSpace: 0
 
 ! Fonts
 URxvt.allow_bold: true
-URxvt*font: xft:Inconsolata:size=12.5:antialias=true
+URxvt*font: xft:Source Code Pro, xft:Ricty-Bold:size=14:antialias=true, xft:Migu 1C
 
 ! Fix font space
 URxvt*letterSpace: -1
