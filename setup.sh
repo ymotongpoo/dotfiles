@@ -77,10 +77,11 @@ cd "$HOME"
 ln -s "$DOTFILES"/.zshrc .zshrc
 platform=`uname`
 if [ platform = "Linux" ]; then
-  ln -s "$DOTFILES"/.zshenv.linux .zshenv
+  ln -s "$DOTFILES"/.zshenv.linux "$HOME"/.zshenv
+  ln -s "$DOTFILES"/.Xresources "$HOME"/.Xresources
 elif [ platform = "Darwin" ]; then
-  ln -s "$DOTFILES"/.zshenv.macos .zshenv
-  ln -s "$DOTFILES"/.zprofile.macos .zprofile
+  ln -s "$DOTFILES"/.zshenv.macos "$HOME"/.zshenv
+  ln -s "$DOTFILES"/.zprofile.macos "$HOME"/.zprofile
 fi
 
 ##### set editor configuration files
@@ -147,7 +148,7 @@ done
 case ${info[0]} in
 "arch")
     echo "arch linux additional setup"
-    sudo pacman -S i3 i3lock feh pulseaudio-control xbacklight playerctl networkmanager 
+    sudo pacman -S i3 i3lock feh pulseaudio-control xbacklight playerctl networkmanager rxvt-unicode
     ;;
 "ubuntu" | "debian")
     echo "ubuntu or degian additional setup"

@@ -70,7 +70,7 @@ if [ -d $NVM_DIR ]; then
 fi
 
 export PATH="$EXTRA_PATH":"$PATH"
-export TERMINAL=xterm
+export TERMINAL=urxvt
 
 which xclip > /dev/null 2>&1 && alias clipboard="xclip -selection clipboard"
 
