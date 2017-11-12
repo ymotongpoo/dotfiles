@@ -87,16 +87,18 @@ fi
 ln -s "$DOTFILES"/.emacs.d "$HOME"/.emacs.d
 ln -s "$DOTFILES"/.vim "$HOME"/.vim
 
-##### install cask for Emacs
-cd "$HOME"
-curl -fsSL https://raw.githubusercontent.com/cask/cask/master/go | python
-
 ##### set terminal multiplexer configuration files
 ln -s "$DOTFILES"/.screenrc "$HOME"/.screenrc
 if [ platform = "Linux" ]; then
-  ln -s "$DOTFILES"/.tmux.conf.linux "$HOME"/.tmux.conf
+    ln -s "$DOTFILES"/.tmux.conf.linux "$HOME"/.tmux.conf
 elif [ platform = "Darwin" ]; then
-  ln -s "$DOTFILES"/.tmux.conf.macos "$HOME"/.tmux.conf
+    ln -s "$DOTFILES"/.tmux.conf.macos "$HOME"/.tmux.conf
+fi
+
+##### set i3 setting
+if [ platform = "Linux" ]; then
+    ln -s "$DOTFILES"/i3config "$HOME"/.config/i3/config
+    ln -s "$DOTFILES"/i3status.conf "$HOME"/.config/i3status/config
 fi
 
 ##### create private bin directory
@@ -128,6 +130,7 @@ export GOPATH="$goworkspace"
 declare -a repos=(
     "github.com/nsf/gocode"
     "github.com/rogpeppe/godef"
+    "golang.org/x/tools/cmd/godoc"
     "golang.org/x/tools/cmd/goimports"
     "golang.org/x/tools/cmd/guru"
 )
@@ -144,7 +147,7 @@ done
 case ${info[0]} in
 "arch")
     echo "arch linux additional setup"
-    sudo pacman -S i3 i3lock pulseaudio-control xbacklight playerctl networkmanager
+    sudo pacman -S i3 i3lock feh pulseaudio-control xbacklight playerctl networkmanager 
     ;;
 "ubuntu" | "debian")
     echo "ubuntu or degian additional setup"
