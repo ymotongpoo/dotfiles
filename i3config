@@ -179,10 +179,10 @@ bar {
         workspace_buttons yes
         binding_mode_indicator yes
         colors {
-                background: #FFC107
-                separator: #BDBDBD
-                focused_workspace   #0288D1 #03A9F4 #FFFFFF
-                active_workspace    #0288D1 #B3E5FC #FFFFFF
+                background #6D5200
+                separator  #BDBDBD
+                focused_workspace   #FFBC3F #FFD68C #FFFFFF
+                active_workspace    #FFBC3F #FFD68C #FFFFFF
                 inactive_workspace  #0288D1 #212121 #FFFFFF 
         }
 }
