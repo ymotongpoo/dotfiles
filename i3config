@@ -33,7 +33,7 @@ exec --no-startup-id "feh --bg-scale $HOME/.config/i3/wallpaper.jpg"
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec --no-startup-id urxvt
+bindsym $mod+Return exec --no-startup-id i3-sensible-terminal
 
 # kill focused window
 bindsym $mod+Shift+q kill

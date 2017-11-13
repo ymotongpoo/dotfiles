@@ -25,7 +25,8 @@ URxvt.lineSpace: 0
 
 ! Fonts
 URxvt.allow_bold: true
-URxvt*font: xft:Source Code Pro, xft:Ricty-Bold:size=14:antialias=true, xft:Migu 1C
+!URxvt*font: xft:Source Code Pro, xft:Ricty-Bold:size=14:antialias=true, xft:DejaVu Sans Mono, xft:VL Gothic, xft:Migu 1C
+URxvt*font: xft:DejaVu Sans Mono, xft:VL Gothic, xft:Migu 1C
 
 ! Fix font space
 URxvt*letterSpace: -1
