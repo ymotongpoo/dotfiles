@@ -35,8 +35,6 @@
     :ensure t)
   (use-package go-guru
     :ensure t)
-  (use-package exec-path-from-shell
-    :ensure t)
   (setq godef-command "godef")
   (setq gofmt-command "gofmt")
   (setq go-guru-debug t)
@@ -55,9 +53,8 @@
 ;; go get -u golang.org/x/tools/cmd/goimports
 ;; go get -u golang.org/x/tools/cmd/guru
 ;; go get -u golang.org/x/tools/cmd/godoc
-(add-to-list 'exec-path (expand-file-name "~/src/go/workspace/bin"))
-(add-to-list 'exec-path (expand-file-name "/opt/go/go1.9.2/bin"))
-
-;;(define-key go-mode-map (kbd "C-c C-j") 'go-direx-pop-to-buffer)
-;;(push '(direx:direx-mode :position left :width 0.4 :dedicated t :stick t)
-;;      popwin:special-display-config)
+(use-package exec-path-from-shell
+  :ensure t
+  :config
+  (exec-path-from-shell-copy-env "GOPATH")
+  (add-to-list 'exec-path (expand-file-name "~/src/go/workspace/bin")))
