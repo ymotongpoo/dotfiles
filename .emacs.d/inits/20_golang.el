@@ -43,8 +43,7 @@
   (setq flycheck-check-syntax-automatically t)
   (add-to-list 'company-backends '(company-go :with company-dabbrev-code))
   (setq company-transformers '(company-sort-by-backend-importance))
-  (add-hook 'before-save-hook 'gofmt-before-save)
-  )
+  (add-hook 'before-save-hook 'gofmt-before-save))
 
 ;; Go settings require the following tools
 ;; go get -u github.com/nsf/gocode
@@ -53,8 +52,3 @@
 ;; go get -u golang.org/x/tools/cmd/goimports
 ;; go get -u golang.org/x/tools/cmd/guru
 ;; go get -u golang.org/x/tools/cmd/godoc
-(use-package exec-path-from-shell
-  :ensure t
-  :config
-  (exec-path-from-shell-copy-env "GOPATH")
-  (add-to-list 'exec-path (expand-file-name "~/src/go/workspace/bin")))
