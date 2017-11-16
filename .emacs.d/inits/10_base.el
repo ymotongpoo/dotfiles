@@ -5,7 +5,6 @@
   :config
   (global-set-key [f8] 'neotree-toggle))
 
-
 ;;;;; frame
 (column-number-mode t)
 (line-number-mode t)
@@ -13,9 +12,20 @@
 (display-time-mode t)
 (menu-bar-mode -1)
 (tool-bar-mode 0)
+(scroll-bar-mode -1)
 (setq display-time-day-and-date t)
 (setq display-time-24hr-format t)
 (setq frame-title-format "%f")
+(cond ((display-graphic-p)
+       (set-face-attribute 'default nil 
+			   :family "Source Code Pro" 
+			   :height 120)
+       (set-fontset-font (frame-parameter nil 'font)
+			 'japanese-jisx0208
+			 (font-spec :family "Noto Sans CJK JP"))
+       (add-to-list 'face-font-rescale-alist
+		    '(".*Noto Sans CJK JP.*" . 1.2)))
+      (t 0))
 
 ;;;;; theme
 (use-package monokai-theme
@@ -24,7 +34,7 @@
   (load-theme 'monokai t))
 
 ;;;;; highlight
-(global-hl-line-mode)
+;(global-hl-line-mode)
 (show-paren-mode t)
 (setq hl-line-face 'underline)
 (setq show-paren-delay 0)
@@ -49,6 +59,14 @@
 (put 'set-goal-column 'disabled nil)
 (put 'narrow-to-region 'disabled nil)
 
+;; mozc
+;; http://ain0204.hatenablog.com/entry/2016/08/12/235206
+(use-package mozc
+  :ensure t
+  :defer t
+  :config
+  (set-language-environment "Japanese")
+  (setq default-input-method "japanese-mozc"))
 
 ;;;;; misc
 ;; support for symblic links
