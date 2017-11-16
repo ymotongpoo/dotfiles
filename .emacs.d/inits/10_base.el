@@ -11,10 +11,8 @@
 (line-number-mode t)
 (size-indication-mode t)
 (display-time-mode t)
-(if window-system
-    (lambda ()
-      (menu-bar-mode -1)
-      (tool-bar-mode 0)))
+(menu-bar-mode -1)
+(tool-bar-mode 0)
 (setq display-time-day-and-date t)
 (setq display-time-24hr-format t)
 (setq frame-title-format "%f")
@@ -40,10 +38,17 @@
   (global-company-mode)
   (setq company-idle-delay 0)
   (setq company-minimum-prefix-length 2)
-  (setq company-selection-wrap-around t))
+  (setq company-selection-wrap-around t)
+  (setq x-select-enable-clipboard t)
+  (setq save-interprogram-paste-before-kill t)
+  (setq yank-pop-change-selection t)
+  (setq x-select-enable-clipboard-manager t)
+  (setq x-select-enable-primary t)
+  (setq mouse-drag-copy-region t))
 
 (put 'set-goal-column 'disabled nil)
 (put 'narrow-to-region 'disabled nil)
+
 
 ;;;;; misc
 ;; support for symblic links
