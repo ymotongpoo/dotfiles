@@ -101,6 +101,7 @@ URxvt*color15: #d0d0d0
 XTerm*termName: xterm-256color
 XTerm*scrollBar: False
 XTerm*cursorBlink: True
+XTerm*selectToClipboard: True
 
 !! Fonts and Encoding
 XTerm*utf8: True
