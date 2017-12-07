@@ -16,16 +16,6 @@
 (setq display-time-day-and-date t)
 (setq display-time-24hr-format t)
 (setq frame-title-format "%f")
-(cond ((display-graphic-p)
-       (set-face-attribute 'default nil 
-			   :family "Source Code Pro" 
-			   :height 120)
-       (set-fontset-font (frame-parameter nil 'font)
-			 'japanese-jisx0208
-			 (font-spec :family "Noto Sans CJK JP"))
-       (add-to-list 'face-font-rescale-alist
-		    '(".*Noto Sans CJK JP.*" . 1.2)))
-      (t 0))
 
 ;;;;; theme
 (use-package monokai-theme

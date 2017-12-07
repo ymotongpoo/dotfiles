@@ -1,5 +1,5 @@
 (use-package adoc-mode
-  :ensue t
+  :ensure t
   :defer t
   :mode
   ("\\.asciidoc$" . adoc-mode))
