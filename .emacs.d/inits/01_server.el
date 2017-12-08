@@ -5,8 +5,8 @@
   (unless (server-running-p)
     (server-start))
   (when (display-graphic-p)
-    (add-to-list 'default-frame-alist '(font . "Source Han Code JP R"))
-    (set-face-attribute 'default nil :font "Source Han Code JP R")))
+    (add-to-list 'default-frame-alist '(font . "Source Han Code JP R 12"))
+    (set-face-attribute 'default nil :font "Source Han Code JP R 12")))
 
 (if (daemonp)
     (add-hook 'after-make-frame-functions
@@ -17,8 +17,8 @@
 		  :if (display-graphic-p)
 		  :config
 		  (when (display-graphic-p)
-		    (add-to-list 'default-frame-alist '(font . "Source Han Code JP R"))
-		    (set-face-attribute 'default nil :font "Source Han Code JP R"))
+		    (add-to-list 'default-frame-alist '(font . "Source Han Code JP R 12"))
+		    (set-face-attribute 'default nil :font "Source Han Code JP R 12"))
 		  (use-package monokai-theme
 		    :ensure t
 		    :config
