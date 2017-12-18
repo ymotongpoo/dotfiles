@@ -16,6 +16,9 @@
 (setq display-time-day-and-date t)
 (setq display-time-24hr-format t)
 (setq frame-title-format "%f")
+(setq scroll-conservatively 1)
+(setq scroll-margin 5)
+(setq next-screen-context-lines 5)
 
 ;;;;; theme
 (use-package monokai-theme
