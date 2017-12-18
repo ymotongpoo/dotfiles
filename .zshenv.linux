@@ -74,5 +74,8 @@ export TERMINAL=urxvt
 
 which xclip > /dev/null 2>&1 && alias clipboard="xclip -selection clipboard"
 
-alias EDITOR=/usr/bin/vim
+export EDITOR=/usr/bin/vim
 
+function dict() {
+  grep $1 $HOME/bin/gene-utf8.txt -A 1 -wi --color
+}
