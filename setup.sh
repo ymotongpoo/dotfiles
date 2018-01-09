@@ -149,10 +149,10 @@ case ${info[0]} in
 "arch")
     echo "arch linux additional setup"
     sudo pacman -S i3 i3lock feh pulseaudio-control xbacklight playerctl networkmanager rxvt-unicode pcmanfm emacs vim yaourt
-    yaourt -S ttf-ricty otf-source-han-code-jp
+    yaourt -S ttf-ricty otf-source-han-code-jp google-chrome
     ;;
 "ubuntu" | "debian")
     echo "ubuntu or degian additional setup"
-    sudo apt-get install i3 i3lock
+    sudo apt-get install i3 i3lock trash-cli fonts-noto-cjk fonts-noto-cjk-extra google-chrome-stable
     ;;
 esac
