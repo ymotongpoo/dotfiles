@@ -17,7 +17,7 @@
 (setq display-time-24hr-format t)
 (setq frame-title-format "%f")
 (setq scroll-conservatively 1)
-(setq scroll-margin 5)
+(setq scroll-margin 15)
 (setq next-screen-context-lines 5)
 
 ;;;;; theme

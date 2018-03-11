@@ -53,4 +53,4 @@
 ;; go get -u golang.org/x/tools/cmd/guru
 ;; go get -u golang.org/x/tools/cmd/godoc
 (add-to-list 'exec-path (expand-file-name "~/src/go/workspace/bin"))
-(add-to-list 'exec-path (expand-file-name "/opt/go/go1.9.2/bin"))
+(add-to-list 'exec-path (expand-file-name "/opt/go/go1.9.4/bin"))
