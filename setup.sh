@@ -122,7 +122,26 @@ elif [ $platform = "Darwin" ]; then
   curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.8/install.sh | bash
 fi
 
-##### set Go workspace
+##### set up Go and Go workspace
+GO_VER=1.10.1
+if [ $platform = "Linux" ]; then
+  sudo mkdir -p /opt/go
+  sudo chmod $USER /opt/go
+  cd /opt/go
+  GO_LINUX_BINARY="go${GO_VER}.linux-amd64.tar.gz"
+  wget "https://dl.google.com/go/${GO_LINUX_BINARY}"
+  tar xz "${GO_LINUX_BINARY}" "go${GO_VER}"
+  rm "${GO_LINUX_BINARY}"
+elif [ $platform = "Darwin" ]; then
+  sudo mkdir -p /opt/go
+  sudo chmod $USER /opt/go
+  cd /opt/go
+  GO_MAC_BINARY="go${GO_VER}.darwn-amd64.tar.gz"
+  wget "https://dl.google.com/go/${GO_MAC_BINARY}"
+  tar xz "${GO_MAC_BINARY}" "go${GO_VER}"
+  rm "${GO_MAC_BINARY}"
+fi
+
 goworkspace="$HOME/src/go/workspace"
 mkdir -p "$goworkspace"
 cd "$goworkspace"
