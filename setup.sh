@@ -111,18 +111,37 @@ mkdir "$tmpdir"
 cd "$tmpdir"
 
 if [ $platform = "Linux" ]; then
-  wget "https://github.com/monochromegane/the_platinum_searcher/releases/download/v2.0.2/pt_linux_amd64.tar.gz"
-  wget "https://github.com/peco/peco/releases/download/v0.3.5/peco_linux_amd64.tar.gz"
-  wget "https://drive.google.com/uc?id=0B3X9GlR6Embnb095MGxEYmJhY2c"
-  wget -qO- https://raw.githubusercontent.com/creationix/nvm/v0.30.2/install.sh | bash
+  wget "https://github.com/monochromegane/the_platinum_searcher/releases/download/v2.1.5/pt_linux_amd64.tar.gz"
+  wget "https://github.com/peco/peco/releases/download/v0.5.3/peco_linux_amd64.tar.gz"
+  wget "https://drive.google.com/uc?export=download&id=0B3X9GlR6Embnb095MGxEYmJhY2c" -o drive
+  wget -qO- https://raw.githubusercontent.com/creationix/nvm/v0.33.8/install.sh | bash
 elif [ $platform = "Darwin" ]; then
-  curl -O "https://github.com/monochromegane/the_platinum_searcher/releases/download/v2.0.2/pt_linux_amd64.tar.gz"
-  curl -O "https://github.com/peco/peco/releases/download/v0.3.5/peco_darwin_amd64.zip"
+  curl -O "https://github.com/monochromegane/the_platinum_searcher/releases/download/v2.1.5/pt_linux_amd64.tar.gz"
+  curl -O "https://github.com/peco/peco/releases/download/v0.5.3/peco_darwin_amd64.zip"
   curl -O -L "https://drive.google.com/uc?id=0B3X9GlR6EmbnVjIzMDRqck1aekE" --output drive
-  curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.30.2/install.sh | bash
+  curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.8/install.sh | bash
 fi
 
-##### set Go workspace
+##### set up Go and Go workspace
+GO_VER=1.10.1
+if [ $platform = "Linux" ]; then
+  sudo mkdir -p /opt/go
+  sudo chmod $USER /opt/go
+  cd /opt/go
+  GO_LINUX_BINARY="go${GO_VER}.linux-amd64.tar.gz"
+  wget "https://dl.google.com/go/${GO_LINUX_BINARY}"
+  tar xz "${GO_LINUX_BINARY}" "go${GO_VER}"
+  rm "${GO_LINUX_BINARY}"
+elif [ $platform = "Darwin" ]; then
+  sudo mkdir -p /opt/go
+  sudo chmod $USER /opt/go
+  cd /opt/go
+  GO_MAC_BINARY="go${GO_VER}.darwn-amd64.tar.gz"
+  wget "https://dl.google.com/go/${GO_MAC_BINARY}"
+  tar xz "${GO_MAC_BINARY}" "go${GO_VER}"
+  rm "${GO_MAC_BINARY}"
+fi
+
 goworkspace="$HOME/src/go/workspace"
 mkdir -p "$goworkspace"
 cd "$goworkspace"
@@ -135,10 +154,11 @@ declare -a repos=(
     "golang.org/x/tools/cmd/godoc"
     "golang.org/x/tools/cmd/goimports"
     "golang.org/x/tools/cmd/guru"
+    "github.com/Songmu/goxz/cmd/goxz"
 )
 
 for repo in repos; do
-    go get -u "$repo"
+    go get -u -v "$repo"
     go install "$repo"
 done
 
@@ -149,7 +169,16 @@ done
 case ${info[0]} in
 "arch")
     echo "arch linux additional setup"
-    sudo pacman -S i3 i3lock feh pulseaudio-control xbacklight playerctl networkmanager rxvt-unicode pcmanfm emacs vim yaourt
+    sudo pacman -S i3 i3lock \            # window manager
+                   feh \                  # viewer
+                   pulseaudio-control \   # audio control
+                   xbacklight \           # LCD brightness control
+                   playerctl \            # video/music player control
+                   networkmanager \       # network manager
+                   rxvt-unicode \         # terminal
+                   pcmanfm \              # file manager
+                   emacs vim \            # editors
+                   yaourt                 # package manager
     yaourt -S ttf-ricty otf-source-han-code-jp google-chrome
     ;;
 "ubuntu" | "debian")
