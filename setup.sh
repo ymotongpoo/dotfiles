@@ -128,6 +128,7 @@ mkdir -p "$goworkspace"
 cd "$goworkspace"
 export GOPATH="$goworkspace"
 
+# TODO: separate Go setup into another script.
 declare -a repos=(
     "github.com/nsf/gocode"
     "github.com/rogpeppe/godef"
