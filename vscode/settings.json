@@ -19,7 +19,7 @@
     "go.formatOnSave": false,
     "go.formatTool": "gofmt",
     "go.goroot": "/opt/go/go1.10.1",
-    "go.gopath": "/usr/local/google/home/yoshifumi/src/go/workspace:/opt/go/go_appengine",
+    "go.gopath": "${env:HOME}/src/go/workspace:/opt/go/go_appengine",
 
     "licenser.author": "Yoshi Yamaguchi",
     "licenser.license": "AL2",
@@ -31,7 +31,7 @@
         "javascript": "html"
     },
 
-    "eslint.nodePath": "/Users/ymotongpoo/.nvm/versions/node/v6.3.0/lib/node_modules",
+    "eslint.nodePath": "${env:HOME}/.nvm/versions/node/v6.3.0/lib/node_modules",
     "eslint.enable": true,
     "eslint.options": {
         "fix": true
@@ -39,8 +39,7 @@
 
     "javascript.format.insertSpaceAfterFunctionKeywordForAnonymousFunctions": false,
 
-    "typescript.tsdk": "/usr/local/google/home/yoshifumi/.nvm/versions/node/v6.9.4/bin/",
-    "tslint.configFile": "/google/src/head/depot/google3/javascript/typescript/tslint/google.tslint.json",
+    "typescript.tsdk": "${env:HOME}/.nvm/versions/node/v6.9.4/bin/",
     "tslint.enable": true,
     "tslint.run": "onSave",
 
