@@ -43,17 +43,6 @@
     "tslint.enable": true,
     "tslint.run": "onSave",
 
-    "sync.gist": "f304d1f0080661ea6a5f29375586cfed",
-    "sync.lastUpload": "",
-    "sync.autoDownload": false,
-    "sync.autoUpload": false,
-    "sync.lastDownload": "2017-02-21T00:24:33.625Z",
-    "sync.version": 262,
-    "sync.showSummary": true,
-    "sync.forceDownload": false,
-    "sync.workspaceSync": false,
-    "sync.anonymousGist": false,
-
     "terminal.integrated.fontSize": 16,
     "terminal.integrated.fontFamily": "Ubuntu Mono",
     "files.associations": {
