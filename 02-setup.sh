@@ -85,7 +85,7 @@ declare -a repos=(
     "github.com/derekparker/delve/cmd/dlv"
 )
 
-for repo in repos; do
+for repo in $repos; do
     go get -u -v "$repo"
     go install "$repo"
 done

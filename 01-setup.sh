@@ -147,21 +147,6 @@ mkdir -p "$goworkspace"
 cd "$goworkspace"
 export GOPATH="$goworkspace"
 
-# TODO: separate Go setup into another script.
-declare -a repos=(
-    "github.com/nsf/gocode"
-    "github.com/rogpeppe/godef"
-    "golang.org/x/tools/cmd/godoc"
-    "golang.org/x/tools/cmd/goimports"
-    "golang.org/x/tools/cmd/guru"
-    "github.com/Songmu/goxz/cmd/goxz"
-)
-
-for repo in repos; do
-    go get -u -v "$repo"
-    go install "$repo"
-done
-
 # setup OPAM
 # wget http://www.ocamlpro.com/pub/opam_installer.sh
 # sh ./opam_installer.sh .
@@ -178,7 +163,9 @@ case ${info[0]} in
                    rxvt-unicode \         # terminal
                    pcmanfm \              # file manager
                    emacs vim \            # editors
-                   yaourt                 # package manager
+                   yaourt \               # package manager
+                   tmux \                 # terminal multiplexer
+		   xclip                  # copy CLI output to X clipboard
     yaourt -S ttf-ricty otf-source-han-code-jp google-chrome
     ;;
 "ubuntu" | "debian")
