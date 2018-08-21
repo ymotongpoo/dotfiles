@@ -88,6 +88,10 @@ case ${UID} in
     ;;
 esac
 
+if [ ${DEMO} == "1" ]; then
+    PROMPT="> "
+fi
+
 # VCS version and branch info in RPROMPT
 autoload -Uz vcs_info
 zstyle ':vcs_info:*' enable git hg bzr
@@ -187,7 +191,7 @@ alias -s js='node'
 ### Google Cloud Platform
 GCPTOOLS="$HOME/google-cloud-sdk"
 if [ -d "$GCPTOOLS" ]; then
-  export PATH="$GCPTOOLS:$PATH"
+  export PATH="$GCPTOOLS/bin:$PATH"
   source $HOME/google-cloud-sdk/completion.zsh.inc
 fi
 
@@ -197,3 +201,6 @@ export PATH="$HOME/.yarn/bin":"$HOME/.cask/bin":"$PATH"
 alias start-emacs="emacs --daemon"
 alias kill-emacs="emacsclient -e '(kill-emacs)'"
 alias ec="emacsclient -nc"
+
+test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
+
