@@ -88,10 +88,6 @@ case ${UID} in
     ;;
 esac
 
-if [ ${DEMO} = "1" ]; then
-    PROMPT="> "
-fi
-
 # VCS version and branch info in RPROMPT
 autoload -Uz vcs_info
 zstyle ':vcs_info:*' enable git hg bzr
