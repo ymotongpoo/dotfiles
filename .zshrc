@@ -88,6 +88,10 @@ case ${UID} in
     ;;
 esac
 
+if [ ${DEMO} = "1" ]; then
+  PROMPT="> "
+fi
+
 # VCS version and branch info in RPROMPT
 autoload -Uz vcs_info
 zstyle ':vcs_info:*' enable git hg bzr
@@ -185,10 +189,10 @@ alias -s py='python'
 alias -s js='node'
 
 ### Google Cloud Platform
-GCPTOOLS="$HOME/google-cloud-sdk"
-if [ -d "$GCPTOOLS" ]; then
-  export PATH="$GCPTOOLS/bin:$PATH"
-  source $HOME/google-cloud-sdk/completion.zsh.inc
+GOOGLE_CLOUD_SDK="$HOME/google-cloud-sdk"
+if [ -d "$GOOGLE_CLOUD_SDK" ]; then
+  export PATH="$GOOGLE_CLOUD_SDK/bin:$PATH"
+  source $GOOGLE_CLOUD_SDK/completion.zsh.inc
 fi
 
 export PATH="/usr/local/git/current/bin/":"$PATH"
