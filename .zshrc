@@ -88,7 +88,7 @@ case ${UID} in
     ;;
 esac
 
-if [ ${DEMO} = "1" ]; then
+if [ -n "${DEMO}" ] && [ "${DEMO}" = "1" ]; then
   PROMPT="> "
 fi
 
