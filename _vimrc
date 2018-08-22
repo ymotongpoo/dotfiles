@@ -11,7 +11,7 @@ set fenc=utf-8
 set fencs=iso-2022-jp,euc-jp,cp932
 
 " 書式設定
-colorscheme mycontrast
+colorscheme base
 syntax on
 autocmd BufNewFile *.py set filetype=python fenc=utf-8
 autocmd BufNewFile *.js set filetype=javascript fenc=utf-8
