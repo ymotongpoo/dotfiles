@@ -14,16 +14,16 @@ variable "gce_ssh_user" {
 }
 variable "gce_ssh_pub_key" {
     type    = "string"
-    default = "/home/ymotongpoo/.ssh/ansible-target.pub"
+    default = "/home/ymotongpoo/.ssh/terraform.pub"
 }
 
 variable "gce_ssh_private_key" {
     type    = "string"
-    default = "/home/ymotongpoo/.ssh/ansible-target"
+    default = "/home/ymotongpoo/.ssh/terraform"
 }
 
 /*
- * Set GOOGLE_CREDENTIALS enrionment variable that is the path to service 
+ * Set GOOGLE_CREDENTIALS enrionment variable that is the path to service
  * account JSON file.
  */
 provider "google" {
@@ -34,7 +34,7 @@ provider "google" {
 resource "google_compute_instance" "development" {
     name         = "development"
     machine_type = "n1-standard-1"
-    zone         = "asia-northeast1-b"
+    zone         = "asia-northeast1-a"
     description  = "development environment for testing"
     tags         = ["development"]
 
@@ -63,23 +63,52 @@ resource "google_compute_instance" "development" {
         "ssh-keys" = "${var.gce_ssh_user}:${file(var.gce_ssh_pub_key)}"
     }
 
+    # install fundamental packages
     provisioner "remote-exec" {
         inline = [
+            # preparation
             "sudo apt-get update && sudo apt-get upgrade -y",
-            "sudo apt-get install python3",
+            "sudo apt-get install -y build-essential zsh python3 vim emacs",
+            # set zsh as default shell
+            "sudo chsh -s /bin/zsh demo",
+            # install Go
             "wget https://dl.google.com/go/${var.go_tarball}",
             "tar xf ${var.go_tarball}",
             "sudo mkdir -p /opt/go",
             "sudo chown demo /opt/go",
             "mv go /opt/go/go${var.go_version}",
-            "rm ${var.go_tarball}"
-        ]
+            "rm ${var.go_tarball}"        ]
 
         connection {
-            #type        = "ssh"
-            #user        = "demo"
-            #private_key = "${file(var.gce_ssh_private_key)}"
+            type        = "ssh"
+            user        = "demo"
             agent          = true
+            agent_identity = "${file(var.gce_ssh_private_key)}"
+        }
+    }
+
+    # copy .zshrc and .zshenv
+    provisioner "file" {
+        source      = "../.zshrc"
+        destination = ".zshrc"
+
+        connection {
+            type        = "ssh"
+            user        = "demo"
+            agent          = true
+            agent_identity = "${file(var.gce_ssh_private_key)}"
+        }
+    }
+
+    provisioner "file" {
+        source      = "../.zshenv.linux"
+        destination = ".zshenv"
+
+        connection {
+            type        = "ssh"
+            user        = "demo"
+            agent          = true
+            agent_identity = "${file(var.gce_ssh_private_key)}"
         }
     }
 }
