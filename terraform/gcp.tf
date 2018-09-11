@@ -22,6 +22,11 @@ variable "gce_ssh_private_key" {
     default = "/home/ymotongpoo/.ssh/terraform"
 }
 
+variable "skaffold_release_url" {
+    type    = "string"
+    default = "https://github.com/GoogleContainerTools/skaffold/releases/download/v0.13.0/skaffold-linux-amd64"
+}
+
 /*
  * Set GOOGLE_CREDENTIALS enrionment variable that is the path to service
  * account JSON file.
@@ -66,9 +71,21 @@ resource "google_compute_instance" "development" {
     # install fundamental packages
     provisioner "remote-exec" {
         inline = [
+            # add Cloud SDK repo
+            "export CLOUD_SDK_REPO='cloud-sdk-$(lsb_release -c -s)'",
+            "echo 'deb http://packages.cloud.google.com/apt $CLOUD_SDK_REPO main' | sudo tee -a /etc/apt/sources.list.d/google-cloud-sdk.list",
+            "curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -",
             # preparation
             "sudo apt-get update && sudo apt-get upgrade -y",
             "sudo apt-get install -y build-essential zsh python3 vim emacs",
+            "sudo apt-get install -y google-cloud-sdk kubectl google-cloud-sdk-app-engine-go",
+            # add docker repo
+            "sudo apt-get install -y apt-transport-https ca-certificates curl gnupg2 software-properties-common",
+            "curl -fsSL https://download.docker.com/linux/debian/gpg | sudo apt-key add -",
+            "sudo apt-key fingerprint 0EBFCD88",
+            "sudo add-apt-repository 'deb [arch=amd64] https://download.docker.com/linux/debian $(lsb_release -cs) stable'",
+            "sudo apt-get update && sudo apt-get install -y docker-ce",
+            "sudo docker run hello-world",
             # set zsh as default shell
             "sudo chsh -s /bin/zsh demo",
             # install Go
@@ -77,7 +94,11 @@ resource "google_compute_instance" "development" {
             "sudo mkdir -p /opt/go",
             "sudo chown demo /opt/go",
             "mv go /opt/go/go${var.go_version}",
-            "rm ${var.go_tarball}"        ]
+            "rm ${var.go_tarball}",
+            # install k8s related tools
+            "mkdir -p bin",
+            "wget ${var.skaffold_release_url} -O bin/skaffold"
+        ]
 
         connection {
             type        = "ssh"
