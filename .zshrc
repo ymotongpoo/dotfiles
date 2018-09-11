@@ -1,7 +1,3 @@
-# zshrc >= 4.3.10
-# 2013.04.02 4.3.11
-# 2015.12.15 5.0.5
-#
 # If you want MacPorts' zsh as login shell, you should run:
 # % sudo sh -c "echo '/opt/local/bin/zsh' >> /etc/shells"
 # % chsh -s /opt/local/bin/zsh
@@ -14,8 +10,8 @@ if [ -f "$HOME/.zprofile" ]; then
 fi
 
 # LANG
-export LANG=ja_JP.UTF-8
-export LC_CTYPE=ja_JP.UTF-8
+#export LANG=ja_JP.UTF-8
+#export LC_CTYPE=ja_JP.UTF-8
 
 # Emacs like key bind
 bindkey -e
@@ -145,7 +141,7 @@ export PYTHONPATH
 export MANPATH
 
 export EXTRA_PATH
-export PATH=~/bin:$PATH
+export PATH=$HOME/bin:$PATH
 export WORKON_HOME=$HOME/.virtualenvs
 
 if [ -n "$GOENVWRAPPER" -a -f "$GOENVWRAPPER" ]; then
@@ -195,8 +191,7 @@ if [ -d "$GOOGLE_CLOUD_SDK" ]; then
   source $GOOGLE_CLOUD_SDK/completion.zsh.inc
 fi
 
-export PATH="/usr/local/git/current/bin/":"$PATH"
-export PATH="$HOME/.yarn/bin":"$HOME/.cask/bin":"$PATH"
+export PATH="/usr/local/git/current/bin":"$HOME/.yarn/bin":"$PATH"
 
 alias start-emacs="emacs --daemon"
 alias kill-emacs="emacsclient -e '(kill-emacs)'"
