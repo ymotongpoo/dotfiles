@@ -1,9 +1,33 @@
 {
+    "variables": {
+        "ssh_user": "root",
+        "ssh_pass": "s0mePa55"
+    },
     "builders": [
         {
             "type": "qemu",
+            "iso_checksum_type": "sha256",
+            "iso_checksum": "eb8e9538625c0ac3e157c2d43b40418e2dab8ba5449db1dfc30746017430e1cb",
+            "iso_url": "https://cdimage.debian.org/cdimage/weekly-builds/amd64/iso-cd/debian-testing-amd64-netinst.iso",
+            "output_directory": "output",
+            "shutdown_command": "echo '{{user `ssh_pass`}}' | sudo -S shutdown -P now",
+            "shutdown_timeout": "1m",
+            "disk_size": "15000",
+            "format": "raw",
+            "http_directory": "http",
+            "http_port_max": "10089",
+            "http_port_min": "10082",
+            "ssh_host_port_min": 2222,
+            "ssh_host_port_max": 2229,
+            "ssh_username": "{{user `ssh_user`}}",
+            "ssh_password": "{{user `ssh_pass`}}",
+            "ssh_timeout": "30m",
+            "vm_name": "disk.raw",
             "accelerator": "kvm",
             "communicator": "none",
+            "net_device": "virtio-net",
+            "disk_interface": "virtio",
+            "boot_wait": "5s",
             "boot_command": [
                 "<esc><wait>",
                 "install <wait>",
@@ -20,37 +44,16 @@
                 "console-setup/ask_detect=false <wait>",
                 "console-keymaps-at/keymap=us <wait>",
                 "grub-installer/bootdev=/dev/sda <wait>",
-                "<enter><wait>"
+                "<enter>"
             ],
-            "disk_size": "15000",
-            "format": "raw",
-            "iso_checksum_type": "sha256",
-            "iso_checksum": "eb8e9538625c0ac3e157c2d43b40418e2dab8ba5449db1dfc30746017430e1cb",
-            "iso_url": "https://cdimage.debian.org/cdimage/weekly-builds/amd64/iso-cd/debian-testing-amd64-netinst.iso",
-            "headless": "true",
-            "http_directory": "http",
-            "http_port_max": "10089",
-            "http_port_min": "10082",
-            "output_directory": "output",
-            "shutdown_timeout": "30m",
-            "vm_name": "disk.raw",
+            "headless": true,
             "qemu_binary": "/usr/bin/kvm",
             "qemuargs": [
-                [
-                    "-m", "1024"
-                ],
-                [
-                    "-cpu", "host"
-                ],
-                [
-                    "-chardev", "tty,id=pts,path=/tmp/hoge0,server"
-                ],
-                [
-                    "-device", "isa-serial,chardev=pts"
-                ],
-                [
-                    "-device", "virtio-net,netdev=user.0"
-                ]
+                [ "-m", "1024" ],
+                [ "-cpu", "host" ],
+                [ "-chardev", "tty,id=pts,path=/tmp/hoge0,server" ],
+                [ "-device", "isa-serial,chardev=pts" ],
+                [ "-device", "virtio-net,netdev=user.0" ]
             ]
         }
     ],
