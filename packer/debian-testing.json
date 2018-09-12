@@ -1,0 +1,74 @@
+{
+    "builders": [
+        {
+            "type": "qemu",
+            "accelerator": "kvm",
+            "communicator": "none",
+            "boot_command": [
+                "<esc><wait>",
+                "install <wait>",
+                " preseed/url=http://{{ .HTTPIP }}:{{ .HTTPPort }}/preseed.cfg <wait>",
+                "debian-installer=en_US.UTF-8 <wait>",
+                "auto <wait>",
+                "locale=en_US.UTF-8 <wait>",
+                "kbd-chooser/method=us <wait>",
+                "keyboard-configuration/xkb-keymap=us <wait>",
+                "netcfg/get_hostname={{ .Name }} <wait>",
+                "netcfg/get_domain=vagrantup.com <wait>",
+                "fb=false <wait>",
+                "debconf/frontend=noninteractive <wait>",
+                "console-setup/ask_detect=false <wait>",
+                "console-keymaps-at/keymap=us <wait>",
+                "grub-installer/bootdev=/dev/sda <wait>",
+                "<enter><wait>"
+            ],
+            "disk_size": "15000",
+            "format": "raw",
+            "iso_checksum_type": "sha256",
+            "iso_checksum": "eb8e9538625c0ac3e157c2d43b40418e2dab8ba5449db1dfc30746017430e1cb",
+            "iso_url": "https://cdimage.debian.org/cdimage/weekly-builds/amd64/iso-cd/debian-testing-amd64-netinst.iso",
+            "headless": "true",
+            "http_directory": "http",
+            "http_port_max": "10089",
+            "http_port_min": "10082",
+            "output_directory": "output",
+            "shutdown_timeout": "30m",
+            "vm_name": "disk.raw",
+            "qemu_binary": "/usr/bin/kvm",
+            "qemuargs": [
+                [
+                    "-m", "1024"
+                ],
+                [
+                    "-cpu", "host"
+                ],
+                [
+                    "-chardev", "tty,id=pts,path=/tmp/hoge0,server"
+                ],
+                [
+                    "-device", "isa-serial,chardev=pts"
+                ],
+                [
+                    "-device", "virtio-net,netdev=user.0"
+                ]
+            ]
+        }
+    ],
+    "post-processors": [
+        [
+            {
+                "type": "compress",
+                "output": "output/disk.raw.tar.gz"
+            },
+            {
+                "type": "googlecompute-import",
+                "project_id": "development-215403",
+                "account_file": "/usr/local/google/home/yoshifumi/.config/gcloud/application_default_credentials.json",
+                "bucket": "yoshifumi-gce-images",
+                "image_name": "debian-testing-{{timestamp}}",
+                "image_description": "Debian testing nigtly",
+                "image_family": "debian"
+            }
+        ]
+    ]
+}
