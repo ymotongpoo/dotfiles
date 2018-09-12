@@ -1,5 +1,3 @@
-LANGUAGE=ja_JP
-
 ### for Python
 # basic Python setting
 PYTHON_VER=3.6.3
@@ -22,12 +20,13 @@ ERL_HOME=/opt/erlang/"$ERL_VER"
 ### for Golang
 # basic Go setting
 GOENVGOROOT=/opt/go
-GO_VER=1.11rc1
+GO_VER=1.11
 GOROOT="$GOENVGOROOT"/go${GO_VER}
 GOOS=linux
 GOARCH=amd64
 GOROOT_BOOTSTRAP="$GOENVGOROOT"/go1.4.2
 GOPATH="$HOME"/src/go/workspace
+GO111MODULE=on
 # Google App Engine for Go
 GAEGO=/opt/go/go_appengine
 # goenv setting
@@ -59,17 +58,20 @@ if [ -d "$GOROOT" ]; then
   export GOOS
   export GOARCH
   export GOPATH
+  export GO111MODULE
   EXTRA_PATH="$GOROOT/bin":"$GOPATH/bin":"$GOENVTARGET":"$EXTRA_PATH"
 fi
 if [ -d "$VIRTUALENV" ]; then
   EXTRA_PATH="$VIRTUALENV/bin":"$EXTRA_PATH"
 fi
 if [ -d $NVM_DIR ]; then
-   export NVM_DIR
-   [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  
+  export NVM_DIR
+  [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  
 fi
 
-export PATH="$EXTRA_PATH":"$PATH"
+if [ -z "$PATH" ]; then 
+  export PATH="$EXTRA_PATH":"$PATH"
+fi
 export TERMINAL=urxvt
 
 which xclip > /dev/null 2>&1 && alias clipboard="xclip -selection clipboard"
