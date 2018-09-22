@@ -123,7 +123,6 @@ elif [ $platform = "Darwin" ]; then
 fi
 
 ##### set up Go and Go workspace
-GO_VER=1.10.1
 if [ $platform = "Linux" ]; then
   sudo mkdir -p /opt/go
   sudo chmod $USER /opt/go
@@ -151,6 +150,7 @@ export GOPATH="$goworkspace"
 # wget http://www.ocamlpro.com/pub/opam_installer.sh
 # sh ./opam_installer.sh .
 
+if [ "$DESKTOP" == 1 ]; then
 case ${info[0]} in
 "arch")
     echo "arch linux additional setup"
@@ -173,3 +173,4 @@ case ${info[0]} in
     sudo apt-get install i3 i3lock trash-cli fonts-noto-cjk fonts-noto-cjk-extra google-chrome-stable
     ;;
 esac
+fi

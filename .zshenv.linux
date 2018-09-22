@@ -26,7 +26,7 @@ GOOS=linux
 GOARCH=amd64
 GOROOT_BOOTSTRAP="$GOENVGOROOT"/go1.4.2
 GOPATH="$HOME"/src/go/workspace
-GO111MODULE=on
+GO111MODULE=auto
 # Google App Engine for Go
 GAEGO=/opt/go/go_appengine
 # goenv setting
@@ -69,9 +69,7 @@ if [ -d $NVM_DIR ]; then
   [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  
 fi
 
-if [ -z "$PATH" ]; then 
-  export PATH="$EXTRA_PATH":"$PATH"
-fi
+export PATH="$EXTRA_PATH":"$PATH"
 export TERMINAL=urxvt
 
 which xclip > /dev/null 2>&1 && alias clipboard="xclip -selection clipboard"

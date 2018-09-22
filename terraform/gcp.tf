@@ -1,3 +1,8 @@
+variable "instance_name" {
+    type    = "string"
+    default = "dev"
+}
+
 variable "go_version" {
     type    = "string"
     default = "1.11"
@@ -38,7 +43,7 @@ provider "google" {
 }
 
 resource "google_compute_instance" "development" {
-    name         = "development"
+    name         = "${var.instance_name}"
     machine_type = "n1-standard-1"
     zone         = "asia-northeast1-a"
     description  = "development environment for testing"
@@ -124,23 +129,12 @@ resource "google_compute_instance" "development" {
         }
     }
 
-    # copy .zshrc and .zshenv
-    provisioner "file" {
-        source      = "../.zshrc"
-        destination = ".zshrc"
-
-        connection {
-            type        = "ssh"
-            user        = "demo"
-            agent          = true
-            agent_identity = "${file(var.gce_ssh_private_key)}"
-        }
-    }
-
-    provisioner "file" {
-        source      = "../.zshenv.linux"
-        destination = ".zshenv"
-
+    # copy dot files
+    provisioner "remote-exec" {
+        inline = [
+            "git clone https://github.com/ymotongpoo/dotfiles.git .dotfiles",
+            "./.dotfiles/01-setup.sh"
+        ]
         connection {
             type        = "ssh"
             user        = "demo"
