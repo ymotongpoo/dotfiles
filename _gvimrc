@@ -3,7 +3,7 @@
 "
 if has('win32')
   " Windows用
-  set guifont=MS_Gothic:h10:cSHIFTJIS
+  set guifont=MS_Gothic:h13
   " 行間隔の設定
   set linespace=1
   " 一部のUCS文字の幅を自動計測して決める
@@ -12,9 +12,9 @@ if has('win32')
   endif
 elseif has('mac')
   set guifont=Osaka−等幅:h16
-elseif has('xfontset')
+elseif has('unix')
   " UNIX用 (xfontsetを使用)
-  set guifontset=a16,r16,k16
+  let &guifont = 'Source Han Code JP 14'
 endif
 
 "---------------------------------------------------------------------------
