@@ -82,7 +82,7 @@ resource "google_compute_instance" "development" {
             "curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -",
             # preparation
             "sudo apt-get update && sudo apt-get upgrade -y",
-            "sudo apt-get install -y build-essential git-core zsh python3 vim emacs",
+            "sudo apt-get install -y build-essential git-core zsh python3 python3-dev python3-pip python3-venv vim emacs",
             "sudo apt-get install -y google-cloud-sdk kubectl google-cloud-sdk-app-engine-go",
             # set zsh as default shell
             "sudo chsh -s /bin/zsh demo",
