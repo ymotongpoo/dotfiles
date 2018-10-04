@@ -16,7 +16,7 @@ set $mod Mod4
 font pango:Inconsolata 12
 exec --no-startup-id fcitx
 exec --no-startup-id nm-applet
-exec --no-startup-id "feh --bg-scale $HOME/.config/i3/wallpaper.jpg"
+exec --no-startup-id feh --bg-scale $HOME/.config/i3/wallpaper.jpg
 
 # This font is widely installed, provides lots of unicode glyphs, right-to-left
 # text rendering and scalability on retina/hidpi displays (thanks to pango).
@@ -124,9 +124,13 @@ bindsym $mod+Shift+c reload
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 bindsym $mod+Shift+r restart
 # exit i3 (logs you out of your X session)
-bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
+bindsym $mod+Shift+e exec i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'
 # lock screen (requires 'i3lock' package)
 bindsym $mod+Control+l exec i3lock
+
+# print screen with the area (requires 'gnome-screenshot')
+bindsym --release $mod+Control+p exec --no-startup-id /usr/bin/gnome-screenshot -a
+bindsym --release $mod+Shift+Control+p exec --no-startup-id yabumi-linux
 
 # audio (requires 'pactl' package)
 bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 0 +5%

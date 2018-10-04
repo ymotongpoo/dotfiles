@@ -49,6 +49,10 @@
   (setq x-select-enable-primary t)
   (setq mouse-drag-copy-region t))
 
+(use-package ag
+  :ensure t
+  :defer t)
+
 (put 'set-goal-column 'disabled nil)
 (put 'narrow-to-region 'disabled nil)
 

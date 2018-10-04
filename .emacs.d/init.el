@@ -5,6 +5,9 @@
 ;; You may delete these explanatory comments.
 (package-initialize)
 
+;(setq spacemacs-start-directory "~/.emacs.d/spacemacs/")
+;(load-file (concat spacemacs-start-directory "init.el"))
+
 ;;;;; add melpa and orgmode for packages
 (setq package-archives
       '(("gnu" . "http://elpa.gnu.org/packages/")

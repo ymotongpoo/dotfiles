@@ -5,7 +5,11 @@
 .emacs.d/ac-comphist.dat
 .emacs.d/recentf
 .emacs.d/.cask
+.emacs.d/.cache
 .emacs.d/elpa
 .emacs.d/smex-items
 .emacs.d/ido.last
 *archive-contents
+terraform/.terraform
+terraform/terraform.tfstate*
+packer/packer_cache
