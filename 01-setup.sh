@@ -82,6 +82,8 @@ if [ platform = "Linux" ]; then
 elif [ platform = "Darwin" ]; then
   ln -s "$DOTFILES"/.zshenv.macos "$HOME"/.zshenv
   ln -s "$DOTFILES"/.zprofile.macos "$HOME"/.zprofile
+else
+  ln -s "$DOTFILES"/.zshenv.linux "$HOME"/.zshenv
 fi
 
 ##### set editor configuration files
