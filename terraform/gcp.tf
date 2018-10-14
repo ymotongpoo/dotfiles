@@ -5,7 +5,12 @@ variable "instance_name" {
 
 variable "go_version" {
     type    = "string"
-    default = "1.11"
+    default = "1.11.1"
+}
+
+variable "gce_image" {
+    type    = "string"
+    default = "debian-cloud/debian-9"
 }
 
 variable "gce_ssh_user" {
@@ -29,7 +34,7 @@ variable "docker_credential_gcr_ver" {
 
 locals {
     go_tarball = "go${var.go_version}.linux-amd64.tar.gz"
-    skaffold_release_url = "https://github.com/GoogleContainerTools/skaffold/releases/download/v0.13.0/skaffold-linux-amd64"
+    skaffold_release_url = "https://github.com/GoogleContainerTools/skaffold/releases/download/v0.16.0/skaffold-linux-amd64"
     docker_credential_gcr_url = "https://github.com/GoogleCloudPlatform/docker-credential-gcr/releases/download/v${var.docker_credential_gcr_ver}/docker-credential-gcr_linux_amd64-${var.docker_credential_gcr_ver}.tar.gz"
 }
 
@@ -47,13 +52,13 @@ resource "google_compute_instance" "development" {
     machine_type = "n1-standard-1"
     zone         = "asia-northeast1-a"
     description  = "development environment for testing"
-    tags         = ["development"]
+    tags         = ["development", "${var.instance_name}"]
 
     boot_disk {
         initialize_params {
             size  = 30
             type  = "pd-standard"
-            image = "debian-cloud/debian-9"
+            image = "${var.gce_image}"
         }
     }
 
@@ -82,7 +87,7 @@ resource "google_compute_instance" "development" {
             "curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -",
             # preparation
             "sudo apt-get update && sudo apt-get upgrade -y",
-            "sudo apt-get install -y build-essential git-core zsh python3 python3-dev python3-pip python3-venv vim emacs",
+            "sudo apt-get install -y build-essential git-core zsh python3 python3-dev python3-pip python3-venv vim emacs tmux",
             "sudo apt-get install -y google-cloud-sdk kubectl google-cloud-sdk-app-engine-go",
             # set zsh as default shell
             "sudo chsh -s /bin/zsh demo",
