@@ -46,11 +46,11 @@
   (add-hook 'before-save-hook 'gofmt-before-save))
 
 ;; Go settings require the following tools
-;; go get -u github.com/nsf/gocode
-;; go get =u github.com/rogpeppe/godef
-;; go get -u github.com/golang/lint/golint
+;; go get -u github.com/mdempsky/gocode
+;; go get -u github.com/rogpeppe/godef
+;; go get -u golang.org/x/lint/golint
 ;; go get -u golang.org/x/tools/cmd/goimports
 ;; go get -u golang.org/x/tools/cmd/guru
 ;; go get -u golang.org/x/tools/cmd/godoc
 (add-to-list 'exec-path (expand-file-name "~/src/go/workspace/bin"))
-(add-to-list 'exec-path (expand-file-name "/opt/go/go1.9.4/bin"))
+(add-to-list 'exec-path (expand-file-name "/opt/go/go1.11.1/bin"))
