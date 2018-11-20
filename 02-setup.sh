@@ -72,7 +72,7 @@ get_os_info() {
 
 ##### Install go packages
 declare -a repos=(
-    "github.com/nsf/gocode"
+    "github.com/mdempsky/gocode"
     "github.com/rogpeppe/godef"
     "golang.org/x/tools/cmd/godoc"
     "golang.org/x/tools/cmd/goimports"
@@ -82,7 +82,15 @@ declare -a repos=(
     "github.com/ramya-rao-a/go-outline"
     "github.com/acroca/go-symbols"
     "golang.org/x/tools/cmd/gorename"
+    "sourcegraph.com/sqs/goreturns"
     "github.com/derekparker/delve/cmd/dlv"
+    "github.com/kisielk/errcheck"
+    "github.com/davidrjenni/reftools/cmd/fillstruct"
+    "github.com/jstemmer/gotags"
+    "github.com/cweill/gotests/..."
+    "github.com/fatih/gomodifytags"
+    "github.com/huydx/hget"
+    "mvdan.cc/sh/cmd/shfmt"
 )
 
 for repo in $repos; do
