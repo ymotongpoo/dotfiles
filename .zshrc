@@ -140,8 +140,7 @@ export VIRTUALENVWRAPPER
 export PYTHONPATH
 export MANPATH
 
-export EXTRA_PATH
-export PATH=$HOME/bin:$PATH
+ZSHRC_EXTRA_PATH="$HOME/bin"
 export WORKON_HOME=$HOME/.virtualenvs
 
 if [ -n "$GOENVWRAPPER" -a -f "$GOENVWRAPPER" ]; then
@@ -187,11 +186,12 @@ alias -s js='node'
 ### Google Cloud Platform
 GOOGLE_CLOUD_SDK="$HOME/google-cloud-sdk"
 if [ -d "$GOOGLE_CLOUD_SDK" ]; then
-  export PATH="$GOOGLE_CLOUD_SDK/bin:$PATH"
+  EXTRA_PATH="$GOOGLE_CLOUD_SDK/bin:$EXTRA_PATH"
   source $GOOGLE_CLOUD_SDK/completion.zsh.inc
 fi
 
-export PATH="/usr/local/git/current/bin":"$HOME/.yarn/bin":"$PATH"
+ZSHRC_EXTRA_PATH="/usr/local/git/current/bin":"$HOME/.yarn/bin":"$ZSHRC_EXTRA_PATH"
+export PATH="$ZSHRC_EXTRA_PATH:$ZSHENV_EXTRA_PATH:$PATH"
 
 alias start-emacs="emacs --daemon"
 alias kill-emacs="emacsclient -e '(kill-emacs)'"

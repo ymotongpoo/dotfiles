@@ -33,9 +33,10 @@ GAEGO=/opt/go/go_appengine
 GOENVHOME=$HOME/src/go
 
 GOENVTARGET=/opt/goenv
+ZSHENV_EXTRA_PATH=""
 if [ -d "$GOENVTARGET" ]; then
   GOENVWRAPPER=$GOENVTARGET/goenvwrapper.sh
-  EXTRA_PATH="$GOENVTARGET":"$PATH"
+  ZSHENV_EXTRA_PATH="$GOENVTARGET:$ZSHENV_EXTRA_PATH"
 fi
 
 ### for node
@@ -43,15 +44,15 @@ NVM_DIR="$HOME/.nvm"
 
 ### Set extra paths
 if [ -d "$PYTHON_HOME/bin" ]; then
-  EXTRA_PATH="$PYTHON_HOME/bin"
+  ZSHENV_EXTRA_PATH="$PYTHON_HOME/bin:$ZSHENV_EXTRA_PATH"
 fi
 if [ -d "$ERL_HOME/bin" ]; then
   export ERL_HOME
-  EXTRA_PATH="$EXTRA_PATH":"$ERL_HOME/bin"
+  ZSHENV_EXTRA_PATH="$ERL_HOME/bin:$ZSHENV_EXTRA_PATH"
 fi
 if [ -d "$GAEGO" ]; then
   export GAEGO
-  EXTRA_PATH="$GAEGO":"$EXTRA_PATH"
+  ZSHENV_EXTRA_PATH="$GAEGO:$ZSHENV_EXTRA_PATH"
 fi
 if [ -d "$GOROOT" ]; then
   export GOROOT
@@ -59,17 +60,18 @@ if [ -d "$GOROOT" ]; then
   export GOARCH
   export GOPATH
   export GO111MODULE
-  EXTRA_PATH="$GOROOT/bin":"$GOPATH/bin":"$GOENVTARGET":"$EXTRA_PATH"
+  ZSHENV_EXTRA_PATH="$GOROOT/bin:$GOPATH/bin:$GOENVTARGET:$ZSHENV_EXTRA_PATH"
 fi
 if [ -d "$VIRTUALENV" ]; then
-  EXTRA_PATH="$VIRTUALENV/bin":"$EXTRA_PATH"
+  ZSHENV_EXTRA_PATH="$VIRTUALENV/bin:$ZSHENV_EXTRA_PATH"
 fi
 if [ -d $NVM_DIR ]; then
   export NVM_DIR
   [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  
 fi
 
-export PATH="$EXTRA_PATH":"$PATH"
+echo "zshenv extra_path: $ZSHENV_EXTRA_PATH"
+export ZSHENV_EXTRA_PATH
 export TERMINAL=urxvt
 
 which xclip > /dev/null 2>&1 && alias clipboard="xclip -selection clipboard"
