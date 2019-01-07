@@ -1,7 +1,7 @@
 ### for Python
 # basic Python setting
 PYTHON_VER=3.6.3
-PYTHON_HOME=/opt/python/"$PYTHON_VER"
+PYTHON_HOME="/opt/python/$PYTHON_VER"
 
 # for virtualenv
 VIRTUALENV_HOME="$PYTHON_HOME"
@@ -31,12 +31,16 @@ GO111MODULE=auto
 GAEGO=/opt/go/go_appengine
 # goenv setting
 GOENVHOME=$HOME/src/go
-
 GOENVTARGET=/opt/goenv
+
 ZSHENV_EXTRA_PATH=""
 if [ -d "$GOENVTARGET" ]; then
-  GOENVWRAPPER=$GOENVTARGET/goenvwrapper.sh
-  ZSHENV_EXTRA_PATH="$GOENVTARGET:$ZSHENV_EXTRA_PATH"
+  GOENVWRAPPER="$GOENVTARGET"/goenvwrapper.sh
+  if [ -n "$ZSHENV_EXTRA_PATH" ]; then
+    ZSHENV_EXTRA_PATH="$GOENVTARGET"
+  else
+    ZSHENV_EXTRA_PATH="$GOENVTARGET:$ZSHENV_EXTRA_PATH"
+  fi
 fi
 
 ### for node
@@ -44,15 +48,27 @@ NVM_DIR="$HOME/.nvm"
 
 ### Set extra paths
 if [ -d "$PYTHON_HOME/bin" ]; then
-  ZSHENV_EXTRA_PATH="$PYTHON_HOME/bin:$ZSHENV_EXTRA_PATH"
+  if [ -n "$ZSHENV_EXTRA_PATH" ]; then
+    ZSHENV_EXTRA_PATH="$PYTHON_HOME/bin"
+  else
+    ZSHENV_EXTRA_PATH="$PYTHON_HOME/bin:$ZSHENV_EXTRA_PATH"
+  fi
 fi
 if [ -d "$ERL_HOME/bin" ]; then
   export ERL_HOME
-  ZSHENV_EXTRA_PATH="$ERL_HOME/bin:$ZSHENV_EXTRA_PATH"
+  if [ -n "$ZSHENV_EXTRA_PATH" ]; then
+    ZSHENV_EXTRA_PATH="$ERL_HOME/bin"
+  else
+    ZSHENV_EXTRA_PATH="$ERL_HOME/bin:$ZSHENV_EXTRA_PATH"
+  fi
 fi
 if [ -d "$GAEGO" ]; then
   export GAEGO
-  ZSHENV_EXTRA_PATH="$GAEGO:$ZSHENV_EXTRA_PATH"
+  if [ -n "$ZSHENV_EXTRA_PATH" ]; then
+    ZSHENV_EXTRA_PATH="$GAEGO"
+  else
+    ZSHENV_EXTRA_PATH="$GAEGO:$ZSHENV_EXTRA_PATH"
+  fi
 fi
 if [ -d "$GOROOT" ]; then
   export GOROOT
@@ -60,17 +76,25 @@ if [ -d "$GOROOT" ]; then
   export GOARCH
   export GOPATH
   export GO111MODULE
-  ZSHENV_EXTRA_PATH="$GOROOT/bin:$GOPATH/bin:$GOENVTARGET:$ZSHENV_EXTRA_PATH"
+  if [ -n "$ZSHENV_EXTRA_PATH" ]; then
+    ZSHENV_EXTRA_PATH="$GOROOT/bin:$GOPATH/bin"
+  else
+    ZSHENV_EXTRA_PATH="$GOROOT/bin:$GOPATH/bin:$ZSHENV_EXTRA_PATH"
+  fi
 fi
 if [ -d "$VIRTUALENV" ]; then
-  ZSHENV_EXTRA_PATH="$VIRTUALENV/bin:$ZSHENV_EXTRA_PATH"
+  if [ -n "$ZSHENV_EXTRA_PATH" ]; then
+    ZSHENV_EXTRA_PATH="$VIRTUALENV/bin"
+  else
+    ZSHENV_EXTRA_PATH="$VIRTUALENV/bin:$ZSHENV_EXTRA_PATH"
+  fi
 fi
 if [ -d $NVM_DIR ]; then
   export NVM_DIR
   [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  
 fi
 
-echo "zshenv extra_path: $ZSHENV_EXTRA_PATH"
+echo "zshenv extra path: $ZSHENV_EXTRA_PATH"
 export ZSHENV_EXTRA_PATH
 export TERMINAL=urxvt
 

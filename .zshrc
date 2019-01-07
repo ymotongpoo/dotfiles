@@ -186,12 +186,21 @@ alias -s js='node'
 ### Google Cloud Platform
 GOOGLE_CLOUD_SDK="$HOME/google-cloud-sdk"
 if [ -d "$GOOGLE_CLOUD_SDK" ]; then
-  EXTRA_PATH="$GOOGLE_CLOUD_SDK/bin:$EXTRA_PATH"
+  if [ -n "$EXTRA_PATH" ]; then
+    EXTRA_PATH="$GOOGLE_CLOUD_SDK/bin"
+  else
+    EXTRA_PATH="$GOOGLE_CLOUD_SDK/bin:$EXTRA_PATH"
+  fi
   source $GOOGLE_CLOUD_SDK/completion.zsh.inc
 fi
 
-ZSHRC_EXTRA_PATH="/usr/local/git/current/bin":"$HOME/.yarn/bin":"$ZSHRC_EXTRA_PATH"
-export PATH="$ZSHRC_EXTRA_PATH:$ZSHENV_EXTRA_PATH:$PATH"
+if [ -n "$ZSHRC_EXTRA_PATH" ]; then
+  ZSHRC_EXTRA_PATH="/usr/local/git/current/bin:$HOME/.yarn/bin"
+else
+  ZSHRC_EXTRA_PATH="/usr/local/git/current/bin:$HOME/.yarn/bin:$ZSHRC_EXTRA_PATH"
+fi
+
+PATH="$ZSHRC_EXTRA_PATH:$ZSHENV_EXTRA_PATH:$PATH"
 
 alias start-emacs="emacs --daemon"
 alias kill-emacs="emacsclient -e '(kill-emacs)'"
