@@ -186,15 +186,15 @@ alias -s js='node'
 ### Google Cloud Platform
 GOOGLE_CLOUD_SDK="$HOME/google-cloud-sdk"
 if [ -d "$GOOGLE_CLOUD_SDK" ]; then
-  if [ -n "$EXTRA_PATH" ]; then
-    EXTRA_PATH="$GOOGLE_CLOUD_SDK/bin"
+  if [ -z "$ZSHRC_EXTRA_PATH" ]; then
+    ZSHRC_EXTRA_PATH="$GOOGLE_CLOUD_SDK/bin"
   else
-    EXTRA_PATH="$GOOGLE_CLOUD_SDK/bin:$EXTRA_PATH"
+    ZSHRC_EXTRA_PATH="$GOOGLE_CLOUD_SDK/bin:$ZSHRC_EXTRA_PATH"
   fi
   source $GOOGLE_CLOUD_SDK/completion.zsh.inc
 fi
 
-if [ -n "$ZSHRC_EXTRA_PATH" ]; then
+if [ -z "$ZSHRC_EXTRA_PATH" ]; then
   ZSHRC_EXTRA_PATH="/usr/local/git/current/bin:$HOME/.yarn/bin"
 else
   ZSHRC_EXTRA_PATH="/usr/local/git/current/bin:$HOME/.yarn/bin:$ZSHRC_EXTRA_PATH"
