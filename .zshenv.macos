@@ -29,7 +29,7 @@ ERL_HOME=/opt/erlang/"$ERL_VER"
 # basic Go setting
 GO_VER="1.11.4"
 GOENVGOROOT=/opt/go
-GOROOT="$GOENVGOROOT"/go"$GO_VER"
+GOROOT="$GOENVGOROOT/go$GO_VER"
 GOOS=darwin
 GOARCH=amd64
 GOPATH="$HOME"/src/go/workspace
@@ -94,7 +94,7 @@ if [ -d $NVM_DIR ]; then
 fi
 
 if [ -d "$MACPORTS_PREFIX/bin" ]; then
-  if [ -z "$ZSHRC_EXTRA_PATH" ]; then
+  if [ -z "$ZSHENV_EXTRA_PATH" ]; then
     ZSHENV_EXTRA_PATH="$MACPORTS_PREFIX/bin"
   else
     ZSHENV_EXTRA_PATH="$MACPORTS_PREFIX/bin:$ZSHENV_EXTRA_PATH"
