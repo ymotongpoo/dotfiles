@@ -72,7 +72,7 @@ get_os_info() {
 
 ##### Install go packages
 declare -a repos=(
-    "github.com/mdempsky/gocode"
+    "golang.org/x/tools/cmd/golsp"
     "github.com/rogpeppe/godef"
     "golang.org/x/tools/cmd/godoc"
     "golang.org/x/tools/cmd/goimports"
@@ -91,10 +91,11 @@ declare -a repos=(
     "github.com/fatih/gomodifytags"
     "github.com/huydx/hget"
     "mvdan.cc/sh/cmd/shfmt"
+    "github.com/FiloSottile/mkcert"
 )
 
 for repo in $repos; do
-    go get -u -v "$repo"
+    go get -u "$repo"
     go install "$repo"
 done
 
