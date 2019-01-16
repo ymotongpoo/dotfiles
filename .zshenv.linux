@@ -1,3 +1,7 @@
+### for compdef
+autoload -Uz compinit
+compinit
+
 ### for Python
 # basic Python setting
 PYTHON_VER=3.6.3

@@ -1,5 +1,8 @@
-MACPORTS_PREFIX=/opt/local
+### for compinit
+autoload -Uz compinit
+compinit
 
+MACPORTS_PREFIX=/opt/local
 #C_INCLUDE_PATH=/usr/include:/opt/local/include
 #CPLUS_INCLUDE_PATH=/usr/include:/opt/local/include
 #LD_LIBRARY_PATH=/usr/lib:/opt/local/lib
@@ -24,20 +27,14 @@ ERL_HOME=/opt/erlang/"$ERL_VER"
 
 ### for Golang
 # basic Go setting
-GO_VER="1.11.1"
+GO_VER="1.11.4"
 GOENVGOROOT=/opt/go
-GOROOT="$GOENVGOROOT"/go"$GO_VER"
+GOROOT="$GOENVGOROOT/go$GO_VER"
 GOOS=darwin
 GOARCH=amd64
-GOROOT_BOOTSTRAP="$GOENVGOROOT"/go1.4.3
 GO111MODULE=on
 # Google App Engine for Go
 GAEGO=/opt/go/go_appengine
-# goenv setting
-GOENVHOME=$HOME/src/go
-
-GOENVTARGET=/opt/go/goenv
-GOENVWRAPPER="$GOENVTARGET"/goenvwrapper.sh
 
 ### for Android
 ANDROID_HOME=/Users/$USER/Library/Android/sdk
@@ -48,20 +45,28 @@ NVM_DIR="$HOME/.nvm"
 
 EXTRA_PATH="."
 ### Set extra paths
+if [ -d "$PYTHON_HOME/bin" ]; then
+  if [ -z "$ZSHENV_EXTRA_PATH" ]; then
+    ZSHENV_EXTRA_PATH="$PYTHON_HOME/bin"
+  else
+    ZSHENV_EXTRA_PATH="$PYTHON_HOME/bin:$ZSHENV_EXTRA_PATH"
+  fi
+fi
 if [ -d "$ERL_HOME/bin" ]; then
   export ERL_HOME
-  EXTRA_PATH="$EXTRA_PATH":"$ERL_HOME/bin"
-fi
-if [ -d "$GHC_HOME/bin" ]; then
-  export GHC_HOME
-  EXTRA_PATH="$GHC_HOME/bin"
-fi
-if [ -d "$GOENVTARGET" ]; then
-  EXTRA_PATH="$EXTRA_PATH":"$GOENVTARGET"
+  if [ -z "$ZSHENV_EXTRA_PATH" ]; then
+    ZSHENV_EXTRA_PATH="$ERL_HOME/bin"
+  else
+    ZSHENV_EXTRA_PATH="$ERL_HOME/bin:$ZSHENV_EXTRA_PATH"
+  fi
 fi
 if [ -d "$GAEGO" ]; then
   export GAEGO
-  EXTRA_PATH=$GAEGO:"$EXTRA_PATH"
+  if [ -z "$ZSHENV_EXTRA_PATH" ]; then
+    ZSHENV_EXTRA_PATH="$GAEGO"
+  else
+    ZSHENV_EXTRA_PATH="$GAEGO:$ZSHENV_EXTRA_PATH"
+  fi
 fi
 if [ -d "$GOROOT" ]; then
   export GOROOT
@@ -69,22 +74,36 @@ if [ -d "$GOROOT" ]; then
   export GOARCH
   export GOPATH
   export GO111MODULE
-  EXTRA_PATH="$GOROOT/bin":"$GOPATH/bin":"$GOENVTARGET":"$EXTRA_PATH"
+  if [ -z "$ZSHENV_EXTRA_PATH" ]; then
+    ZSHENV_EXTRA_PATH="$GOROOT/bin:$GOPATH/bin"
+  else
+    ZSHENV_EXTRA_PATH="$GOROOT/bin:$GOPATH/bin:$ZSHENV_EXTRA_PATH"
+  fi
 fi
-if [ -d "$VIRTUALENV_HOME" ]; then
-  EXTRA_PATH="$VIRTUALENV_HOME/bin":"$EXTRA_PATH"
+if [ -d "$VIRTUALENV" ]; then
+  if [ -z "$ZSHENV_EXTRA_PATH" ]; then
+    ZSHENV_EXTRA_PATH="$VIRTUALENV/bin"
+  else
+    ZSHENV_EXTRA_PATH="$VIRTUALENV/bin:$ZSHENV_EXTRA_PATH"
+  fi
 fi
 if [ -d $NVM_DIR ]; then
   export NVM_DIR
   [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  
 fi
+
 if [ -d "$MACPORTS_PREFIX/bin" ]; then
-  EXTRA_PATH="$MACPORTS_PREFIX/bin":"$EXTRA_PATH"
+  if [ -z "$ZSHENV_EXTRA_PATH" ]; then
+    ZSHENV_EXTRA_PATH="$MACPORTS_PREFIX/bin"
+  else
+    ZSHENV_EXTRA_PATH="$MACPORTS_PREFIX/bin:$ZSHENV_EXTRA_PATH"
+  fi
 fi
-PATH="$EXTRA_PATH":"$PATH"
 if [ -d "$OCAML_HOME" ]; then
   . /Users/yoshifumi/.opam/opam-init/init.zsh > /dev/null 2> /dev/null || true
 fi
+echo "zshenv extra path: $ZSHENV_EXTRA_PATH"
+export ZSHENV_EXTRA_PATH
 
 alias emacs="/opt/local/bin/emacs"
 alias gvim="/Applications/MacVim.app/Contents/MacOS/MacVim"

@@ -113,15 +113,17 @@ mkdir "$tmpdir"
 cd "$tmpdir"
 
 if [ $platform = "Linux" ]; then
-  wget "https://github.com/monochromegane/the_platinum_searcher/releases/download/v2.1.5/pt_linux_amd64.tar.gz"
-  wget "https://github.com/peco/peco/releases/download/v0.5.3/peco_linux_amd64.tar.gz"
-  wget "https://drive.google.com/uc?export=download&id=0B3X9GlR6Embnb095MGxEYmJhY2c" -o drive
-  wget -qO- https://raw.githubusercontent.com/creationix/nvm/v0.33.8/install.sh | bash
+  wget -O- "https://github.com/monochromegane/the_platinum_searcher/releases/download/v2.1.5/pt_linux_amd64.tar.gz" | tar xf -
+  wget -O- "https://github.com/peco/peco/releases/download/v0.5.3/peco_linux_amd64.tar.gz" | tar xf -
+  wget "https://docs.google.com/uc?id=0B3X9GlR6EmbnQ0FtZmJJUXEyRTA&export=download" -o gdrive
+  wget -O- "https://github.com/loadimpact/k6/releases/download/v0.23.1/k6-v0.23.1-linux64.tar.gz" | tar xf -
+  wget -qO- https://raw.githubusercontent.com/creationix/nvm/v0.34.0/install.sh | bash
 elif [ $platform = "Darwin" ]; then
-  curl -O "https://github.com/monochromegane/the_platinum_searcher/releases/download/v2.1.5/pt_linux_amd64.tar.gz"
-  curl -O "https://github.com/peco/peco/releases/download/v0.5.3/peco_darwin_amd64.zip"
-  curl -O -L "https://drive.google.com/uc?id=0B3X9GlR6EmbnVjIzMDRqck1aekE" --output drive
-  curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.8/install.sh | bash
+  curl -O "https://github.com/monochromegane/the_platinum_searcher/releases/download/v2.1.5/pt_linux_amd64.tar.gz" | tar xf -
+  curl -O "https://github.com/loadimpact/k6/releases/download/v0.23.1/k6-v0.23.1-mac.zip" | unzip -
+  curl -O "https://github.com/peco/peco/releases/download/v0.5.3/peco_darwin_amd64.zip" | unzip -
+  curl -O -L "https://docs.google.com/uc?id=0B3X9GlR6Embnb010SnpUV0s2ZkU&export=download" --output gdrive
+  curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.34.0/install.sh | bash
 fi
 
 ##### set up Go and Go workspace
