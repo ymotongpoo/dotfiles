@@ -24,7 +24,6 @@ GO_VER=1.11.4
 GOROOT="$GOENVGOROOT"/go${GO_VER}
 GOOS=linux
 GOARCH=amd64
-GOPATH="$HOME"/src/go/workspace
 GO111MODULE=auto
 # Google App Engine for Go
 GAEGO=/opt/go/go_appengine
@@ -62,7 +61,6 @@ if [ -d "$GOROOT" ]; then
   export GOROOT
   export GOOS
   export GOARCH
-  export GOPATH
   export GO111MODULE
   if [ -z "$ZSHENV_EXTRA_PATH" ]; then
     ZSHENV_EXTRA_PATH="$GOROOT/bin:$GOPATH/bin"
