@@ -75,9 +75,9 @@ if [ -d "$GOROOT" ]; then
   export GOPATH
   export GO111MODULE
   if [ -z "$ZSHENV_EXTRA_PATH" ]; then
-    ZSHENV_EXTRA_PATH="$GOROOT/bin:$GOPATH/bin"
+    ZSHENV_EXTRA_PATH="$GOROOT/bin:$HOME/go/bin"
   else
-    ZSHENV_EXTRA_PATH="$GOROOT/bin:$GOPATH/bin:$ZSHENV_EXTRA_PATH"
+    ZSHENV_EXTRA_PATH="$GOROOT/bin:$HOME/go/bin:$ZSHENV_EXTRA_PATH"
   fi
 fi
 if [ -d "$VIRTUALENV" ]; then
