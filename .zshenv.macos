@@ -27,7 +27,7 @@ ERL_HOME=/opt/erlang/"$ERL_VER"
 
 ### for Golang
 # basic Go setting
-GO_VER="1.11.4"
+GO_VER="1.12.5"
 GOENVGOROOT=/opt/go
 GOROOT="$GOENVGOROOT/go$GO_VER"
 GOOS=darwin
