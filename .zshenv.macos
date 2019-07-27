@@ -27,7 +27,7 @@ ERL_HOME=/opt/erlang/"$ERL_VER"
 
 ### for Golang
 # basic Go setting
-GO_VER="1.12.5"
+GO_VER="1.12.7"
 GOENVGOROOT=/opt/go
 GOROOT="$GOENVGOROOT/go$GO_VER"
 GOOS=darwin
@@ -43,7 +43,7 @@ export ANDROID_HOME
 ### for node (nvm)
 NVM_DIR="$HOME/.nvm"
 
-EXTRA_PATH="."
+ZSHENV_EXTRA_PATH=".:$HOME/Library/Python/3.7/bin"
 ### Set extra paths
 if [ -d "$PYTHON_HOME/bin" ]; then
   if [ -z "$ZSHENV_EXTRA_PATH" ]; then
@@ -100,9 +100,8 @@ if [ -d "$MACPORTS_PREFIX/bin" ]; then
   fi
 fi
 if [ -d "$OCAML_HOME" ]; then
-  . /Users/yoshifumi/.opam/opam-init/init.zsh > /dev/null 2> /dev/null || true
+  . $HOME/.opam/opam-init/init.zsh > /dev/null 2> /dev/null || true
 fi
-echo "zshenv extra path: $ZSHENV_EXTRA_PATH"
 export ZSHENV_EXTRA_PATH
 
 alias emacs="/opt/local/bin/emacs"
