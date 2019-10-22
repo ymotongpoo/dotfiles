@@ -3,7 +3,7 @@ bind-key z send-prefix
 bind-key r source-file ~/.tmux.conf
 bind-key C-z send-prefix
 
-set-option -g history-limit 10000
+set-option -g history-limit 100000
 
 set-option -g status-interval 5
 set-option -g status-bg black
