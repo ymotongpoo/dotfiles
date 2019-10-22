@@ -32,7 +32,7 @@ GO111MODULE=auto
 # Google App Engine for Go
 GAEGO=/opt/go/go_appengine
 
-ZSHENV_EXTRA_PATH=""
+ZSHENV_EXTRA_PATH="$HOME/.local/bin"
 
 ### for node
 NVM_DIR="$HOME/.nvm"
@@ -40,9 +40,9 @@ NVM_DIR="$HOME/.nvm"
 ### Set extra paths
 if [ -d "$PYTHON_HOME/bin" ]; then
   if [ -z "$ZSHENV_EXTRA_PATH" ]; then
-    ZSHENV_EXTRA_PATH="$HOME/.local/bin:$PYTHON_HOME/bin"
+    ZSHENV_EXTRA_PATH="$PYTHON_HOME/bin"
   else
-    ZSHENV_EXTRA_PATH="$HOME/.local/bin:$PYTHON_HOME/bin:$ZSHENV_EXTRA_PATH"
+    ZSHENV_EXTRA_PATH="$PYTHON_HOME/bin:$ZSHENV_EXTRA_PATH"
   fi
 fi
 if [ -d "$ERL_HOME/bin" ]; then
