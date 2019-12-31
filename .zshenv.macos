@@ -43,7 +43,7 @@ export ANDROID_HOME
 ### for node (nvm)
 NVM_DIR="$HOME/.nvm"
 
-ZSHENV_EXTRA_PATH=".:$HOME/Library/Python/3.7/bin"
+ZSHENV_EXTRA_PATH=".:/opt/local/libexec/gnubin:$HOME/Library/Python/3.7/bin"
 ### Set extra paths
 if [ -d "$PYTHON_HOME/bin" ]; then
   if [ -z "$ZSHENV_EXTRA_PATH" ]; then
