@@ -6,10 +6,9 @@ bind-key C-z send-prefix
 set-option -g history-limit 100000
 
 set-option -g status-interval 5
-set-option -g status-bg black
-set-option -g status-bg white
-set-window-option -g window-status-current-bg blue
-set-window-option -g window-status-current-fg white
+set-option -g status-style fg=black,bg=white
+set-window-option -g window-status-style fg=blue,bg=black,dim,fg=brightblue
+set-window-option -g window-status-current-style fg=white,bg=blue
 
 set-option -g mouse on
 bind -n WheelUpPane if-shell -F -t = "#{mouse_any_flag}" "send-keys -M" "if -Ft= '#{pane_in_mode}' 'send-keys -M' 'select-pane -t=; copy-mode -e; send-keys -M'"

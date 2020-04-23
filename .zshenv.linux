@@ -73,7 +73,7 @@ if [ -d "$GOROOT" ]; then
     ZSHENV_EXTRA_PATH="$GOROOT/bin:$HOME/go/bin:$ZSHENV_EXTRA_PATH"
   fi
 fi
-if [ =d "$HOME/.cargo" ]; then
+if [ -d "$HOME/.cargo" ]; then
     ZSHENV_EXTRA_PATH="$HOME/.cargo/bin:$ZSHENV_EXTRA_PATH"
 fi
 if [ -d "$VIRTUALENV" ]; then
