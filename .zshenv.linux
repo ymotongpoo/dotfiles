@@ -34,6 +34,7 @@ GAEGO=/opt/go/go_appengine
 
 ZSHENV_EXTRA_PATH="$HOME/.local/bin"
 
+
 ### for node
 NVM_DIR="$HOME/.nvm"
 
@@ -71,6 +72,9 @@ if [ -d "$GOROOT" ]; then
   else
     ZSHENV_EXTRA_PATH="$GOROOT/bin:$HOME/go/bin:$ZSHENV_EXTRA_PATH"
   fi
+fi
+if [ -d "$HOME/.cargo" ]; then
+    ZSHENV_EXTRA_PATH="$HOME/.cargo/bin:$ZSHENV_EXTRA_PATH"
 fi
 if [ -d "$VIRTUALENV" ]; then
   if [ -z "$ZSHENV_EXTRA_PATH" ]; then
