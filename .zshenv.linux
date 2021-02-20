@@ -23,6 +23,7 @@ ERL_HOME=/opt/erlang/"$ERL_VER"
 
 ### for Golang
 # basic Go setting
+GOROOT=/opt/go
 GOOS=linux
 GOARCH=amd64
 GO111MODULE=auto
