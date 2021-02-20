@@ -23,15 +23,12 @@ ERL_HOME=/opt/erlang/"$ERL_VER"
 
 ### for Golang
 # basic Go setting
-GOROOT=/opt/go
+GOROOT=~/.go
 GOOS=linux
 GOARCH=amd64
 GO111MODULE=auto
-# Google App Engine for Go
-GAEGO=/opt/go/go_appengine
 
 ZSHENV_EXTRA_PATH="$HOME/.local/bin"
-
 
 ### for node
 NVM_DIR="$HOME/.nvm"
