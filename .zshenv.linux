@@ -2,63 +2,32 @@
 autoload -Uz compinit
 compinit
 
-### for Python
-# basic Python setting
-PYTHON_VER=3.6.3
-PYTHON_HOME="/opt/python/$PYTHON_VER"
-
-# for virtualenv
-VIRTUALENV_HOME="$PYTHON_HOME"
-VIRTUALENVWRAPPER="$VIRTUALENV_HOME"/bin/virtualenvwrapper.sh
-VIRTUALENVWRAPPER_PYTHON="$VIRTUALENV_HOME"/bin/python
-
-### for OCaml
-OCAML_VER=4.00.1
-OCAML_HOME=/opt/ocaml/"$OCAML_VER"
-OMAKE_HOME=/opt/ocaml/omake
-
-### for Erlang
-ERL_VER=R15B02
-ERL_HOME=/opt/erlang/"$ERL_VER"
-
-### for Golang
-# basic Go setting
+### for Go
 GOROOT=~/.go
 GOOS=linux
 GOARCH=amd64
 GO111MODULE=auto
 
-ZSHENV_EXTRA_PATH="$HOME/.local/bin"
-
 ### for node
 NVM_DIR="$HOME/.nvm"
 
 ### Set extra paths
+export GOROOT
 export GOOS
 export GOARCH
 export GO111MODULE
 ZSHENV_EXTRA_PATH="$GOROOT/bin:$HOME/go/bin:$ZSHENV_EXTRA_PATH"
-if [ -d "$PYTHON_HOME/bin" ]; then
-  ZSHENV_EXTRA_PATH="$PYTHON_HOME/bin:$ZSHENV_EXTRA_PATH"
-fi
 if [ -d "$ERL_HOME/bin" ]; then
   export ERL_HOME
   ZSHENV_EXTRA_PATH="$ERL_HOME/bin:$ZSHENV_EXTRA_PATH"
 fi
-if [ -d "$GAEGO" ]; then
-  export GAEGO
-  ZSHENV_EXTRA_PATH="$GAEGO:$ZSHENV_EXTRA_PATH"
-fi
-
 if [ -d "$HOME/.cargo" ]; then
+    source $HOME/.cargo/env
     ZSHENV_EXTRA_PATH="$HOME/.cargo/bin:$ZSHENV_EXTRA_PATH"
-fi
-if [ -d "$VIRTUALENV" ]; then
-  ZSHENV_EXTRA_PATH="$VIRTUALENV/bin:$ZSHENV_EXTRA_PATH"
 fi
 if [ -d $NVM_DIR ]; then
   export NVM_DIR
-  [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  
+  [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
 fi
 
 export ZSHENV_EXTRA_PATH
@@ -67,7 +36,3 @@ export TERMINAL=urxvt
 which xclip > /dev/null 2>&1 && alias clipboard="xclip -selection clipboard"
 
 export EDITOR=/usr/bin/vim
-
-function dict() {
-  grep $1 $HOME/bin/gene-utf8.txt -A 1 -wi --color
-}
