@@ -16,7 +16,7 @@ export GOROOT
 export GOOS
 export GOARCH
 export GO111MODULE
-ZSHENV_EXTRA_PATH="$GOROOT/bin:$HOME/go/bin:$HOME/.rbenv/bin:$ZSHENV_EXTRA_PATH"
+ZSHENV_EXTRA_PATH="$GOROOT/bin:$HOME/go/bin:$HOME/.rbenv/bin:$HOME/.rbenv/plugins/ruby-build/bin:$ZSHENV_EXTRA_PATH"
 if [ -d "$HOME/.cargo" ]; then
     source $HOME/.cargo/env
     ZSHENV_EXTRA_PATH="$HOME/.cargo/bin:$ZSHENV_EXTRA_PATH"
