@@ -73,56 +73,6 @@ autoload -Uz add-zsh-hook
 # #6699cc Blue              068 SteelBlue3      #5f87d7
 # #cc99cc Purple            135 MediumPurple2   #af5fff
 
-# VCS version and branch info in RPROMPT
-autoload -Uz vcs_info
-zstyle ':vcs_info:*' enable git hg bzr
-zstyle ':vcs_info:*' formats '(%s:%b)'
-zstyle ':vcs_info:*' actionformats '(%s:%b|%a)'
-zstyle ':vcs_info:(svn|bzr):*' branchformat '%b:r%r'
-zstyle ':vcs_info:bzr:*' use-simple true
-
-autoload -Uz is-at-least
-if is-at-least 4.3.10; then
-  zstyle ':vcs_info:git:*' check-for-changes true
-  zstyle ':vcs_info:git:*' stagedstr "+"    
-  zstyle ':vcs_info:git:*' unstagedstr "-"  
-  zstyle ':vcs_info:git:*' formats '(%s:%b) %c%u'
-  zstyle ':vcs_info:git:*' actionformats '(%s:%b|%a) %c%u'
-fi
-
-local _pre=''
-preexec() {
-    _pre="$1"
-}
-
-function _update_vcs_info_msg() {
-    psvar=()
-    LANG=en_US.UTF-8 vcs_info
-    [[ -n "$vcs_info_msg_0_" ]] && psvar[1]="$vcs_info_msg_0_"
-}
-add-zsh-hook precmd _update_vcs_info_msg
-local p_vcs="%1(v|%F{green}%1v%f|)"
-local p_time="%F{154}%*%f"
-local p_user="%F{135}%n%f%F{251}@%m%f"
-local p_cd="%F{221}%~%f"
-local p_chars=("🐙" "🍙" "🍡" "💩")
-
-setopt prompt_subst
-case ${UID} in
-0)
-    PROMPT="%F{255}[%f%F{161}%* %f%F{99}%n%f%F{255}@%m %f%F{191}%~%f%F{255}]%f
- %# "
-    ;;
-*)
-    PROMPT="${p_time} ${p_user} ${p_cd} ${p_vcs}
-$p_chars[$[1+$RANDOM%4]] "
-    ;;
-esac
-
-if [ -n "${DEMO}" ] && [ "${DEMO}" = "1" ]; then
-  PROMPT="> "
-fi
-
 # use color less if possible
 srchilite="/opt/local/bin/src-hilite-lesspipe.sh"
 if [ -f $srchilite ]; then
@@ -178,11 +128,6 @@ case "$OSTYPE" in
     ;;
 esac
 
-# suffix alias
-alias -s go='go run'
-alias -s py='python'
-alias -s js='node'
-
 ### Google Cloud Platform
 GOOGLE_CLOUD_SDK="$HOME/google-cloud-sdk"
 if [ -d "$GOOGLE_CLOUD_SDK" ]; then
@@ -206,8 +151,6 @@ alias start-emacs="emacs --daemon"
 alias kill-emacs="emacsclient -e '(kill-emacs)'"
 alias ec="emacsclient -nc"
 
-test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
+eval "$(rbenv init -)"
+eval "$(starship init zsh)"
 
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
