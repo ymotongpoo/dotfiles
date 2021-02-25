@@ -151,11 +151,13 @@ alias start-emacs="emacs --daemon"
 alias kill-emacs="emacsclient -e '(kill-emacs)'"
 alias ec="emacsclient -nc"
 
-if [ -f "$HOME/.rbenv/bin/rbenv" ]; then
+rbenv_exists=$(which rbenv)
+if [ -f "$rbenv_exists" ]; then
   eval "$(rbenv init -)"
 fi
 
-if [ -f "$HOME/bin/starship" ]; then
+starship_exists=$(which starship)
+if [ -f "$starship_exists" ]; then
   eval "$(starship init zsh)"
 fi
 
