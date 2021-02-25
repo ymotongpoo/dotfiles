@@ -140,9 +140,9 @@ if [ -d "$GOOGLE_CLOUD_SDK" ]; then
 fi
 
 if [ -z "$ZSHRC_EXTRA_PATH" ]; then
-  ZSHRC_EXTRA_PATH="/usr/local/git/current/bin:$HOME/.yarn/bin"
+  ZSHRC_EXTRA_PATH="/usr/local/git/current/bin"
 else
-  ZSHRC_EXTRA_PATH="/usr/local/git/current/bin:$HOME/.yarn/bin:$ZSHRC_EXTRA_PATH"
+  ZSHRC_EXTRA_PATH="/usr/local/git/current/bin:$ZSHRC_EXTRA_PATH"
 fi
 
 PATH="$ZSHRC_EXTRA_PATH:$ZSHENV_EXTRA_PATH:$PATH"
