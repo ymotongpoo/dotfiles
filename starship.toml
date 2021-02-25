@@ -1,0 +1,15 @@
+add_newline = false
+
+[character]
+success_symbol = "🍡"
+error_symbol = "👹"
+
+[git_branch]
+symbol = "🌱"
+
+[gcloud]
+format = "$directory[$symbol$active]($style)"
+
+[golang]
+format = "$directory[go$version](bold cyan)"
+
