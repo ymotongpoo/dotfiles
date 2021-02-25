@@ -151,6 +151,11 @@ alias start-emacs="emacs --daemon"
 alias kill-emacs="emacsclient -e '(kill-emacs)'"
 alias ec="emacsclient -nc"
 
-eval "$(rbenv init -)"
-eval "$(starship init zsh)"
+if [ -f "$HOME/.rbenv/bin/rbenv" ]; then
+  eval "$(rbenv init -)"
+fi
+
+if [ -f "$HOME/bin/starship" ]; then
+  eval "$(starship init zsh)"
+fi
 
