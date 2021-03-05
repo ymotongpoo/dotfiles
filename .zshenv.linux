@@ -24,6 +24,9 @@ RUBY_PATHS="$HOME/.rbenv/shims:$HOME/.rbenv/bin:$HOME/.rbenv/plugins/ruby-build/
 export JAVA_HOME=/opt/openjdk/15
 export CLASSPATH=".:$JAVA_HOME/jre/lib:$JAVA_HOME/lib:$JAVA_HOME/lib/tools.jar"
 
+### Google Cloud SDK
+GOOGLE_CLOUD_SDK=$HOME/.google_cloud_sdk
+
 ZSHENV_EXTRA_PATH="$GOROOT/bin:$HOME/go/bin:$RUBY_PATHS"
 if [ -d "$HOME/.cargo" ]; then
     source $HOME/.cargo/env
@@ -38,6 +41,9 @@ fi
 if [ -d $NVM_DIR ]; then
   export NVM_DIR
   [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
+fi
+if [ -d $GOOGLE_CLOUD_SDK ]; then
+    ZSHENV_EXTRA_PATH="$GOOGLE_CLOUD_SDK/bin"
 fi
 
 export ZSHENV_EXTRA_PATH

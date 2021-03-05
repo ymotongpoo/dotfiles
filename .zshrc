@@ -161,3 +161,6 @@ if [ -f "$starship_exists" ]; then
   eval "$(starship init zsh)"
 fi
 
+if [ -f "$HOME/.corp" ]; then
+  source $HOME/.corp
+fi
