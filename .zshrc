@@ -46,7 +46,7 @@ HISTSIZE=100000
 SAVEHIST=100000
 setopt hist_ignore_dups  # ignore duplication command history list
 setopt share_history     # share command history data
-setopt hist_ignore_space # ignore command if it starts from space 
+setopt hist_ignore_space # ignore command if it starts from space
 setopt hist_no_store     # do not store 'history' command in hitory file
 setopt extended_history  # record command hit time
 
@@ -98,7 +98,7 @@ export MANPATH
 ZSHRC_EXTRA_PATH="$HOME/bin"
 
 ########################################
-##################### Utilities 
+##################### Utilities
 ########################################
 # complete process ID
 zstyle ':completion:*:processes' command 'ps x -o pid,s,args'
@@ -152,7 +152,12 @@ alias kill-emacs="emacsclient -e '(kill-emacs)'"
 alias ec="emacsclient -nc"
 
 rbenv_exists=$(which rbenv)
-if [ -f "$rbenv_exists" ]; then
+if [ ! -z "$rbenv_exists" ]; then
+  eval "$(rbenv init -)"
+fi
+
+nodenv_exists=$(which nodenv)
+if [ ! -z "$nodenv_exists" ]; then
   eval "$(rbenv init -)"
 fi
 

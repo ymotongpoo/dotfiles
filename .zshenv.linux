@@ -9,7 +9,7 @@ GOARCH=amd64
 GO111MODULE=auto
 
 ### for node
-NVM_DIR="$HOME/.nvm"
+NODENV_DIR="$HOME/.nodenv"
 
 ### Set extra paths
 export GOROOT
@@ -18,7 +18,8 @@ export GOARCH
 export GO111MODULE
 
 ### Set Ruby paths
-RUBY_PATHS="$HOME/.rbenv/shims:$HOME/.rbenv/bin:$HOME/.rbenv/plugins/ruby-build/bin"
+RBENV_DIR="$HOME/.rbenv"
+RBENV_PATHS="$RBENV_DIR/shims:$RBENV_DIR/bin:$RBENV_DIR/plugins/ruby-build/bin"
 
 ### Set Java variables
 export JAVA_HOME=/opt/openjdk/15
@@ -27,7 +28,7 @@ export CLASSPATH=".:$JAVA_HOME/jre/lib:$JAVA_HOME/lib:$JAVA_HOME/lib/tools.jar"
 ### Google Cloud SDK
 GOOGLE_CLOUD_SDK=$HOME/.google_cloud_sdk
 
-ZSHENV_EXTRA_PATH="$GOROOT/bin:$HOME/go/bin:$RUBY_PATHS"
+ZSHENV_EXTRA_PATH="$GOROOT/bin:$HOME/go/bin"
 if [ -d "$HOME/.cargo" ]; then
     source $HOME/.cargo/env
     ZSHENV_EXTRA_PATH="$HOME/.cargo/bin:$ZSHENV_EXTRA_PATH"
@@ -38,9 +39,11 @@ fi
 if [ -d "/opt/kotlin" ]; then
     ZSHENV_EXTRA_PATH="/opt/kotlin/bin:$ZSHENV_EXTRA_PATH"
 fi
-if [ -d $NVM_DIR ]; then
-  export NVM_DIR
-  [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
+if [ -d $NODENV_DIR ]; then
+    ZSHENV_EXTRA_PATH="$NODENV_DIR/bin:$ZSHENV_EXTRA_PATH"
+fi
+if [ -d $RBENV_DIR ]; then
+    ZSHENV_EXTRA_PATH="$RBENV_PATHS:$ZSHENV_EXTRA_PATH"
 fi
 if [ -d $GOOGLE_CLOUD_SDK ]; then
     ZSHENV_EXTRA_PATH="$GOOGLE_CLOUD_SDK/bin"
