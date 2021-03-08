@@ -8,14 +8,15 @@ GOOS=linux
 GOARCH=amd64
 GO111MODULE=auto
 
-### for node
-NODENV_DIR="$HOME/.nodenv"
-
 ### Set extra paths
 export GOROOT
 export GOOS
 export GOARCH
 export GO111MODULE
+
+### for node
+NODENV_DIR="$HOME/.nodenv"
+NODENV_PATHS="$NODENV_DIR/shims:$NODENV_DIR/bin:$NODENV_DIR/plugins/node-build/bin"
 
 ### Set Ruby paths
 RBENV_DIR="$HOME/.rbenv"
@@ -40,7 +41,7 @@ if [ -d "/opt/kotlin" ]; then
     ZSHENV_EXTRA_PATH="/opt/kotlin/bin:$ZSHENV_EXTRA_PATH"
 fi
 if [ -d $NODENV_DIR ]; then
-    ZSHENV_EXTRA_PATH="$NODENV_DIR/bin:$ZSHENV_EXTRA_PATH"
+    ZSHENV_EXTRA_PATH="$NODENV_PATHS:$ZSHENV_EXTRA_PATH"
 fi
 if [ -d $RBENV_DIR ]; then
     ZSHENV_EXTRA_PATH="$RBENV_PATHS:$ZSHENV_EXTRA_PATH"
