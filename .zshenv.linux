@@ -6,13 +6,11 @@ compinit
 GOROOT=~/.go
 GOOS=linux
 GOARCH=amd64
-GO111MODULE=auto
 
 ### Set extra paths
 export GOROOT
 export GOOS
 export GOARCH
-export GO111MODULE
 
 ### for node
 NODENV_DIR="$HOME/.nodenv"
