@@ -2,39 +2,11 @@
 autoload -Uz compinit
 compinit
 
-MACPORTS_PREFIX=/opt/local
-#C_INCLUDE_PATH=/usr/include:/opt/local/include
-#CPLUS_INCLUDE_PATH=/usr/include:/opt/local/include
-#LD_LIBRARY_PATH=/usr/lib:/opt/local/lib
-
-### for virtualenv
-PYTHON_VER="3.5"
-VIRTUALENV_HOME="$MACPORTS_PREFIX"/Library/Frameworks/Python.framework/Versions/"$PYTHON_VER"
-PYTHONPATH="$MACPORTS_PREFIX"/lib/python"$PYTHON_VER"/:"$PYTHONPATH"
-MANPATH="$MACPORTS_PREFIX"/share/man:/usr/local/man:"$MANPATH"
-
-### for OCaml
-OCAML_VER="4.03.0"
-OCAML_HOME="$HOME/.opam/$OCAML_VER"
-
-### for Haskell
-GHC_VER="8.4.2"
-GHC_HOME=/opt/haskell/ghc-"$GHC_VER"
-
-### for Erlang
-ERL_VER=R15B02
-ERL_HOME=/opt/erlang/"$ERL_VER"
-
 ### for Golang
 # basic Go setting
-GO_VER="1.13.3"
-GOENVGOROOT=/opt/go
-GOROOT="$GOENVGOROOT/go$GO_VER"
 GOOS=darwin
 GOARCH=amd64
 GO111MODULE=on
-# Google App Engine for Go
-GAEGO=/opt/go/go_appengine
 
 ### for Android
 ANDROID_HOME=/Users/$USER/Library/Android/sdk
@@ -43,73 +15,31 @@ export ANDROID_HOME
 ### for node (nvm)
 NVM_DIR="$HOME/.nvm"
 
-ZSHENV_EXTRA_PATH=".:/opt/local/libexec/gnubin:$HOME/Library/Python/3.7/bin"
+### for Homebrew
+HOMEBREW_INSTALL="/opt/brew"
+export HOMEBREW_CACHE="/opt/brew/cache"
+
+ZSHENV_EXTRA_PATH=".:$HOMEBREW_INSTALL/bin:$HOME/.pyenv/shims"
+
 ### Set extra paths
-if [ -d "$PYTHON_HOME/bin" ]; then
-  if [ -z "$ZSHENV_EXTRA_PATH" ]; then
-    ZSHENV_EXTRA_PATH="$PYTHON_HOME/bin"
-  else
-    ZSHENV_EXTRA_PATH="$PYTHON_HOME/bin:$ZSHENV_EXTRA_PATH"
-  fi
-fi
-if [ -d "$ERL_HOME/bin" ]; then
-  export ERL_HOME
-  if [ -z "$ZSHENV_EXTRA_PATH" ]; then
-    ZSHENV_EXTRA_PATH="$ERL_HOME/bin"
-  else
-    ZSHENV_EXTRA_PATH="$ERL_HOME/bin:$ZSHENV_EXTRA_PATH"
-  fi
-fi
-if [ -d "$GAEGO" ]; then
-  export GAEGO
-  if [ -z "$ZSHENV_EXTRA_PATH" ]; then
-    ZSHENV_EXTRA_PATH="$GAEGO"
-  else
-    ZSHENV_EXTRA_PATH="$GAEGO:$ZSHENV_EXTRA_PATH"
-  fi
-fi
 if [ -d "$GOROOT" ]; then
-  export GOROOT
   export GOOS
   export GOARCH
-  export GOPATH
   export GO111MODULE
   if [ -z "$ZSHENV_EXTRA_PATH" ]; then
-    ZSHENV_EXTRA_PATH="$GOROOT/bin:$HOME/go/bin"
+    ZSHENV_EXTRA_PATH="$HOME/go/bin"
   else
-    ZSHENV_EXTRA_PATH="$GOROOT/bin:$HOME/go/bin:$ZSHENV_EXTRA_PATH"
+    ZSHENV_EXTRA_PATH="$HOME/go/bin:$ZSHENV_EXTRA_PATH"
   fi
 fi
 if [ -d "$HOME/.cargo" ]; then
   ZSHENV_EXTRA_PATH="$HOME/.cargo/bin:$ZSHENV_EXTRA_PATH"
 fi
-if [ -d "$VIRTUALENV" ]; then
-  if [ -z "$ZSHENV_EXTRA_PATH" ]; then
-    ZSHENV_EXTRA_PATH="$VIRTUALENV/bin"
-  else
-    ZSHENV_EXTRA_PATH="$VIRTUALENV/bin:$ZSHENV_EXTRA_PATH"
-  fi
-fi
 if [ -d $NVM_DIR ]; then
   export NVM_DIR
-  [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  
-fi
-
-if [ -d "$MACPORTS_PREFIX/bin" ]; then
-  if [ -z "$ZSHENV_EXTRA_PATH" ]; then
-    ZSHENV_EXTRA_PATH="$MACPORTS_PREFIX/bin"
-  else
-    ZSHENV_EXTRA_PATH="$MACPORTS_PREFIX/bin:$ZSHENV_EXTRA_PATH"
-  fi
-fi
-if [ -d "$OCAML_HOME" ]; then
-  . $HOME/.opam/opam-init/init.zsh > /dev/null 2> /dev/null || true
+  [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
 fi
 export ZSHENV_EXTRA_PATH
 
 alias emacs="/opt/local/bin/emacs"
-alias gvim="/Applications/MacVim.app/Contents/MacOS/MacVim"
-alias godev_appserver="$GAEGO/dev_appserver.py"
-alias goappcfg="$GAEGO/appcfg.py"
 alias vscode="open -a Visual\ Studio\ Code $1"
-alias canary="/Applications/Google\ Chrome\ Canary.app/Contents/MacOS/Google\ Chrome\ Canary"
