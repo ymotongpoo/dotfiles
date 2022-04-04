@@ -2,44 +2,49 @@
 autoload -Uz compinit
 compinit
 
-### for Golang
-# basic Go setting
-GOOS=darwin
-GOARCH=amd64
-GO111MODULE=on
-
-### for Android
-ANDROID_HOME=/Users/$USER/Library/Android/sdk
-export ANDROID_HOME
-
-### for node (nvm)
-NVM_DIR="$HOME/.nvm"
-
 ### for Homebrew
-HOMEBREW_INSTALL="/opt/brew"
-export HOMEBREW_CACHE="/opt/brew/cache"
+HOMEBREW_INSTALL="/opt/homebrew"
+export HOMEBREW_CACHE="/opt/homebrew/cache"
+ZSHENV_EXTRA_PATH=".:$HOMEBREW_INSTALL/bin"
+eval "$(/opt/homebrew/bin/brew shellenv)"
 
-ZSHENV_EXTRA_PATH=".:$HOMEBREW_INSTALL/bin:$HOME/.pyenv/shims"
+### for node
+NODENV_DIR="$HOME/.nodenv"
+NODENV_PATHS="$NODENV_DIR/shims:$NODENV_DIR/bin:$NODENV_DIR/plugins/node-build/bin"
 
-### Set extra paths
-if [ -d "$GOROOT" ]; then
-  export GOOS
-  export GOARCH
-  export GO111MODULE
-  if [ -z "$ZSHENV_EXTRA_PATH" ]; then
-    ZSHENV_EXTRA_PATH="$HOME/go/bin"
-  else
-    ZSHENV_EXTRA_PATH="$HOME/go/bin:$ZSHENV_EXTRA_PATH"
-  fi
-fi
+### Set Ruby paths
+RBENV_DIR="$HOME/.rbenv"
+RBENV_PATHS="$RBENV_DIR/shims:$RBENV_DIR/bin:$RBENV_DIR/plugins/ruby-build/bin"
+
+### Google Cloud SDK
+GOOGLE_CLOUD_SDK=$HOME/.google-cloud-sdk
+
+ZSHENV_EXTRA_PATH="$GOROOT/bin:$HOME/go/bin"
 if [ -d "$HOME/.cargo" ]; then
-  ZSHENV_EXTRA_PATH="$HOME/.cargo/bin:$ZSHENV_EXTRA_PATH"
+    source $HOME/.cargo/env
+    ZSHENV_EXTRA_PATH="$HOME/.cargo/bin:$ZSHENV_EXTRA_PATH"
 fi
-if [ -d $NVM_DIR ]; then
-  export NVM_DIR
-  [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
+if [ -d "/opt/openjdk/15" ]; then
+    ZSHENV_EXTRA_PATH="$JAVA_HOME/bin:$ZSHENV_EXTRA_PATH"
+fi
+if [ -d "/opt/kotlin" ]; then
+    ZSHENV_EXTRA_PATH="/opt/kotlin/bin:$ZSHENV_EXTRA_PATH"
+fi
+if [ -d $NODENV_DIR ]; then
+    ZSHENV_EXTRA_PATH="$NODENV_PATHS:$ZSHENV_EXTRA_PATH"
+    if command -v nodenv 1>/dev/null 2>&1
+    then
+        eval "$(nodenv init -)"
+    fi
+fi
+if [ -d $RBENV_DIR ]; then
+    ZSHENV_EXTRA_PATH="$RBENV_PATHS:$ZSHENV_EXTRA_PATH"
+fi
+if [ -d $GOOGLE_CLOUD_SDK ]; then
+    ZSHENV_EXTRA_PATH="$GOOGLE_CLOUD_SDK/bin"
 fi
 export ZSHENV_EXTRA_PATH
 
+export EDITOR=/usr/bin/vim
 alias emacs="/opt/local/bin/emacs"
-alias vscode="open -a Visual\ Studio\ Code $1"
+

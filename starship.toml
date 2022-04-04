@@ -1,8 +1,16 @@
-add_newline = false
+add_newline = true
 
 [character]
 success_symbol = "🍡"
 error_symbol = "👹"
+
+[time]
+disabled = false
+time_format = "%m%dT%H:%M:%S"
+format = "🕘[$time]($style)"
+
+[directory]
+truncation_symbol = ".../"
 
 [git_branch]
 symbol = "🌱"
@@ -11,5 +19,5 @@ symbol = "🌱"
 format = "$directory[$symbol$active]($style)"
 
 [golang]
-format = "$directory[go$version](bold cyan)"
+format = "$directory[$symbol$version](bold cyan)"
 
