@@ -8,21 +8,38 @@ export HOMEBREW_CACHE="/opt/homebrew/cache"
 ZSHENV_EXTRA_PATH=".:$HOMEBREW_INSTALL/bin"
 eval "$(/opt/homebrew/bin/brew shellenv)"
 
+export LDFLAGS="-L/usr/local/opt/llvm/lib"
+export CPPFLAGS="-I/usr/local/opt/llvm/include"
+
+### for Python
+PYENV_DIR="$HOME/.pyenv"
+PYENV_PATHS="$PYENV_DIR/shims:$PYENV_DIR/bin"
+
 ### for node
 NODENV_DIR="$HOME/.nodenv"
 NODENV_PATHS="$NODENV_DIR/shims:$NODENV_DIR/bin:$NODENV_DIR/plugins/node-build/bin"
 
-### Set Ruby paths
+### for Ruby
 RBENV_DIR="$HOME/.rbenv"
 RBENV_PATHS="$RBENV_DIR/shims:$RBENV_DIR/bin:$RBENV_DIR/plugins/ruby-build/bin"
+
+### for Erlang
+IS_ERLANG_INSTALLED=0
+if command -v erlang &> /dev/null; then
+  IS_ERLANG_INSTALLED=1
+fi
 
 ### Google Cloud SDK
 GOOGLE_CLOUD_SDK=$HOME/.google-cloud-sdk
 
-ZSHENV_EXTRA_PATH="$GOROOT/bin:$HOME/go/bin"
+ZSHENV_EXTRA_PATH="$HOME/go/bin"
 if [ -d "$HOME/.cargo" ]; then
     source $HOME/.cargo/env
     ZSHENV_EXTRA_PATH="$HOME/.cargo/bin:$ZSHENV_EXTRA_PATH"
+fi
+if [ -d "$HOME/.ghcup" ]; then
+    source "$HOME/.ghcup/env"
+    ZSHENV_EXTRA_PATH="$HOME/.ghcup/bin:$ZSHENV_EXTRA_PATH"
 fi
 if [ -d "/opt/openjdk/15" ]; then
     ZSHENV_EXTRA_PATH="$JAVA_HOME/bin:$ZSHENV_EXTRA_PATH"
@@ -30,18 +47,17 @@ fi
 if [ -d "/opt/kotlin" ]; then
     ZSHENV_EXTRA_PATH="/opt/kotlin/bin:$ZSHENV_EXTRA_PATH"
 fi
-if [ -d $NODENV_DIR ]; then
-    ZSHENV_EXTRA_PATH="$NODENV_PATHS:$ZSHENV_EXTRA_PATH"
-    if command -v nodenv 1>/dev/null 2>&1
-    then
-        eval "$(nodenv init -)"
-    fi
+if [ -d "$GOOGLE_CLOUD_SDK" ]; then
+    ZSHENV_EXTRA_PATH="$GOOGLE_CLOUD_SDK/bin:$ZSHENV_EXTRA_PATH"
+    source $GOOGLE_CLOUD_SDK/completion.zsh.inc
 fi
-if [ -d $RBENV_DIR ]; then
-    ZSHENV_EXTRA_PATH="$RBENV_PATHS:$ZSHENV_EXTRA_PATH"
+if [ ${IS_ERLANG_INSTALLED} ]; then
+    ZSHENV_EXTRA_PATH="${HOME}/.cache/rebar3/bin:${ZSHENV_EXTRA_PATH}"
 fi
-if [ -d $GOOGLE_CLOUD_SDK ]; then
-    ZSHENV_EXTRA_PATH="$GOOGLE_CLOUD_SDK/bin"
+if [ -d /opt/homebrew/opt/llvm@12 ]; then
+    ZSHENV_EXTRA_PATH="/opt/homebrew/opt/llvm@12/bin:$ZSHENV_EXTRA_PATH"
+    export LDFLAGS="-L/opt/homebrew/opt/llvm@12/lib"
+    export CPPFLAGS="-I/opt/homebrew/opt/llvm@12/include"
 fi
 export ZSHENV_EXTRA_PATH
 

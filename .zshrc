@@ -89,13 +89,6 @@ export C_INCLUDE_PATH
 export CPLUS_INCLUDE_PATH
 export LD_LIBRARY_PATH
 
-### for Python
-export VIRTUALENV_HOME
-export VIRTUALENVWRAPPER
-export PYTHONPATH
-export MANPATH
-
-ZSHRC_EXTRA_PATH="$HOME/bin"
 
 ########################################
 ##################### Utilities
@@ -128,28 +121,16 @@ case "$OSTYPE" in
     ;;
 esac
 
-### Google Cloud Platform
-GOOGLE_CLOUD_SDK="$HOME/google-cloud-sdk"
-if [ -d "$GOOGLE_CLOUD_SDK" ]; then
-  if [ -z "$ZSHRC_EXTRA_PATH" ]; then
-    ZSHRC_EXTRA_PATH="$GOOGLE_CLOUD_SDK/bin"
-  else
-    ZSHRC_EXTRA_PATH="$GOOGLE_CLOUD_SDK/bin:$ZSHRC_EXTRA_PATH"
-  fi
-  source $GOOGLE_CLOUD_SDK/completion.zsh.inc
-fi
-
-if [ -z "$ZSHRC_EXTRA_PATH" ]; then
-  ZSHRC_EXTRA_PATH="/usr/local/git/current/bin"
-else
-  ZSHRC_EXTRA_PATH="/usr/local/git/current/bin:$ZSHRC_EXTRA_PATH"
-fi
-
-PATH="$ZSHRC_EXTRA_PATH:$ZSHENV_EXTRA_PATH:$PATH"
+ZSHRC_EXTRA_PATH="$HOME/bin"
 
 alias start-emacs="emacs --daemon"
 alias kill-emacs="emacsclient -e '(kill-emacs)'"
 alias ec="emacsclient -nc"
+
+pyenv_exists=$(which pyenv)
+if [ ! -z "$pyenv_exists" ]; then
+  eval "$(pyenv init -)"
+fi
 
 rbenv_exists=$(which rbenv)
 if [ ! -z "$rbenv_exists" ]; then
@@ -158,7 +139,7 @@ fi
 
 nodenv_exists=$(which nodenv)
 if [ ! -z "$nodenv_exists" ]; then
-  eval "$(rbenv init -)"
+  eval "$(nodenv init -)"
 fi
 
 starship_exists=$(which starship)
@@ -169,3 +150,6 @@ fi
 if [ -f "$HOME/.corp" ]; then
   source $HOME/.corp
 fi
+
+PATH="$ZSHRC_EXTRA_PATH:$ZSHENV_EXTRA_PATH:$PATH:/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
+
