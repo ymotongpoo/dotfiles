@@ -3,18 +3,25 @@ bind-key z send-prefix
 bind-key r source-file ~/.tmux.conf
 bind-key C-z send-prefix
 
-set-option -g history-limit 10000
+set -g @plugin "arcticicestudio/nord-tmux"
+set -g @plugin 'tmux-plugins/tpm'
+set -g @plugin 'tmux-plugins/tmux-sensible'
 
+set-option -g history-limit 10000
+set-option -g default-terminal screen-256color
 set-option -g status-interval 5
-set-option -g status-bg black
-set-option -g status-bg white
 
 set-option -g mouse on
 
-# install "tmux-pasteboard" from MacPorts
-if-shell "test -d /opt/local/bin/reattach-to-user-namespace" "set-option -g default-command '/opt/local/bin/reattach-to-user-namespace zsh'"
-
 set-window-option -g mode-keys vi
 
-bind-key C-c run "tmux save-buffer - | reattach-to-user-namespace pbcopy"
-bind-key C-v run "reattach-to-user-namespace pbpaste | tmux load-buffer - && tmux paste-buffer" 
+bind -T copy-mode-vi y send-keys -X copy-pipe-and-cancel "pbcopy"
+bind -T copy-mode-vi Enter send-keys -X copy-pipe-and-cancel "pbcopy"
+bind -T copy-mode-vi Escape send-keys -X clear-selection
+
+
+# install tpm before running the tmux
+# git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+#
+# and run prefix-I to install all plugins
+run '~/.tmux/plugins/tpm/tpm'

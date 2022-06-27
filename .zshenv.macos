@@ -41,8 +41,8 @@ if [ -d "$HOME/.ghcup" ]; then
     source "$HOME/.ghcup/env"
     ZSHENV_EXTRA_PATH="$HOME/.ghcup/bin:$ZSHENV_EXTRA_PATH"
 fi
-if [ -d "/opt/openjdk/15" ]; then
-    ZSHENV_EXTRA_PATH="$JAVA_HOME/bin:$ZSHENV_EXTRA_PATH"
+if [ -d "/opt/homebrew/opt/openjdk" ]; then
+    ZSHENV_EXTRA_PATH="/opt/homebrew/opt/openjdk/bin:$ZSHENV_EXTRA_PATH"
 fi
 if [ -d "/opt/kotlin" ]; then
     ZSHENV_EXTRA_PATH="/opt/kotlin/bin:$ZSHENV_EXTRA_PATH"
