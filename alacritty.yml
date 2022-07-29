@@ -35,7 +35,7 @@ shell:
 bell:
   animation: EaseOutCirc
   duration: 100
-  color: '#00ff00'
+  color: '#aaeeaa'
 
 
 # Copyright (c) 2017-present Arctic Ice Studio <development@arcticicestudio.com>
