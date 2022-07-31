@@ -1,15 +1,64 @@
 local wezterm = require 'wezterm'
 
--- The filled in variant of the < symbol
-local SOLID_LEFT_ARROW = utf8.char(0xe0b2)
-
--- The filled in variant of the > symbol
-local SOLID_RIGHT_ARROW = utf8.char(0xe0b0)
-
 function font_with_fallback(name, params)
   local names = { name, 'Noto Sans JP', 'BIZ UDPGothic' }
   return wezterm.font_with_fallback(names, params)
 end
+
+function random_color_scheme()
+  math.randomseed(os.time())
+  local schemes = { 
+    "Afterglow",
+    "arcoiris",
+    "Arthur",
+    "Atom",
+    "Blazer",
+    "Builtin Pastel Dark",
+    "Chalkboard",
+    "Chester",
+    "DoomOne",
+    "Dracula+",
+    "FishTank",
+    "Guezwhoz",
+    "iceberg-dark",
+    "Japanesque",
+    "kanagawabones",
+    "lovelace",
+    "Mariana",
+    "MaterialDesignColors",
+    "neobones_dark",
+    "nord",
+    "OneHalfDark",
+    "Overnight Slumber",
+    "Pnevma",
+    "Rapture",
+    "rebecca",
+    "Smyck",
+    "Teerb",
+    "tokyonight-storm",
+    "Tomorrow Night Eighties",
+    "Whimsy",
+    "Wombat",
+  }
+  local i = math.random(#schemes) 
+  return schemes[i]
+end
+
+wezterm.on('random-color-scheme', function(window, pane)
+  local overrides = window:get_config_overrides() or {}
+  scheme = random_color_scheme()
+  overrides.color_scheme = scheme
+  window:set_config_overrides(overrides)
+end)
+
+wezterm.on('toggle-opacity', function(window, pane)
+  local overrides = window:get_config_overrides() or {}
+  if not overrides.window_background_opacity then
+    overrides.window_background_opacity = 0.5
+  else
+    overrides.window_background_opacity = nil
+  end
+end)
 
 return {
   ----------------- input
@@ -33,9 +82,8 @@ return {
   ----------------- window
   initial_cols = 90,
   initial_rows = 50,
-  -- color_scheme = "nord",
-  -- color_scheme = "Mariana",
-  color_scheme = "MaterialDesignColors",
+  color_scheme = "nord",
+
   visual_bell = {
     fade_in_function = "EaseInOut",
     fade_in_duration_ms = 150,
@@ -63,5 +111,13 @@ return {
   check_for_update = true,
   check_for_update_interval_seconds = 86400,
   show_update_window = true,
+
+  ----------------- key bindings
+  keys = {
+    { key = 'A',          mods = 'CTRL',       action = wezterm.action.EmitEvent 'random-color-scheme' },     
+    { key = 'RightArrow', mods = 'SHIFT|CTRL', action = wezterm.action.EmitEvent 'toggle-opacity' },     
+    { key = 'UpArrow',    mods = 'SHIFT|CTRL', action = wezterm.action.ActivateTabRelative(-1) },
+    { key = 'DownArrow',  mods = 'SHIFT|CTRL', action = wezterm.action.ActivateTabRelative(1) },
+  }, 
 }
 
