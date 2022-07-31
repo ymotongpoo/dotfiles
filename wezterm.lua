@@ -1,7 +1,7 @@
 local wezterm = require 'wezterm'
 
 function font_with_fallback(name, params)
-  local names = { name, 'Noto Sans JP', 'BIZ UDPGothic' }
+  local names = { name, 'Noto Sans JP', 'BIZ UDPGothic', 'monospace' }
   return wezterm.font_with_fallback(names, params)
 end
 
@@ -51,13 +51,10 @@ wezterm.on('random-color-scheme', function(window, pane)
   window:set_config_overrides(overrides)
 end)
 
-wezterm.on('toggle-opacity', function(window, pane)
+wezterm.on('nord-color-scheme', function(window, pane)
   local overrides = window:get_config_overrides() or {}
-  if not overrides.window_background_opacity then
-    overrides.window_background_opacity = 0.5
-  else
-    overrides.window_background_opacity = nil
-  end
+  overrides.color_scheme = 'nord'
+  window:set_config_overrides(overrides)
 end)
 
 return {
@@ -113,11 +110,12 @@ return {
   show_update_window = true,
 
   ----------------- key bindings
+  leader = { key = 'q', mods = 'CTRL', timeout_milliseconds = 2000 },     
   keys = {
-    { key = 'A',          mods = 'CTRL',       action = wezterm.action.EmitEvent 'random-color-scheme' },     
-    { key = 'RightArrow', mods = 'SHIFT|CTRL', action = wezterm.action.EmitEvent 'toggle-opacity' },     
-    { key = 'UpArrow',    mods = 'SHIFT|CTRL', action = wezterm.action.ActivateTabRelative(-1) },
-    { key = 'DownArrow',  mods = 'SHIFT|CTRL', action = wezterm.action.ActivateTabRelative(1) },
+    { key = 'c',          mods = 'LEADER|CTRL',       action = wezterm.action.EmitEvent 'random-color-scheme' },     
+    { key = 'n',          mods = 'LEADER|CTRL',       action = wezterm.action.EmitEvent 'nord-color-scheme' },     
+    { key = 'UpArrow',    mods = 'SHIFT|CTRL',        action = wezterm.action.ActivateTabRelative(-1) },
+    { key = 'DownArrow',  mods = 'SHIFT|CTRL',        action = wezterm.action.ActivateTabRelative(1) },
   }, 
 }
 
