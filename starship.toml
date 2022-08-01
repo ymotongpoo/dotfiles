@@ -4,6 +4,12 @@ add_newline = true
 success_symbol = "🍡"
 error_symbol = "👹"
 
+[line_break]
+disabled = false
+
+[status]
+disabled = false
+
 [time]
 disabled = false
 time_format = "%m%dT%H:%M:%S"

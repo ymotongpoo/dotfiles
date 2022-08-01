@@ -57,6 +57,10 @@ wezterm.on('nord-color-scheme', function(window, pane)
   window:set_config_overrides(overrides)
 end)
 
+wezterm.on('copy-last-command-result', function(window, pane)
+  -- TODO: implement the function to copy the output between the current and last prompts 
+end)
+
 return {
   ----------------- input
   use_ime = true,
@@ -83,11 +87,11 @@ return {
 
   visual_bell = {
     fade_in_function = "EaseInOut",
-    fade_in_duration_ms = 150,
-    fade_out_duration_ms = 100,
+    fade_in_duration_ms = 80,
+    fade_out_duration_ms = 80,
   },
   colors = {
-    visual_bell = "#202020",
+    visual_bell = "#222222",
   },
   scrollback_lines = 20000,
   enable_scroll_bar = true,
@@ -110,12 +114,48 @@ return {
   show_update_window = true,
 
   ----------------- key bindings
+  disable_default_key_bindings = true,
   leader = { key = 'q', mods = 'CTRL', timeout_milliseconds = 2000 },     
   keys = {
-    { key = 'c',          mods = 'LEADER|CTRL',       action = wezterm.action.EmitEvent 'random-color-scheme' },     
+    -- basic config
+    { key = 'c',          mods = 'SUPER',             action = wezterm.action.CopyTo 'Clipboard' },
+    { key = 'v',          mods = 'SUPER',             action = wezterm.action.PasteFrom 'Clipboard' },
+    { key = 'x',          mods = 'SHIFT|CTRL',        action = wezterm.action.ActivateCopyMode },
+
+    { key = 't',          mods = 'SUPER',             action = wezterm.action.SpawnTab 'CurrentPaneDomain' },
+    { key = 'w',          mods = 'SUPER',             action = wezterm.action.CloseCurrentTab {confirm=true} },
+    { key = '1',          mods = 'SUPER',             action = wezterm.action.ActivateTab(0) },
+    { key = '2',          mods = 'SUPER',             action = wezterm.action.ActivateTab(1) },
+    { key = '3',          mods = 'SUPER',             action = wezterm.action.ActivateTab(2) },
+    { key = '4',          mods = 'SUPER',             action = wezterm.action.ActivateTab(3) },
+    { key = '5',          mods = 'SUPER',             action = wezterm.action.ActivateTab(4) },
+    { key = 'LeftArrow',  mods = 'SUPER',             action = wezterm.action.ActivateTabRelative(-1) },
+    { key = 'RightArrow', mods = 'SUPER',             action = wezterm.action.ActivateTabRelative(1) },
+
+    { key = 'n',          mods = 'SUPER',             action = wezterm.action.SpawnWindow },
+    { key = 'm',          mods = 'SUPER',             action = wezterm.action.Hide },
+    { key = '"',          mods = 'SHIFT|CTRL',        action = wezterm.action.SplitVertical {domain='CurrentPaneDomain'} },
+    { key = '%',          mods = 'SHIFT|CTRL',        action = wezterm.action.SplitHorizontal {domain='CurrentPaneDomain'} },
+    { key = 'UpArrow',    mods = 'SHIFT|CTRL|SUPER',  action = wezterm.action.AdjustPaneSize {"Up", 1} },
+    { key = 'DownArrow',  mods = 'SHIFT|CTRL|SUPER',  action = wezterm.action.AdjustPaneSize {"Down", 1} },
+    { key = 'LeftArrow',  mods = 'SHIFT|CTRL|SUPER',  action = wezterm.action.AdjustPaneSize {"Left", 1} },
+    { key = 'RightArrow', mods = 'SHIFT|CTRL|SUPER',  action = wezterm.action.AdjustPaneSize {"Right", 1} },
+    { key = 'UpArrow',    mods = 'SHIFT|CTRL',        action = wezterm.action.ActivatePaneDirection "Up" },
+    { key = 'DownArrow',  mods = 'SHIFT|CTRL',        action = wezterm.action.ActivatePaneDirection "Down" },
+    { key = 'LeftArrow',  mods = 'SHIFT|CTRL',        action = wezterm.action.ActivatePaneDirection "Left" },
+    { key = 'RightArrow', mods = 'SHIFT|CTRL',        action = wezterm.action.ActivatePaneDirection "Right" },
+
+    { key = '-',          mods = 'SUPER|CTRL',        action = wezterm.action.DecreaseFontSize },
+    { key = '=',          mods = 'SUPER|CTRL',        action = wezterm.action.IncreaseFontSize },
+    { key = '0',          mods = 'SUPER|CTRL',        action = wezterm.action.ResetFontSize },
+
+    { key = 'UpArrow',    mods = 'SUPER|CTRL',        action = wezterm.action.ScrollToPrompt(-1) },
+    { key = 'DownArrow',  mods = 'SUPER|CTRL',        action = wezterm.action.ScrollToPrompt(1) },
+
+    -- custom actions
+    { key = 'm',          mods = 'LEADER|CTRL',       action = wezterm.action.EmitEvent 'random-color-scheme' },     
     { key = 'n',          mods = 'LEADER|CTRL',       action = wezterm.action.EmitEvent 'nord-color-scheme' },     
-    { key = 'UpArrow',    mods = 'SHIFT|CTRL',        action = wezterm.action.ActivateTabRelative(-1) },
-    { key = 'DownArrow',  mods = 'SHIFT|CTRL',        action = wezterm.action.ActivateTabRelative(1) },
+    { key = 'c',          mods = 'LEADER|CTRL',       action = wezterm.action.EmitEvent 'copy-last-command-result' },     
   }, 
 }
 
