@@ -49,16 +49,23 @@ wezterm.on('random-color-scheme', function(window, pane)
   scheme = random_color_scheme()
   overrides.color_scheme = scheme
   window:set_config_overrides(overrides)
+  window:set_right_status(wezterm.format {
+    { Text = scheme },
+  })
 end)
 
 wezterm.on('nord-color-scheme', function(window, pane)
   local overrides = window:get_config_overrides() or {}
   overrides.color_scheme = 'nord'
   window:set_config_overrides(overrides)
+  window:set_right_status(wezterm.format {
+    { Text = scheme },
+  })
 end)
 
 wezterm.on('copy-last-command-result', function(window, pane)
   -- TODO: implement the function to copy the output between the current and last prompts 
+  wezterm.action.ScrollToPrompt(-1)
 end)
 
 return {
@@ -113,6 +120,15 @@ return {
   check_for_update_interval_seconds = 86400,
   show_update_window = true,
 
+  ----------------- mouse bindings
+  mouse_bindings = {
+    {
+      event = { Down = { streak = 3, button = 'Left' } },
+      action = wezterm.action.SelectTextAtMouseCursor 'SemanticZone',
+      mods = 'NONE',
+    },
+  },
+
   ----------------- key bindings
   disable_default_key_bindings = true,
   leader = { key = 'q', mods = 'CTRL', timeout_milliseconds = 2000 },     
@@ -156,6 +172,20 @@ return {
     { key = 'm',          mods = 'LEADER|CTRL',       action = wezterm.action.EmitEvent 'random-color-scheme' },     
     { key = 'n',          mods = 'LEADER|CTRL',       action = wezterm.action.EmitEvent 'nord-color-scheme' },     
     { key = 'c',          mods = 'LEADER|CTRL',       action = wezterm.action.EmitEvent 'copy-last-command-result' },     
-  }, 
+  },
+
+  key_tables = {
+    copy_mode = {
+      { key = 'j',        mods = 'CTRL',              action = wezterm.action.CopyMode 'MoveForwardSemanticZone' },
+      { key = 'k',        mods = 'CTRL',              action = wezterm.action.CopyMode 'MoveBackwardSemanticZone' },
+      { key = 'j',        mods = 'ALT',               action = wezterm.action.CopyMode { MoveBackwardZoneOfType ='Output' }},
+      { key = 'k',        mods = 'ALT',               action = wezterm.action.CopyMode { MoveForwardZoneOfType ='Output' }},
+      { key = 'z',        mods = 'CTRL',              action = wezterm.action.CopyMode { SetSelectionMode = 'SemanticZone' } },
+
+      { key = 'Escape',   mods = 'NONE',              action = wezterm.action.CopyMode 'Close' },
+      { key = 'c',        mods = 'CTRL',              action = wezterm.action.CopyMode 'Close' },
+    },
+  },
+
 }
 
