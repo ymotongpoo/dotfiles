@@ -63,11 +63,6 @@ wezterm.on('nord-color-scheme', function(window, pane)
   })
 end)
 
-wezterm.on('copy-last-command-result', function(window, pane)
-  -- TODO: implement the function to copy the output between the current and last prompts 
-  wezterm.action.ScrollToPrompt(-1)
-end)
-
 return {
   ----------------- input
   use_ime = true,
@@ -136,7 +131,7 @@ return {
     -- basic config
     { key = 'c',          mods = 'SUPER',             action = wezterm.action.CopyTo 'Clipboard' },
     { key = 'v',          mods = 'SUPER',             action = wezterm.action.PasteFrom 'Clipboard' },
-    { key = 'x',          mods = 'SHIFT|CTRL',        action = wezterm.action.ActivateCopyMode },
+    { key = 'n',          mods = 'SHIFT|CTRL',        action = wezterm.action.SpawnWindow },
 
     { key = 't',          mods = 'SUPER',             action = wezterm.action.SpawnTab 'CurrentPaneDomain' },
     { key = 'w',          mods = 'SUPER',             action = wezterm.action.CloseCurrentTab {confirm=true} },
@@ -152,10 +147,6 @@ return {
     { key = 'm',          mods = 'SUPER',             action = wezterm.action.Hide },
     { key = '"',          mods = 'SHIFT|CTRL',        action = wezterm.action.SplitVertical {domain='CurrentPaneDomain'} },
     { key = '%',          mods = 'SHIFT|CTRL',        action = wezterm.action.SplitHorizontal {domain='CurrentPaneDomain'} },
-    { key = 'UpArrow',    mods = 'SHIFT|CTRL|SUPER',  action = wezterm.action.AdjustPaneSize {"Up", 1} },
-    { key = 'DownArrow',  mods = 'SHIFT|CTRL|SUPER',  action = wezterm.action.AdjustPaneSize {"Down", 1} },
-    { key = 'LeftArrow',  mods = 'SHIFT|CTRL|SUPER',  action = wezterm.action.AdjustPaneSize {"Left", 1} },
-    { key = 'RightArrow', mods = 'SHIFT|CTRL|SUPER',  action = wezterm.action.AdjustPaneSize {"Right", 1} },
     { key = 'UpArrow',    mods = 'SHIFT|CTRL',        action = wezterm.action.ActivatePaneDirection "Up" },
     { key = 'DownArrow',  mods = 'SHIFT|CTRL',        action = wezterm.action.ActivatePaneDirection "Down" },
     { key = 'LeftArrow',  mods = 'SHIFT|CTRL',        action = wezterm.action.ActivatePaneDirection "Left" },
@@ -168,6 +159,10 @@ return {
     { key = 'UpArrow',    mods = 'SUPER|CTRL',        action = wezterm.action.ScrollToPrompt(-1) },
     { key = 'DownArrow',  mods = 'SUPER|CTRL',        action = wezterm.action.ScrollToPrompt(1) },
 
+    -- change key table
+    { key = 'x',          mods = 'SHIFT|CTRL',        action = wezterm.action.ActivateCopyMode },
+    { key = 'p',          mods = 'SHIFT|CTRL',        action = wezterm.action.ActivateKeyTable { name = 'resize_pane', one_shot = false } },
+
     -- custom actions
     { key = 'm',          mods = 'LEADER|CTRL',       action = wezterm.action.EmitEvent 'random-color-scheme' },     
     { key = 'n',          mods = 'LEADER|CTRL',       action = wezterm.action.EmitEvent 'nord-color-scheme' },     
@@ -175,6 +170,14 @@ return {
   },
 
   key_tables = {
+    resize_pane = {
+      { key = 'UpArrow',                              action = wezterm.action.AdjustPaneSize {"Up", 1} },
+      { key = 'DownArrow',                            action = wezterm.action.AdjustPaneSize {"Down", 1} },
+      { key = 'LeftArrow',                            action = wezterm.action.AdjustPaneSize {"Left", 1} },
+      { key = 'RightArrow',                           action = wezterm.action.AdjustPaneSize {"Right", 1} },
+      { key = 'Escape',                               action = 'PopKeyTable' },
+    },
+
     copy_mode = {
       { key = 'j',        mods = 'CTRL',              action = wezterm.action.CopyMode 'MoveForwardSemanticZone' },
       { key = 'k',        mods = 'CTRL',              action = wezterm.action.CopyMode 'MoveBackwardSemanticZone' },
@@ -186,6 +189,5 @@ return {
       { key = 'c',        mods = 'CTRL',              action = wezterm.action.CopyMode 'Close' },
     },
   },
-
 }
 
