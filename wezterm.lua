@@ -1,7 +1,27 @@
 local wezterm = require 'wezterm'
 
-function font_with_fallback(name, params)
-  local names = { name, 'Noto Sans JP', 'BIZ UDPGothic', 'monospace' }
+function font_with_fallback(preferred, params)
+  local names = preferred
+  local fallbacks = { 'Noto Sans JP', 'BIZ UDPGothic' }
+  if wezterm.target_triple == 'x86_64-pc-windows-msvc' then
+    table.insert(fallbacks, 'Consolas')
+    table.insert(fallbacks, 'Meiryo UI')
+    table.insert(fallbacks, 'Yu Gothic UI')
+  end
+  if wezterm.target_triple == 'x86_64-apple-darwin' then
+    table.insert(fallbacks, 'Monaco')
+    table.insert(fallbacks, 'Menlo')
+    table.insert(fallbacks, 'ヒラギノ丸ゴ ProN')
+  end
+  if wezterm.target_triple == 'x86_64-unknown-linux-gnu' then
+    table.insert(fallbacks, 'Ubuntu Monospace')
+    table.insert(fallbacks, 'DejaVu Sans')
+    table.insert(fallbacks, 'Doroid Sans')
+  end
+  table.insert(fallbacks, 'monospace')
+  for i = 1, #fallbacks do
+    table.insert(names, fallbacks[i])
+  end
   return wezterm.font_with_fallback(names, params)
 end
 
@@ -69,15 +89,15 @@ return {
   ime_preedit_rendering = 'System',
 
   ----------------- fonts
-  font = font_with_fallback 'Hack Nerd Font Mono',
+  font = font_with_fallback { 'Hack Nerd Font Mono' },
   font_ruled = {
     {
       italic = true,
-      font = font_with_fallback 'Hack Italic',
+      font = font_with_fallback { 'Hack Italic' },
     },
     {
       intensity = 'Bold',
-      font = font_with_fallback 'Noto Sans JP Bold',
+      font = font_with_fallback { 'Noto Sans JP Bold' },
     },
   },
   font_size = 20.0,
@@ -179,6 +199,12 @@ return {
     },
 
     copy_mode = {
+      { key = 'Space',    mods = 'NONE',              action = wezterm.action.CopyMode { SetSelectionMode = 'Cell' }, },
+      { key = 'h',                                    action = wezterm.action.CopyMode 'MoveLeft' },
+      { key = 'j',                                    action = wezterm.action.CopyMode 'MoveDown' },
+      { key = 'k',                                    action = wezterm.action.CopyMode 'MoveUp' },
+      { key = 'l',                                    action = wezterm.action.CopyMode 'MoveRight' },
+      
       { key = 'j',        mods = 'CTRL',              action = wezterm.action.CopyMode 'MoveForwardSemanticZone' },
       { key = 'k',        mods = 'CTRL',              action = wezterm.action.CopyMode 'MoveBackwardSemanticZone' },
       { key = 'j',        mods = 'ALT',               action = wezterm.action.CopyMode { MoveBackwardZoneOfType ='Output' }},
