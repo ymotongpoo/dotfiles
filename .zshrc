@@ -127,19 +127,19 @@ alias start-emacs="emacs --daemon"
 alias kill-emacs="emacsclient -e '(kill-emacs)'"
 alias ec="emacsclient -nc"
 
-if type "pyenv" > /dev/null 2&>1; then
+if type "pyenv" > /dev/null 2>&1; then
   eval "$(pyenv init -)"
 fi
 
-if type "rbenv" > /dev/null 2&>1; then
+if type "rbenv" > /dev/null 2>&1; then
   eval "$(rbenv init -)"
 fi
 
-if type "nodenv" > /dev/null 2&>1; then
+if type "nodenv" > /dev/null 2>&1; then
   eval "$(nodenv init -)"
 fi
 
-if type "starship" > /dev/null 2&>1; then
+if type "starship" > /dev/null 2>&1; then
   eval "$(starship init zsh)"
 fi
 
