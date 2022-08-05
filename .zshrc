@@ -127,23 +127,19 @@ alias start-emacs="emacs --daemon"
 alias kill-emacs="emacsclient -e '(kill-emacs)'"
 alias ec="emacsclient -nc"
 
-pyenv_exists=$(which pyenv)
-if [ ! -z "$pyenv_exists" ]; then
+if type "pyenv" > /dev/null 2&>1; then
   eval "$(pyenv init -)"
 fi
 
-rbenv_exists=$(which rbenv)
-if [ ! -z "$rbenv_exists" ]; then
+if type "rbenv" > /dev/null 2&>1; then
   eval "$(rbenv init -)"
 fi
 
-nodenv_exists=$(which nodenv)
-if [ ! -z "$nodenv_exists" ]; then
+if type "nodenv" > /dev/null 2&>1; then
   eval "$(nodenv init -)"
 fi
 
-starship_exists=$(which starship)
-if [ -f "$starship_exists" ]; then
+if type "starship" > /dev/null 2&>1; then
   eval "$(starship init zsh)"
 fi
 
