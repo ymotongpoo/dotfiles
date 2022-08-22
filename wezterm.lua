@@ -1,8 +1,49 @@
 local wezterm = require 'wezterm'
-
+local current_color_theme_index = 1
+local fav_color_schemes = { 
+  "Afterglow",
+  "arcoiris",
+  "astromouse (terminal.sexy)",
+  "Atom",
+  "Ayu Mirage",
+  "Blazer",
+  "Builtin Pastel Dark",
+  "carbonfox",
+  "Catppuccin Mocha",
+  "ChallengerDeep",
+  "Chalkboard",
+  "Chester",
+  "Circus (base16)",
+  "Classic Dark (base16)",
+  "DanQing (base16)",
+  "DoomOne",
+  "Dracula+",
+  "FishTank",
+  "Guezwhoz",
+  "iceberg-dark",
+  "Japanesque",
+  "kanagawabones",
+  "lovelace",
+  "Mariana",
+  "MaterialDesignColors",
+  "neobones_dark",
+  "nord",
+  "OneHalfDark",
+  "Overnight Slumber",
+  "Pnevma",
+  "Rapture",
+  "rebecca",
+  "Smyck",
+  "Teerb",
+  "tokyonight-storm",
+  "Tomorrow Night Eighties",
+  "Whimsy",
+  "Wombat",
+}
+ 
 function font_with_fallback(preferred, params)
   local names = preferred
-  local fallbacks = { 'Noto Sans JP', 'BIZ UDPGothic' }
+  local fallbacks = { 'Hack Nerd Font Mono', 'Noto Sans JP', 'BIZ UDPGothic' }
   if wezterm.target_triple == 'x86_64-pc-windows-msvc' then
     table.insert(fallbacks, 'Consolas')
     table.insert(fallbacks, 'Meiryo UI')
@@ -25,48 +66,31 @@ function font_with_fallback(preferred, params)
   return wezterm.font_with_fallback(names, params)
 end
 
-function random_color_scheme()
-  math.randomseed(os.time())
-  local schemes = { 
-    "Afterglow",
-    "arcoiris",
-    "Arthur",
-    "Atom",
-    "Blazer",
-    "Builtin Pastel Dark",
-    "Chalkboard",
-    "Chester",
-    "DoomOne",
-    "Dracula+",
-    "FishTank",
-    "Guezwhoz",
-    "iceberg-dark",
-    "Japanesque",
-    "kanagawabones",
-    "lovelace",
-    "Mariana",
-    "MaterialDesignColors",
-    "neobones_dark",
-    "nord",
-    "OneHalfDark",
-    "Overnight Slumber",
-    "Pnevma",
-    "Rapture",
-    "rebecca",
-    "Smyck",
-    "Teerb",
-    "tokyonight-storm",
-    "Tomorrow Night Eighties",
-    "Whimsy",
-    "Wombat",
-  }
-  local i = math.random(#schemes) 
-  return schemes[i]
+function rotate_color_theme()
+  current_color_theme_index = (current_color_theme_index + 1) % #fav_color_schemes
+  if current_color_theme_index == 0 then current_color_theme_index = 1 end
+  return fav_color_schemes[current_color_theme_index]
 end
 
-wezterm.on('random-color-scheme', function(window, pane)
+function rev_rotate_color_theme()
+  current_color_theme_index = current_color_theme_index - 1
+  if current_color_theme_index == 0 then current_color_theme_index = #fav_color_schemes end
+  return fav_color_schemes[current_color_theme_index]
+end
+
+wezterm.on('rev-rotate-color-scheme', function(window, pane)
   local overrides = window:get_config_overrides() or {}
-  scheme = random_color_scheme()
+  scheme = rev_rotate_color_theme()
+  overrides.color_scheme = scheme
+  window:set_config_overrides(overrides)
+  window:set_right_status(wezterm.format {
+    { Text = scheme },
+  })
+end)
+
+wezterm.on('rotate-color-scheme', function(window, pane)
+  local overrides = window:get_config_overrides() or {}
+  scheme = rotate_color_theme()
   overrides.color_scheme = scheme
   window:set_config_overrides(overrides)
   window:set_right_status(wezterm.format {
@@ -89,18 +113,8 @@ return {
   ime_preedit_rendering = 'System',
 
   ----------------- fonts
-  font = font_with_fallback { 'Hack Nerd Font Mono' },
-  font_ruled = {
-    {
-      italic = true,
-      font = font_with_fallback { 'Hack Italic' },
-    },
-    {
-      intensity = 'Bold',
-      font = font_with_fallback { 'Noto Sans JP Bold' },
-    },
-  },
-  font_size = 20.0,
+  font = font_with_fallback { 'Cica' },
+  font_size = 24.0,
 
   ----------------- window
   initial_cols = 90,
@@ -121,7 +135,7 @@ return {
 
   ----------------- tab
   -- https://wezfurlong.org/wezterm/config/appearance.html#native-fancy-tab-bar-appearance
-  hide_tab_bar_if_only_one = true,
+  hide_tab_bar_if_only_one_tab = true,
   tab_bar_at_bottom = true,
   window_frame = {
     font = wezterm.font { family = 'Nerd', weight = 'Bold' },
@@ -131,16 +145,21 @@ return {
   },
 
   ----------------- check update
-  check_for_update = true,
-  check_for_update_interval_seconds = 86400,
+  check_for_updates = true,
+  check_for_updates_interval_seconds = 86400,
   show_update_window = true,
 
   ----------------- mouse bindings
   mouse_bindings = {
     {
       event = { Down = { streak = 3, button = 'Left' } },
-      action = wezterm.action.SelectTextAtMouseCursor 'SemanticZone',
       mods = 'NONE',
+      action = wezterm.action.SelectTextAtMouseCursor 'Line',
+    },
+    {
+      event = { Down = { streak = 3, button = 'Left' } },
+      action = wezterm.action.SelectTextAtMouseCursor 'SemanticZone',
+      mods = 'CTRL',
     },
   },
 
@@ -184,16 +203,21 @@ return {
     { key = 'p',          mods = 'SHIFT|CTRL',        action = wezterm.action.ActivateKeyTable { name = 'resize_pane', one_shot = false } },
 
     -- custom actions
-    { key = 'm',          mods = 'LEADER|CTRL',       action = wezterm.action.EmitEvent 'random-color-scheme' },     
-    { key = 'n',          mods = 'LEADER|CTRL',       action = wezterm.action.EmitEvent 'nord-color-scheme' },     
+    { key = 'p',          mods = 'LEADER|CTRL',       action = wezterm.action.EmitEvent 'rev-rotate-color-scheme' },     
+    { key = 'n',          mods = 'LEADER|CTRL',       action = wezterm.action.EmitEvent 'rotate-color-scheme' },     
+    { key = '0',          mods = 'LEADER|CTRL',       action = wezterm.action.EmitEvent 'nord-color-scheme' },     
     { key = 'c',          mods = 'LEADER|CTRL',       action = wezterm.action.EmitEvent 'copy-last-command-result' },     
   },
 
   key_tables = {
     resize_pane = {
-      { key = 'UpArrow',                              action = wezterm.action.AdjustPaneSize {"Up", 1} },
-      { key = 'DownArrow',                            action = wezterm.action.AdjustPaneSize {"Down", 1} },
+      { key = 'h',                                    action = wezterm.action.AdjustPaneSize {"Left", 1} },
+      { key = 'j',                                    action = wezterm.action.AdjustPaneSize {"Down", 1} },
+      { key = 'k',                                    action = wezterm.action.AdjustPaneSize {"Up", 1} },
+      { key = 'l',                                    action = wezterm.action.AdjustPaneSize {"Right", 1} },
       { key = 'LeftArrow',                            action = wezterm.action.AdjustPaneSize {"Left", 1} },
+      { key = 'DownArrow',                            action = wezterm.action.AdjustPaneSize {"Down", 1} },
+      { key = 'UpArrow',                              action = wezterm.action.AdjustPaneSize {"Up", 1} },
       { key = 'RightArrow',                           action = wezterm.action.AdjustPaneSize {"Right", 1} },
       { key = 'Escape',                               action = 'PopKeyTable' },
     },
@@ -204,6 +228,10 @@ return {
       { key = 'j',                                    action = wezterm.action.CopyMode 'MoveDown' },
       { key = 'k',                                    action = wezterm.action.CopyMode 'MoveUp' },
       { key = 'l',                                    action = wezterm.action.CopyMode 'MoveRight' },
+      { key = 'LeftArrow',                            action = wezterm.action.CopyMode 'MoveLeft' },
+      { key = 'DownArrow',                            action = wezterm.action.CopyMode 'MoveDown' },
+      { key = 'UpArrow',                              action = wezterm.action.CopyMode 'MoveUp' },
+      { key = 'RightArrow',                           action = wezterm.action.CopyMode 'MoveRight' },
       
       { key = 'j',        mods = 'CTRL',              action = wezterm.action.CopyMode 'MoveForwardSemanticZone' },
       { key = 'k',        mods = 'CTRL',              action = wezterm.action.CopyMode 'MoveBackwardSemanticZone' },
