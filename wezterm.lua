@@ -128,18 +128,27 @@ return {
   },
   colors = {
     visual_bell = "#222222",
+    compose_cursor = "orange",
+    split = "#999999",
   },
   scrollback_lines = 20000,
   enable_scroll_bar = true,
   front_end = 'Software',
 
+  ----------------- pane
+  inactive_pane_hsb = {
+    hue = 0.8,
+    saturation = 0.8,
+    brightness = 0.3,
+  },
+ 
   ----------------- tab
   -- https://wezfurlong.org/wezterm/config/appearance.html#native-fancy-tab-bar-appearance
   hide_tab_bar_if_only_one_tab = true,
   tab_bar_at_bottom = true,
   window_frame = {
-    font = wezterm.font { family = 'Nerd', weight = 'Bold' },
-    font_size = 16.0,
+    font = wezterm.font { family = 'Cica', weight = 'Bold' },
+    font_size = 18.0,
     active_titlebar_bg = '#aaaaaa',
     inactive_titlebar_bg = '#111111',
   },
@@ -186,9 +195,13 @@ return {
     { key = 'm',          mods = 'SUPER',             action = wezterm.action.Hide },
     { key = '"',          mods = 'SHIFT|CTRL',        action = wezterm.action.SplitVertical {domain='CurrentPaneDomain'} },
     { key = '%',          mods = 'SHIFT|CTRL',        action = wezterm.action.SplitHorizontal {domain='CurrentPaneDomain'} },
-    { key = 'UpArrow',    mods = 'SHIFT|CTRL',        action = wezterm.action.ActivatePaneDirection "Up" },
-    { key = 'DownArrow',  mods = 'SHIFT|CTRL',        action = wezterm.action.ActivatePaneDirection "Down" },
+    { key = 'h',          mods = 'SHIFT|CTRL',        action = wezterm.action.ActivatePaneDirection "Left" },
+    { key = 'j',          mods = 'SHIFT|CTRL',        action = wezterm.action.ActivatePaneDirection "Down" },
+    { key = 'k',          mods = 'SHIFT|CTRL',        action = wezterm.action.ActivatePaneDirection "Up" },
+    { key = 'l',          mods = 'SHIFT|CTRL',        action = wezterm.action.ActivatePaneDirection "Right" },
     { key = 'LeftArrow',  mods = 'SHIFT|CTRL',        action = wezterm.action.ActivatePaneDirection "Left" },
+    { key = 'DownArrow',  mods = 'SHIFT|CTRL',        action = wezterm.action.ActivatePaneDirection "Down" },
+    { key = 'UpArrow',    mods = 'SHIFT|CTRL',        action = wezterm.action.ActivatePaneDirection "Up" },
     { key = 'RightArrow', mods = 'SHIFT|CTRL',        action = wezterm.action.ActivatePaneDirection "Right" },
 
     { key = '-',          mods = 'SUPER|CTRL',        action = wezterm.action.DecreaseFontSize },
@@ -211,10 +224,6 @@ return {
 
   key_tables = {
     resize_pane = {
-      { key = 'h',                                    action = wezterm.action.AdjustPaneSize {"Left", 1} },
-      { key = 'j',                                    action = wezterm.action.AdjustPaneSize {"Down", 1} },
-      { key = 'k',                                    action = wezterm.action.AdjustPaneSize {"Up", 1} },
-      { key = 'l',                                    action = wezterm.action.AdjustPaneSize {"Right", 1} },
       { key = 'LeftArrow',                            action = wezterm.action.AdjustPaneSize {"Left", 1} },
       { key = 'DownArrow',                            action = wezterm.action.AdjustPaneSize {"Down", 1} },
       { key = 'UpArrow',                              action = wezterm.action.AdjustPaneSize {"Up", 1} },
