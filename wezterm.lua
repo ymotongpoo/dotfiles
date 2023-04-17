@@ -119,7 +119,7 @@ return {
   ----------------- window
   initial_cols = 90,
   initial_rows = 50,
-  color_scheme = "nord",
+  color_scheme = "catppuccin-frappe",
 
   visual_bell = {
     fade_in_function = "EaseInOut",

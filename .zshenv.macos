@@ -64,3 +64,4 @@ export ZSHENV_EXTRA_PATH
 export EDITOR=/usr/bin/vim
 alias emacs="/opt/local/bin/emacs"
 
+. "$HOME/.cargo/env"
