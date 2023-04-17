@@ -2,15 +2,9 @@
 autoload -Uz compinit
 compinit
 
-### for Go
-GOROOT=~/.go
-GOOS=linux
-GOARCH=amd64
-
-### Set extra paths
-export GOROOT
-export GOOS
-export GOARCH
+### for Python
+PYENV_DIR="$HOME/.pyenv"
+PYENV_PATHS="$PYENV_DIR/shims:$PYENV_DIR/bin"
 
 ### for node
 NODENV_DIR="$HOME/.nodenv"
@@ -38,13 +32,16 @@ fi
 if [ -d "/opt/kotlin" ]; then
     ZSHENV_EXTRA_PATH="/opt/kotlin/bin:$ZSHENV_EXTRA_PATH"
 fi
-if [ -d $NODENV_DIR ]; then
+if [ -d "$PYENV_DIR" ]; then
+    ZSHENV_EXTRA_PATH="$PYENV_PATHS:$ZSHENV_EXTRA_PATH"
+fi
+if [ -d "$NODENV_DIR" ]; then
     ZSHENV_EXTRA_PATH="$NODENV_PATHS:$ZSHENV_EXTRA_PATH"
 fi
-if [ -d $RBENV_DIR ]; then
+if [ -d "$RBENV_DIR" ]; then
     ZSHENV_EXTRA_PATH="$RBENV_PATHS:$ZSHENV_EXTRA_PATH"
 fi
-if [ -d $GOOGLE_CLOUD_SDK ]; then
+if [ -d "$GOOGLE_CLOUD_SDK" ]; then
     ZSHENV_EXTRA_PATH="$GOOGLE_CLOUD_SDK/bin"
 fi
 

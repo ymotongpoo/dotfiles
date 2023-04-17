@@ -122,6 +122,7 @@ case "$OSTYPE" in
 esac
 
 ZSHRC_EXTRA_PATH="$HOME/bin"
+PATH="$ZSHENV_EXTRA_PATH:$PATH:/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
 
 alias start-emacs="emacs --daemon"
 alias kill-emacs="emacsclient -e '(kill-emacs)'"
@@ -147,7 +148,7 @@ if [ -f "$HOME/.corp" ]; then
   source $HOME/.corp
 fi
 
-PATH="$ZSHRC_EXTRA_PATH:$ZSHENV_EXTRA_PATH:$PATH:/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
+PATH="$ZSHRC_EXTRA_PATH:$PATH"
 
 # configurations for OSC 133
 # https://gitlab.freedesktop.org/Per_Bothner/specifications/blob/master/proposals/semantic-prompts.md
