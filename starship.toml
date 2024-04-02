@@ -23,8 +23,8 @@ truncation_symbol = ".../"
 symbol = "🌱"
 
 [gcloud]
-format = "$directory[$symbol$active]($style)"
+format = "$directory[$symbol$active]($style) "
 
 [golang]
-format = "$directory[$symbol$version](bold cyan)"
+format = "$directory[$symbol$version](bold cyan) "
 

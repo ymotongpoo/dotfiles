@@ -43,7 +43,7 @@ local fav_color_schemes = {
  
 function font_with_fallback(preferred, params)
   local names = preferred
-  local fallbacks = { 'Hack Nerd Font Mono', 'Noto Sans JP', 'BIZ UDPGothic' }
+  local fallbacks = { 'IntelOne Mono', 'Hack Nerd Font Mono', 'Noto Sans JP', 'BIZ UDPGothic' }
   if wezterm.target_triple == 'x86_64-pc-windows-msvc' then
     table.insert(fallbacks, 'Consolas')
     table.insert(fallbacks, 'Meiryo UI')
@@ -113,8 +113,8 @@ return {
   ime_preedit_rendering = 'System',
 
   ----------------- fonts
-  font = font_with_fallback { 'Cica' },
-  font_size = 24.0,
+  font = font_with_fallback { 'CommitMono' },
+  font_size = 20.0,
 
   ----------------- window
   initial_cols = 90,
@@ -156,7 +156,6 @@ return {
   ----------------- check update
   check_for_updates = true,
   check_for_updates_interval_seconds = 86400,
-  show_update_window = true,
 
   ----------------- mouse bindings
   mouse_bindings = {

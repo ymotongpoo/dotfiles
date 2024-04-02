@@ -123,14 +123,11 @@ esac
 
 ZSHRC_EXTRA_PATH="$HOME/bin"
 PATH="$ZSHENV_EXTRA_PATH:$PATH:/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
+export USE_GKE_GCLOUD_AUTH_PLUGIN=True
 
 alias start-emacs="emacs --daemon"
 alias kill-emacs="emacsclient -e '(kill-emacs)'"
 alias ec="emacsclient -nc"
-
-if type "pyenv" > /dev/null 2>&1; then
-  eval "$(pyenv init -)"
-fi
 
 if type "rbenv" > /dev/null 2>&1; then
   eval "$(rbenv init -)"
@@ -138,6 +135,9 @@ fi
 
 if type "nodenv" > /dev/null 2>&1; then
   eval "$(nodenv init -)"
+fi
+if type "pyenv" > /dev/null 2>&1; then
+  eval "$(pyenv init -)"
 fi
 
 if type "starship" > /dev/null 2>&1; then
@@ -178,3 +178,5 @@ function __prompt_preexec() {
 preexec_functions+=(__prompt_preexec)
 precmd_functions+=(__prompt_precmd)
 
+# if fzf is installed and `fzf install` is already run 
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
