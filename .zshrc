@@ -180,3 +180,6 @@ precmd_functions+=(__prompt_precmd)
 
 # if fzf is installed and `fzf install` is already run 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+
+export PATH=$PATH:$HOME/.toolbox/bin
