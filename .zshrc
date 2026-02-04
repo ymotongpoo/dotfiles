@@ -1,3 +1,5 @@
+# Kiro CLI pre block. Keep at the top of this file.
+[[ -f "${HOME}/Library/Application Support/kiro-cli/shell/zshrc.pre.zsh" ]] && builtin source "${HOME}/Library/Application Support/kiro-cli/shell/zshrc.pre.zsh"
 # If you want MacPorts' zsh as login shell, you should run:
 # % sudo sh -c "echo '/opt/local/bin/zsh' >> /etc/shells"
 # % chsh -s /opt/local/bin/zsh
@@ -136,10 +138,6 @@ fi
 if type "nodenv" > /dev/null 2>&1; then
   eval "$(nodenv init -)"
 fi
-if type "pyenv" > /dev/null 2>&1; then
-  eval "$(pyenv init -)"
-fi
-
 if type "starship" > /dev/null 2>&1; then
   eval "$(starship init zsh)"
 fi
@@ -183,3 +181,19 @@ precmd_functions+=(__prompt_precmd)
 
 
 export PATH=$PATH:$HOME/.toolbox/bin
+
+[[ "$TERM_PROGRAM" == "vscode" ]] && . "$(kiro --locate-shell-integration-path zsh)"
+
+
+# BEGIN opam configuration
+# This is useful if you're using opam as it adds:
+#   - the correct directories to the PATH
+#   - auto-completion for the opam binary
+# This section can be safely removed at any time if needed.
+[[ ! -r '/Users/yoshiyyy/.opam/opam-init/init.zsh' ]] || source '/Users/yoshiyyy/.opam/opam-init/init.zsh' > /dev/null 2> /dev/null
+# END opam configuration
+
+[[ "$TERM_PROGRAM" == "kiro" ]] && . "$(kiro --locate-shell-integration-path zsh)"
+
+# Kiro CLI post block. Keep at the bottom of this file.
+[[ -f "${HOME}/Library/Application Support/kiro-cli/shell/zshrc.post.zsh" ]] && builtin source "${HOME}/Library/Application Support/kiro-cli/shell/zshrc.post.zsh"

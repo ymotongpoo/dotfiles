@@ -131,7 +131,7 @@ return {
     compose_cursor = "orange",
     split = "#999999",
   },
-  scrollback_lines = 20000,
+  scrollback_lines = 200000,
   enable_scroll_bar = true,
   front_end = 'Software',
 

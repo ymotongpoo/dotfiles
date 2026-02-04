@@ -24,7 +24,7 @@ symbol = "🌱"
 
 [gcloud]
 style = "bold yellow"
-symbol = "🇬️" 
+symbol = "🇬️ " 
 format = " [$symbol$active]($style) "
 
 [gcloud.region_aliases]

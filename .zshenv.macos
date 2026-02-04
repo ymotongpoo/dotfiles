@@ -25,9 +25,6 @@ if command -v erlang &> /dev/null; then
   IS_ERLANG_INSTALLED=1
 fi
 
-### for Python
-PYENV_ROOT="$HOME/.pyenv"
-
 ### Google Cloud SDK
 GOOGLE_CLOUD_SDK=$HOME/.google-cloud-sdk
 
@@ -58,10 +55,12 @@ if [ -d /opt/homebrew/opt/llvm@12 ]; then
     export LDFLAGS="-L/opt/homebrew/opt/llvm@12/lib"
     export CPPFLAGS="-I/opt/homebrew/opt/llvm@12/include"
 fi
-[[ -d $PYENV_ROOT/bin ]] && ZSHENV_EXTRA_PATH="$PYENV_ROOT/shims:$PYENV_ROOT/bin:$ZSHENV_EXTRA_PATH"
-export ZSHENV_EXTRA_PATH
+if [ -d "$HOME/.rd" ]; then
+    ZSHENV_EXTRA_PATH="$HOME/.rd/bin:$ZSHENV_EXTRA_PATH"
+fi
 
+export ZSHENV_EXTRA_PATH
 export EDITOR=/usr/bin/vim
-alias emacs="/opt/local/bin/emacs"
 
 . "$HOME/.cargo/env"
+

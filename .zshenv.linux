@@ -2,10 +2,6 @@
 autoload -Uz compinit
 compinit
 
-### for Python
-PYENV_DIR="$HOME/.pyenv"
-PYENV_PATHS="$PYENV_DIR/shims:$PYENV_DIR/bin"
-
 ### for node
 NODENV_DIR="$HOME/.nodenv"
 NODENV_PATHS="$NODENV_DIR/shims:$NODENV_DIR/bin:$NODENV_DIR/plugins/node-build/bin"
@@ -31,9 +27,6 @@ if [ -d "/opt/openjdk/15" ]; then
 fi
 if [ -d "/opt/kotlin" ]; then
     ZSHENV_EXTRA_PATH="/opt/kotlin/bin:$ZSHENV_EXTRA_PATH"
-fi
-if [ -d "$PYENV_DIR" ]; then
-    ZSHENV_EXTRA_PATH="$PYENV_PATHS:$ZSHENV_EXTRA_PATH"
 fi
 if [ -d "$NODENV_DIR" ]; then
     ZSHENV_EXTRA_PATH="$NODENV_PATHS:$ZSHENV_EXTRA_PATH"
