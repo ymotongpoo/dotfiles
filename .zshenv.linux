@@ -17,7 +17,7 @@ export CLASSPATH=".:$JAVA_HOME/jre/lib:$JAVA_HOME/lib:$JAVA_HOME/lib/tools.jar"
 ### Google Cloud SDK
 GOOGLE_CLOUD_SDK=$HOME/.google_cloud_sdk
 
-ZSHENV_EXTRA_PATH="$GOROOT/bin:$HOME/go/bin"
+ZSHENV_EXTRA_PATH="$GOROOT/bin:$HOME/go/bin:$HOME/.local/bin"
 if [ -d "$HOME/.cargo" ]; then
     source $HOME/.cargo/env
     ZSHENV_EXTRA_PATH="$HOME/.cargo/bin:$ZSHENV_EXTRA_PATH"
@@ -37,6 +37,9 @@ fi
 if [ -d "$GOOGLE_CLOUD_SDK" ]; then
     ZSHENV_EXTRA_PATH="$GOOGLE_CLOUD_SDK/bin"
 fi
+if [ -d "$HOME/.duckdb/" ]; then
+   ZSHENV_EXTRA_PATH="$HOME/.duckdb/.duckdb/cli/latest:$ZSHENV_EXTRA_PATH"
+fi
 
 export ZSHENV_EXTRA_PATH
 export TERMINAL=urxvt
@@ -45,3 +48,4 @@ which xclip > /dev/null 2>&1 && alias clipboard="xclip -selection clipboard"
 
 export EDITOR=/usr/bin/vim
 
+. "$HOME/.cargo/env"

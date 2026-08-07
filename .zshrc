@@ -123,8 +123,7 @@ case "$OSTYPE" in
     ;;
 esac
 
-ZSHRC_EXTRA_PATH="$HOME/bin"
-PATH="$ZSHENV_EXTRA_PATH:$PATH:/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
+PATH="$PATH:$HOME/.local/bin:/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
 export USE_GKE_GCLOUD_AUTH_PLUGIN=True
 
 alias start-emacs="emacs --daemon"
@@ -138,6 +137,11 @@ fi
 if type "nodenv" > /dev/null 2>&1; then
   eval "$(nodenv init -)"
 fi
+
+if type "pyenv" > /dev/null 2>&1; then
+  eval "$(pyenv init -)"
+fi
+
 if type "starship" > /dev/null 2>&1; then
   eval "$(starship init zsh)"
 fi
@@ -146,7 +150,10 @@ if [ -f "$HOME/.corp" ]; then
   source $HOME/.corp
 fi
 
-PATH="$ZSHRC_EXTRA_PATH:$PATH"
+PATH="$ZSHENV_EXTRA_PATH:$PATH"
+if type "npm" > /dev/null 2>&1; then
+  PATH="$(npm prefix -g)/bin:$PATH"
+fi
 
 # configurations for OSC 133
 # https://gitlab.freedesktop.org/Per_Bothner/specifications/blob/master/proposals/semantic-prompts.md
@@ -179,11 +186,25 @@ precmd_functions+=(__prompt_precmd)
 # if fzf is installed and `fzf install` is already run 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
+# SSH Agentをいい感じに起動してもらうための設定
+USER_SSH_DIR="${HOME}/.ssh"
+AGENT_SOCK="${USER_SSH_DIR}/ssh-agent.sock"
+
+# 既存のソケットが生きていれば再利用、なければ起動
+if [ ! -S "$AGENT_SOCK" ]; then
+    ssh-agent -a "$AGENT_SOCK" > /dev/null
+fi
+
+export SSH_AUTH_SOCK="$AGENT_SOCK"
+
+# 必要に応じて自動で鍵を登録（未登録の場合のみ）
+if ! ssh-add -l > /dev/null 2>&1; then
+    ssh-add
+fi
 
 export PATH=$PATH:$HOME/.toolbox/bin
 
 [[ "$TERM_PROGRAM" == "vscode" ]] && . "$(kiro --locate-shell-integration-path zsh)"
-
 
 # BEGIN opam configuration
 # This is useful if you're using opam as it adds:
@@ -193,7 +214,4 @@ export PATH=$PATH:$HOME/.toolbox/bin
 [[ ! -r '/Users/yoshiyyy/.opam/opam-init/init.zsh' ]] || source '/Users/yoshiyyy/.opam/opam-init/init.zsh' > /dev/null 2> /dev/null
 # END opam configuration
 
-[[ "$TERM_PROGRAM" == "kiro" ]] && . "$(kiro --locate-shell-integration-path zsh)"
-
-# Kiro CLI post block. Keep at the bottom of this file.
-[[ -f "${HOME}/Library/Application Support/kiro-cli/shell/zshrc.post.zsh" ]] && builtin source "${HOME}/Library/Application Support/kiro-cli/shell/zshrc.post.zsh"
+. "$HOME/.local/bin/env"
