@@ -43,7 +43,7 @@ local fav_color_schemes = {
  
 function font_with_fallback(preferred, params)
   local names = preferred
-  local fallbacks = { 'IntelOne Mono', 'Hack Nerd Font Mono', 'Noto Sans JP', 'BIZ UDPGothic' }
+  local fallbacks = { 'PlemolJP', 'IntelOne Mono', 'Hack Nerd Font Mono', 'Noto Sans JP', 'BIZ UDPGothic' }
   if wezterm.target_triple == 'x86_64-pc-windows-msvc' then
     table.insert(fallbacks, 'Consolas')
     table.insert(fallbacks, 'Meiryo UI')

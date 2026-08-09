@@ -62,5 +62,8 @@ fi
 export ZSHENV_EXTRA_PATH
 export EDITOR=/usr/bin/vim
 
+### for Claude Code
+export CLAUDE_CODE_NO_FLICKER=1
+
 . "$HOME/.cargo/env"
 
