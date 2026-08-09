@@ -52,7 +52,7 @@ function font_with_fallback(preferred, params)
   if wezterm.target_triple == 'x86_64-apple-darwin' then
     table.insert(fallbacks, 'Monaco')
     table.insert(fallbacks, 'Menlo')
-    table.insert(fallbacks, 'ヒラギノ丸ゴ ProN')
+    table.insert(fallbacks, 'Hiragino Maru Gothic')
   end
   if wezterm.target_triple == 'x86_64-unknown-linux-gnu' then
     table.insert(fallbacks, 'Ubuntu Monospace')
