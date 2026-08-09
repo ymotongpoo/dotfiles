@@ -1,6 +1,3 @@
-# Kiro CLI pre block. Keep at the top of this file.
-[[ -f "${HOME}/Library/Application Support/kiro-cli/shell/zshrc.pre.zsh" ]] && builtin source "${HOME}/Library/Application Support/kiro-cli/shell/zshrc.pre.zsh"
-# If you want MacPorts' zsh as login shell, you should run:
 # % sudo sh -c "echo '/opt/local/bin/zsh' >> /etc/shells"
 # % chsh -s /opt/local/bin/zsh
 #
@@ -206,12 +203,3 @@ export PATH=$PATH:$HOME/.toolbox/bin
 
 [[ "$TERM_PROGRAM" == "vscode" ]] && . "$(kiro --locate-shell-integration-path zsh)"
 
-# BEGIN opam configuration
-# This is useful if you're using opam as it adds:
-#   - the correct directories to the PATH
-#   - auto-completion for the opam binary
-# This section can be safely removed at any time if needed.
-[[ ! -r '/Users/yoshiyyy/.opam/opam-init/init.zsh' ]] || source '/Users/yoshiyyy/.opam/opam-init/init.zsh' > /dev/null 2> /dev/null
-# END opam configuration
-
-. "$HOME/.local/bin/env"
