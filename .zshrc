@@ -186,20 +186,28 @@ precmd_functions+=(__prompt_precmd)
 # SSH Agentをいい感じに起動してもらうための設定
 USER_SSH_DIR="${HOME}/.ssh"
 AGENT_SOCK="${USER_SSH_DIR}/ssh-agent.sock"
+export SSH_AUTH_SOCK="$AGENT_SOCK"
 
-# 既存のソケットが生きていれば再利用、なければ起動
-if [ ! -S "$AGENT_SOCK" ]; then
+# ソケットに実際に応答があるかで生存確認する（ファイルの有無だけでは残骸を誤判定する）
+ssh-add -l > /dev/null 2>&1
+if [ $? -eq 2 ]; then
+    # 応答なし: 残骸ソケットを片付けて起動し直す
+    rm -f "$AGENT_SOCK"
     ssh-agent -a "$AGENT_SOCK" > /dev/null
 fi
 
-export SSH_AUTH_SOCK="$AGENT_SOCK"
-
-# 必要に応じて自動で鍵を登録（未登録の場合のみ）
+# 鍵が未登録なら Keychain に保存済みの鍵を読み込む（未保存なら何もしない）
+# ~/.ssh/config の AddKeysToAgent yes があるので、初回 ssh 利用時にも登録される
 if ! ssh-add -l > /dev/null 2>&1; then
-    ssh-add
+    ssh-add --apple-load-keychain > /dev/null 2>&1
 fi
 
 export PATH=$PATH:$HOME/.toolbox/bin
 
-[[ "$TERM_PROGRAM" == "vscode" ]] && . "$(kiro --locate-shell-integration-path zsh)"
-
+# BEGIN opam configuration
+# This is useful if you're using opam as it adds:
+#   - the correct directories to the PATH
+#   - auto-completion for the opam binary
+# This section can be safely removed at any time if needed.
+[[ ! -r '/Users/yoshiyyy/.opam/opam-init/init.zsh' ]] || source '/Users/yoshiyyy/.opam/opam-init/init.zsh' > /dev/null 2> /dev/null
+# END opam configuration
