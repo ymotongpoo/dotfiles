@@ -183,24 +183,45 @@ precmd_functions+=(__prompt_precmd)
 # if fzf is installed and `fzf install` is already run 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-# SSH Agentをいい感じに起動してもらうための設定
-USER_SSH_DIR="${HOME}/.ssh"
-AGENT_SOCK="${USER_SSH_DIR}/ssh-agent.sock"
-export SSH_AUTH_SOCK="$AGENT_SOCK"
+# SSH Agent
+#
+# 自前で ssh-agent を起動しない。OS が用意する agent に一本化する。
+# 自前 agent を起動して SSH_AUTH_SOCK を上書きすると、systemd user service
+# (hermes-gateway 等) が別の agent を見て「鍵が無い」状態になる。
+#
+# 登録したい鍵。存在するものだけ使う。
+_ssh_keys=()
+for _k in ~/.ssh/id_ed25519 ~/.ssh/github_ed25519; do
+    [ -f "$_k" ] && _ssh_keys+=("$_k")
+done
 
-# ソケットに実際に応答があるかで生存確認する（ファイルの有無だけでは残骸を誤判定する）
-ssh-add -l > /dev/null 2>&1
-if [ $? -eq 2 ]; then
-    # 応答なし: 残骸ソケットを片付けて起動し直す
-    rm -f "$AGENT_SOCK"
-    ssh-agent -a "$AGENT_SOCK" > /dev/null
-fi
-
-# 鍵が未登録なら Keychain に保存済みの鍵を読み込む（未保存なら何もしない）
-# ~/.ssh/config の AddKeysToAgent yes があるので、初回 ssh 利用時にも登録される
-if ! ssh-add -l > /dev/null 2>&1; then
-    ssh-add --apple-load-keychain > /dev/null 2>&1
-fi
+case "$OSTYPE" in
+  darwin*)
+    # launchd が SSH_AUTH_SOCK を設定する (/private/tmp/com.apple.launchd.*/Listeners)。
+    # 鍵は Keychain に入れておけばパスフレーズ入力は初回のみ。
+    if [ -n "$SSH_AUTH_SOCK" ] && ! ssh-add -l > /dev/null 2>&1; then
+        # まず Keychain から復元。それでも空なら Keychain に保存しつつ登録。
+        ssh-add --apple-load-keychain > /dev/null 2>&1
+        if ! ssh-add -l > /dev/null 2>&1 && [ ${#_ssh_keys[@]} -gt 0 ]; then
+            ssh-add --apple-use-keychain "${_ssh_keys[@]}"
+        fi
+    fi
+    ;;
+  linux*)
+    # systemd user unit ssh-agent.socket が ${XDG_RUNTIME_DIR}/openssh_agent を待ち受け、
+    # SSH_AUTH_SOCK を systemd user manager に set-environment する。
+    # GUI セッション配下の端末は継承するが、素の tty / ssh ログインは継承しないので
+    # 未設定なら同じソケットを指すよう補う（socket activation なので接続時に起動する）。
+    if [ -z "$SSH_AUTH_SOCK" ] && [ -S "${XDG_RUNTIME_DIR:-/run/user/$(id -u)}/openssh_agent" ]; then
+        export SSH_AUTH_SOCK="${XDG_RUNTIME_DIR:-/run/user/$(id -u)}/openssh_agent"
+    fi
+    if [ -S "$SSH_AUTH_SOCK" ] && ! ssh-add -l > /dev/null 2>&1 && [ ${#_ssh_keys[@]} -gt 0 ]; then
+        # 引数なしの ssh-add は id_ed25519 しか載せないため明示的に指定する。
+        ssh-add "${_ssh_keys[@]}"
+    fi
+    ;;
+esac
+unset _ssh_keys _k
 
 export PATH=$PATH:$HOME/.toolbox/bin
 
