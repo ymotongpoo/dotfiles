@@ -191,7 +191,7 @@ precmd_functions+=(__prompt_precmd)
 #
 # 登録したい鍵。存在するものだけ使う。
 _ssh_keys=()
-for _k in ~/.ssh/id_ed25519 ~/.ssh/github_ed25519; do
+for _k in ~/.ssh/id_ed25519 ~/.ssh/github_ed25519 ~/.ssh/gitlab; do
     [ -f "$_k" ] && _ssh_keys+=("$_k")
 done
 
