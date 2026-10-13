@@ -26,7 +26,12 @@ if command -v erlang &> /dev/null; then
 fi
 
 ### Google Cloud SDK
-GOOGLE_CLOUD_SDK=$HOME/.google-cloud-sdk
+# Prefer a manual install; otherwise use the Homebrew cask, which links only gcloud/gsutil/bq.
+if [ -d "$HOME/.google-cloud-sdk" ]; then
+    GOOGLE_CLOUD_SDK="$HOME/.google-cloud-sdk"
+elif [ -d "$HOMEBREW_INSTALL/share/google-cloud-sdk" ]; then
+    GOOGLE_CLOUD_SDK="$HOMEBREW_INSTALL/share/google-cloud-sdk"
+fi
 
 ZSHENV_EXTRA_PATH="$HOME/go/bin"
 if [ -d "$HOME/.cargo" ]; then
@@ -43,9 +48,8 @@ fi
 if [ -d "/opt/kotlin" ]; then
     ZSHENV_EXTRA_PATH="/opt/kotlin/bin:$ZSHENV_EXTRA_PATH"
 fi
-if [ -d "$GOOGLE_CLOUD_SDK" ]; then
+if [ -n "$GOOGLE_CLOUD_SDK" ]; then
     ZSHENV_EXTRA_PATH="$GOOGLE_CLOUD_SDK/bin:$ZSHENV_EXTRA_PATH"
-    source $GOOGLE_CLOUD_SDK/completion.zsh.inc
 fi
 if [ ${IS_ERLANG_INSTALLED} ]; then
     ZSHENV_EXTRA_PATH="${HOME}/.cache/rebar3/bin:${ZSHENV_EXTRA_PATH}"

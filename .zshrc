@@ -17,6 +17,9 @@ bindkey -e
 
 # completion
 autoload -Uz compinit && compinit
+if [ -f "$GOOGLE_CLOUD_SDK/completion.zsh.inc" ]; then
+  source "$GOOGLE_CLOUD_SDK/completion.zsh.inc"
+fi
 
 setopt auto_menu
 setopt auto_list
