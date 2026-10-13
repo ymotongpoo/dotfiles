@@ -119,7 +119,7 @@ return {
   ----------------- window
   initial_cols = 90,
   initial_rows = 50,
-  color_scheme = "catppuccin-frappe",
+  color_scheme = "Grafana Dark",
 
   visual_bell = {
     fade_in_function = "EaseInOut",
@@ -149,8 +149,8 @@ return {
   window_frame = {
     font = wezterm.font { family = 'Cica', weight = 'Bold' },
     font_size = 18.0,
-    active_titlebar_bg = '#aaaaaa',
-    inactive_titlebar_bg = '#111111',
+    active_titlebar_bg = '#1e1916',   -- Grafana Dark mantle
+    inactive_titlebar_bg = '#181411', -- Grafana Dark crust
   },
 
   ----------------- check update
