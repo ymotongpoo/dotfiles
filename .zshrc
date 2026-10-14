@@ -233,9 +233,20 @@ case "$OSTYPE" in
     # SSH_AUTH_SOCK を systemd user manager に set-environment する。
     # GUI セッション配下の端末は継承するが、素の tty / ssh ログインは継承しないので
     # 未設定なら同じソケットを指すよう補う（socket activation なので接続時に起動する）。
-    if [ -z "$SSH_AUTH_SOCK" ] && [ -S "${XDG_RUNTIME_DIR:-/run/user/$(id -u)}/openssh_agent" ]; then
-        export SSH_AUTH_SOCK="${XDG_RUNTIME_DIR:-/run/user/$(id -u)}/openssh_agent"
+    #
+    # 端末やマルチプレクサ (WezTerm, herdr 等) が再起動すると、継承した SSH_AUTH_SOCK が
+    # 消えたソケットを指したままになることがある。ssh-add -l の終了コード 2 は agent に
+    # 接続できないことを示すので、その場合も systemd のソケットに付け替える。
+    _agent_sock="${XDG_RUNTIME_DIR:-/run/user/$(id -u)}/openssh_agent"
+    if [ -S "$_agent_sock" ]; then
+        if [ -z "$SSH_AUTH_SOCK" ]; then
+            export SSH_AUTH_SOCK="$_agent_sock"
+        else
+            ssh-add -l > /dev/null 2>&1
+            [ $? -eq 2 ] && export SSH_AUTH_SOCK="$_agent_sock"
+        fi
     fi
+    unset _agent_sock
     if [ -S "$SSH_AUTH_SOCK" ] && ! ssh-add -l > /dev/null 2>&1 && [ ${#_ssh_keys[@]} -gt 0 ]; then
         # 引数なしの ssh-add は id_ed25519 しか載せないため明示的に指定する。
         ssh-add "${_ssh_keys[@]}"
