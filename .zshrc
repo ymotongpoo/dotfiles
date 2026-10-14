@@ -200,8 +200,26 @@ done
 
 case "$OSTYPE" in
   darwin*)
-    # launchd が SSH_AUTH_SOCK を設定する (/private/tmp/com.apple.launchd.*/Listeners)。
+    # launchd が SSH_AUTH_SOCK を設定する (/var/run/com.apple.launchd.*/Listeners、
+    # 古い macOS では /private/tmp/com.apple.launchd.*/Listeners)。
     # 鍵は Keychain に入れておけばパスフレーズ入力は初回のみ。
+    #
+    # 端末やマルチプレクサ (WezTerm, herdr 等) が再起動すると、継承した SSH_AUTH_SOCK が
+    # 消えたソケットを指したままになる。ssh-add -l の終了コード 2 は agent に接続できない
+    # ことを示すので、その場合は launchd の agent に付け替える。
+    ssh-add -l > /dev/null 2>&1
+    if [ $? -eq 2 ]; then
+        for _s in /var/run/com.apple.launchd.*/Listeners(N) /private/tmp/com.apple.launchd.*/Listeners(N); do
+            if [ -S "$_s" ]; then
+                SSH_AUTH_SOCK="$_s" ssh-add -l > /dev/null 2>&1
+                if [ $? -ne 2 ]; then
+                    export SSH_AUTH_SOCK="$_s"
+                    break
+                fi
+            fi
+        done
+        unset _s
+    fi
     if [ -n "$SSH_AUTH_SOCK" ] && ! ssh-add -l > /dev/null 2>&1; then
         # まず Keychain から復元。それでも空なら Keychain に保存しつつ登録。
         ssh-add --apple-load-keychain > /dev/null 2>&1
