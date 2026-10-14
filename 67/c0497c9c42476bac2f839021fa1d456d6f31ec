@@ -1,0 +1,19 @@
+.zshrc
+  s_af264db3f33f1f::t_1ef21dc5f8f60f 236-247,249
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "67c0497c9c42476bac2f839021fa1d456d6f31ec",
+  "prompts": {},
+  "sessions": {
+    "s_af264db3f33f1f": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "5d5a3c75-b192-4f59-93f3-639c23b39f49",
+        "model": "claude-sonnet-5-5"
+      },
+      "human_author": "Yoshi Yamaguchi <ymotongpoo@gmail.com>"
+    }
+  }
+}
