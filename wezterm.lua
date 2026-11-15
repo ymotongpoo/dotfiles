@@ -2,6 +2,7 @@ local wezterm = require 'wezterm'
 local current_color_theme_index = 1
 local fav_color_schemes = { 
   "Grafana Dark",
+  "Grafana Dark Dim",
   "Afterglow",
   "arcoiris",
   "astromouse (terminal.sexy)",
@@ -67,6 +68,36 @@ function font_with_fallback(preferred, params)
   return wezterm.font_with_fallback(names, params)
 end
 
+-- window_frame (fancy tab bar frame) is not part of a color scheme file,
+-- so its colors are set here per scheme: active = mantle, inactive = crust.
+local titlebar_colors = {
+  ["Grafana Dark"]     = { active = '#111111', inactive = '#0b0b0b' },
+  ["Grafana Dark Dim"] = { active = '#181818', inactive = '#121212' },
+}
+
+function window_frame_for(scheme)
+  local frame = {
+    font = wezterm.font { family = 'Cica', weight = 'Bold' },
+    font_size = 18.0,
+  }
+  local c = titlebar_colors[scheme]
+  if c then
+    frame.active_titlebar_bg = c.active
+    frame.inactive_titlebar_bg = c.inactive
+  end
+  return frame
+end
+
+function apply_color_scheme(window, scheme)
+  local overrides = window:get_config_overrides() or {}
+  overrides.color_scheme = scheme
+  overrides.window_frame = window_frame_for(scheme)
+  window:set_config_overrides(overrides)
+  window:set_right_status(wezterm.format {
+    { Text = scheme },
+  })
+end
+
 function rotate_color_theme()
   current_color_theme_index = (current_color_theme_index + 1) % #fav_color_schemes
   if current_color_theme_index == 0 then current_color_theme_index = 1 end
@@ -80,32 +111,15 @@ function rev_rotate_color_theme()
 end
 
 wezterm.on('rev-rotate-color-scheme', function(window, pane)
-  local overrides = window:get_config_overrides() or {}
-  scheme = rev_rotate_color_theme()
-  overrides.color_scheme = scheme
-  window:set_config_overrides(overrides)
-  window:set_right_status(wezterm.format {
-    { Text = scheme },
-  })
+  apply_color_scheme(window, rev_rotate_color_theme())
 end)
 
 wezterm.on('rotate-color-scheme', function(window, pane)
-  local overrides = window:get_config_overrides() or {}
-  scheme = rotate_color_theme()
-  overrides.color_scheme = scheme
-  window:set_config_overrides(overrides)
-  window:set_right_status(wezterm.format {
-    { Text = scheme },
-  })
+  apply_color_scheme(window, rotate_color_theme())
 end)
 
 wezterm.on('nord-color-scheme', function(window, pane)
-  local overrides = window:get_config_overrides() or {}
-  overrides.color_scheme = 'nord'
-  window:set_config_overrides(overrides)
-  window:set_right_status(wezterm.format {
-    { Text = scheme },
-  })
+  apply_color_scheme(window, 'nord')
 end)
 
 return {
@@ -146,12 +160,7 @@ return {
   -- https://wezfurlong.org/wezterm/config/appearance.html#native-fancy-tab-bar-appearance
   hide_tab_bar_if_only_one_tab = true,
   tab_bar_at_bottom = true,
-  window_frame = {
-    font = wezterm.font { family = 'Cica', weight = 'Bold' },
-    font_size = 18.0,
-    active_titlebar_bg = '#0b0b0b',   -- Grafana Dark tab_bar.background
-    inactive_titlebar_bg = '#111111', -- Grafana Dark tab_bar.inactive_tab
-  },
+  window_frame = window_frame_for("Grafana Dark"),
 
   ----------------- check update
   check_for_updates = true,
