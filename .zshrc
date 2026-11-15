@@ -146,10 +146,6 @@ if type "starship" > /dev/null 2>&1; then
   eval "$(starship init zsh)"
 fi
 
-if [ -f "$HOME/.corp" ]; then
-  source $HOME/.corp
-fi
-
 PATH="$ZSHENV_EXTRA_PATH:$PATH"
 # `PATH="$(npm prefix -g)/bin:$PATH"` は置かない。起動時にアクティブだった版の
 # versions/<ver>/bin を PATH 先頭に焼き込み、nodenv local / global の切り替えに
@@ -254,8 +250,6 @@ case "$OSTYPE" in
     ;;
 esac
 unset _ssh_keys _k
-
-export PATH=$PATH:$HOME/.toolbox/bin
 
 # BEGIN opam configuration
 # This is useful if you're using opam as it adds:
