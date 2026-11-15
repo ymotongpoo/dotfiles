@@ -120,6 +120,7 @@ return {
   ----------------- window
   initial_cols = 90,
   initial_rows = 50,
+  color_scheme_dirs = { wezterm.home_dir .. '/.dotfiles/wezterm-colors' },
   color_scheme = "Grafana Dark",
 
   visual_bell = {
