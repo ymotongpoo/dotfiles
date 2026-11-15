@@ -12,8 +12,23 @@ export LDFLAGS="-L/usr/local/opt/llvm/lib"
 export CPPFLAGS="-I/usr/local/opt/llvm/include"
 
 ### for node
+# Node.js の版の解決は nodenv の shims に一本化する。shims は実行時のカレント
+# ディレクトリから nodenv local (.node-version) > nodenv global の順に版を選び、
+# どちらも system のときだけ PATH 上の他の node (Homebrew など) へ素通しする。
+# よって shims が PATH の先頭にあれば、順序は常に local > global > その他になる。
 NODENV_DIR="$HOME/.nodenv"
 NODENV_PATHS="$NODENV_DIR/shims:$NODENV_DIR/bin:$NODENV_DIR/plugins/node-build/bin"
+
+# shims を PATH の先頭に置き直す。冪等。他のツールが PATH を触った後に呼ぶこと。
+#  - versions/<ver>/bin は PATH に直書きしない。起動時の版に固定されて cd や
+#    nodenv global に追従せず、親シェルや GUI アプリから引き継いだ古い PATH の
+#    残骸が shims より前に居座るので、見つけ次第取り除く。
+#  - グローバル npm パッケージのコマンドも shims 経由で見える (nodenv rehash)。
+_nodenv_prioritize_shims() {
+  [ -d "$NODENV_DIR/shims" ] || return 0
+  path=(${path:#$NODENV_DIR/versions/*/bin})
+  path=("$NODENV_DIR/shims" ${path:#$NODENV_DIR/shims})
+}
 
 ### for Ruby
 RBENV_DIR="$HOME/.rbenv"
@@ -70,4 +85,7 @@ export EDITOR=/usr/bin/vim
 export CLAUDE_CODE_NO_FLICKER=1
 
 . "$HOME/.cargo/env"
+
+# 他の PATH 操作がすべて終わった後で、nodenv の shims を先頭に固定する。
+_nodenv_prioritize_shims
 

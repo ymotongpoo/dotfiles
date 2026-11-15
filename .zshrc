@@ -151,9 +151,9 @@ if [ -f "$HOME/.corp" ]; then
 fi
 
 PATH="$ZSHENV_EXTRA_PATH:$PATH"
-if type "npm" > /dev/null 2>&1; then
-  PATH="$(npm prefix -g)/bin:$PATH"
-fi
+# `PATH="$(npm prefix -g)/bin:$PATH"` は置かない。起動時にアクティブだった版の
+# versions/<ver>/bin を PATH 先頭に焼き込み、nodenv local / global の切り替えに
+# 追従しなくなる。Node.js の解決は nodenv の shims に任せる (末尾で先頭へ固定)。
 
 # configurations for OSC 133
 # https://gitlab.freedesktop.org/Per_Bothner/specifications/blob/master/proposals/semantic-prompts.md
@@ -264,3 +264,10 @@ export PATH=$PATH:$HOME/.toolbox/bin
 # This section can be safely removed at any time if needed.
 [[ ! -r '/Users/yoshiyyy/.opam/opam-init/init.zsh' ]] || source '/Users/yoshiyyy/.opam/opam-init/init.zsh' > /dev/null 2> /dev/null
 # END opam configuration
+
+# 他の PATH 操作 (.zprofile の brew shellenv、fzf、opam など) がすべて終わった後で
+# nodenv の shims を先頭に固定する。順序は nodenv local > nodenv global > その他。
+# 関数は .zshenv.macos で定義 (Linux の .zshenv には無いので存在を確認する)。
+if (( $+functions[_nodenv_prioritize_shims] )); then
+  _nodenv_prioritize_shims
+fi
