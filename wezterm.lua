@@ -1,8 +1,8 @@
 local wezterm = require 'wezterm'
 local current_color_theme_index = 1
 local fav_color_schemes = { 
-  "Grafana Dark",
   "Grafana Dark Dim",
+  "Grafana Dark",
   "Afterglow",
   "arcoiris",
   "astromouse (terminal.sexy)",
@@ -135,7 +135,7 @@ return {
   initial_cols = 90,
   initial_rows = 50,
   color_scheme_dirs = { wezterm.home_dir .. '/.dotfiles/wezterm-colors' },
-  color_scheme = "Grafana Dark",
+  color_scheme = "Grafana Dark Dim",
 
   visual_bell = {
     fade_in_function = "EaseInOut",
@@ -160,7 +160,7 @@ return {
   -- https://wezfurlong.org/wezterm/config/appearance.html#native-fancy-tab-bar-appearance
   hide_tab_bar_if_only_one_tab = true,
   tab_bar_at_bottom = true,
-  window_frame = window_frame_for("Grafana Dark"),
+  window_frame = window_frame_for("Grafana Dark Dim"),
 
   ----------------- check update
   check_for_updates = true,
