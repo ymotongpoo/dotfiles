@@ -1,6 +1,7 @@
 local wezterm = require 'wezterm'
 local current_color_theme_index = 1
 local fav_color_schemes = { 
+  "Grafana Dark",
   "Afterglow",
   "arcoiris",
   "astromouse (terminal.sexy)",
@@ -128,8 +129,6 @@ return {
   },
   colors = {
     visual_bell = "#222222",
-    compose_cursor = "orange",
-    split = "#999999",
   },
   scrollback_lines = 200000,
   enable_scroll_bar = true,
@@ -149,8 +148,8 @@ return {
   window_frame = {
     font = wezterm.font { family = 'Cica', weight = 'Bold' },
     font_size = 18.0,
-    active_titlebar_bg = '#1e1916',   -- Grafana Dark mantle
-    inactive_titlebar_bg = '#181411', -- Grafana Dark crust
+    active_titlebar_bg = '#0b0b0b',   -- Grafana Dark tab_bar.background
+    inactive_titlebar_bg = '#111111', -- Grafana Dark tab_bar.inactive_tab
   },
 
   ----------------- check update
